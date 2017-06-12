@@ -60,7 +60,6 @@ Notes
     :titlesonly:
 
     ./Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC
-    ./Notes/iSpy_installation_guide
 
 
 ..
