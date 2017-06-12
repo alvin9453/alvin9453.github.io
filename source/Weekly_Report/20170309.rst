@@ -1,0 +1,78 @@
+2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1
+============================================================================
+
+Survey
+
+Authors : Jiangchuan Liu and Bo Li , Hong Kong University of Science and Technology
+
+Published in: IEEE MultiMedia ( Volume: 10, Issue: 1, Jan-Mar 2003 )
+
+Full text : `IEEE link here. <http://ieeexplore.ieee.org/document/1167919/?part=1>`_
+
+Reading Page in this part : 1-4
+
+Introduction
+-------------
+
+Multicast extends the traditional unicast communications and ofen called **IP Multicast**.
+
+Bandwidth adaptability becomes an essential requirement for video distrubution over Interner because there's no QoS guarantee in the current best-effort Internet.
+
+Nonadaptive stream (Because Internet is a heterogeneous network.) :
+
+  1. Underuse the available bandwidth or cause congestion.
+
+  2. Unfair bandwidth allocation.
+
+Existing adaptation approaches for video multicast
+---------------------------------------------------
+
+Video rates : Single rate and Multirate.
+
+The place where adaption is performed : End system or intermediate network nodes.
+
+Single-rate adaptation
+````````````````````````
+
+Sender maintains one vidwo stream and adjusts the rate based on receives' states.(Receivers detect the states.)
+
+-> Sender will be overwhelmed with the reponses.
+
+-> When the size groups , each receiver reduces the frequency of its RTCP report.
+
+**Although incapable of solving the problem of hetergeneity, single-rate multicast can serve as a building block for advanced video multicast protocols, such as the simulcast protocols.**
+
+Simulcast
+``````````
+
+Individual feedback-controlled connections -> bandwidth efficiency is low but it can achieve ideal fairness.
+
+Destination Set Grouping (DSG) Protocol :
+
+  Carrying low,medinum , and high quality versions of the original video.
+
+  -> Bandwidth redundancy caused by replication.
+
+Layered adaptation
+```````````````````
+
+Decomposition schema : Cumulative Layering.
+
+  1. Base layer : Video main data.
+
+  2. Enhancement layers : Data that refine the reconstructed video quality.
+
+Prioritized transmission :
+
+  1. Base layer is the highest priority.
+
+  2. Enhancement layers have lower priorities.
+
+  -> Require routers to implement priority-based packet scheduling policy.
+
+To be continue...
+
+Summary
+----------
+
+In this part of this paper, it discusses about the importance of adaptive stream.It lists the existing adaptation approaches for video multicast , such as Single rate and Simulcast , to improve bandwidth efficiency.

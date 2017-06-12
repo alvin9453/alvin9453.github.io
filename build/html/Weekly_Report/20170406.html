@@ -1,0 +1,186 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2017/04/06 - Git tutorial &#8212; Jiawei 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/03/30 - (Paper) Adaptive Video Multicast over the Internet - Part 2" href="20170330.html" />
+    <link rel="prev" title="2017/04/13 - Web Application Messaging Protocol" href="20170413.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170330.html" title="2017/03/30 - (Paper) Adaptive Video Multicast over the Internet - Part 2"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="20170413.html" title="2017/04/13 - Web Application Messaging Protocol"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="git-tutorial">
+<h1>2017/04/06 - Git tutorial<a class="headerlink" href="#git-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configuring-github">
+<h2>1.Configuring GitHub<a class="headerlink" href="#configuring-github" title="Permalink to this headline">¶</a></h2>
+<p>Setup github’s username and email</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;user_name&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;email_id&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-local-repository">
+<h2>2.Creating a local repository<a class="headerlink" href="#creating-a-local-repository" title="Permalink to this headline">¶</a></h2>
+<p>Go to the directory where you want to do version control</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">init</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-readme">
+<h2>3.Create a README<a class="headerlink" href="#create-a-readme" title="Permalink to this headline">¶</a></h2>
+<p>The README file is generally used to describe what the repository contains or what the project is all about.</p>
+</div>
+<div class="section" id="adding-repository-files-to-an-index">
+<h2>4.Adding repository files to an index<a class="headerlink" href="#adding-repository-files-to-an-index" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">README</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="committing-changes-made-to-the-index">
+<h2>5.Committing changes made to the index<a class="headerlink" href="#committing-changes-made-to-the-index" title="Permalink to this headline">¶</a></h2>
+<p>Once all the files are added, we can commit it. This means that we have finalized what additions and/or changes have to be made and they are now ready to be uploaded onto our repository.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;message&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-repository-on-github">
+<h2>6.Creating a repository on GitHub<a class="headerlink" href="#creating-a-repository-on-github" title="Permalink to this headline">¶</a></h2>
+<p>Create a repository on GitHub. Notice that the name of the repository should be the same as the repository’s on the local system.</p>
+<p>Once this is created, we can push the contents of the local repository onto the GitHub repository in your profile. Connect to the repository on GitHub using the command</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">user_name</span><span class="o">/</span><span class="n">Mytest</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pushing-files-in-local-repository-to-github-repository">
+<h2>7.Pushing files in local repository to GitHub repository<a class="headerlink" href="#pushing-files-in-local-repository-to-github-repository" title="Permalink to this headline">¶</a></h2>
+<p>The final step is to push the local repository contents into the remote host repository (GitHub), by using the command</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="some-commands">
+<h2>Some commands<a class="headerlink" href="#some-commands" title="Permalink to this headline">¶</a></h2>
+<p>Add all files</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">-</span><span class="n">A</span>
+</pre></div>
+</div>
+<p>Add all changed files</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">-</span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>I have used some version control system such as RCS, CVS, SVN , and now I learned another one : GIT. Github is a famous platform around the world, so this time I want to learn how to use it to manage my project. <a class="reference external" href="https://github.com/alvin9453/NTS">This is my project on github</a>.</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<p>[1] <a class="reference external" href="https://www.howtoforge.com/tutorial/install-git-and-github-on-ubuntu-14.04/">https://www.howtoforge.com/tutorial/install-git-and-github-on-ubuntu-14.04/</a></p>
+<dl class="docutils">
+<dt>[2] Github tutorials</dt>
+<dd><a class="reference external" href="https://www.atlassian.com/git/tutorials">https://www.atlassian.com/git/tutorials</a></dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/04/06 - Git tutorial</a><ul>
+<li><a class="reference internal" href="#configuring-github">1.Configuring GitHub</a></li>
+<li><a class="reference internal" href="#creating-a-local-repository">2.Creating a local repository</a></li>
+<li><a class="reference internal" href="#create-a-readme">3.Create a README</a></li>
+<li><a class="reference internal" href="#adding-repository-files-to-an-index">4.Adding repository files to an index</a></li>
+<li><a class="reference internal" href="#committing-changes-made-to-the-index">5.Committing changes made to the index</a></li>
+<li><a class="reference internal" href="#creating-a-repository-on-github">6.Creating a repository on GitHub</a></li>
+<li><a class="reference internal" href="#pushing-files-in-local-repository-to-github-repository">7.Pushing files in local repository to GitHub repository</a></li>
+<li><a class="reference internal" href="#some-commands">Some commands</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="20170413.html"
+                        title="previous chapter">2017/04/13 - Web Application Messaging Protocol</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20170330.html"
+                        title="next chapter">2017/03/30 - (Paper) Adaptive Video Multicast over the Internet - Part 2</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170330.html" title="2017/03/30 - (Paper) Adaptive Video Multicast over the Internet - Part 2"
+             >next</a></li>
+        <li class="right" >
+          <a href="20170413.html" title="2017/04/13 - Web Application Messaging Protocol"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

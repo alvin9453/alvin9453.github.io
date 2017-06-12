@@ -1,0 +1,193 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2017/03/02 - Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade &#8212; Jiawei 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/02/16 - (Paper) Internet Multicast Video Delivery" href="20170216.html" />
+    <link rel="prev" title="2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1" href="20170309.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170216.html" title="2017/02/16 - (Paper) Internet Multicast Video Delivery"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="20170309.html" title="2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="nodejs-express-generator-express-mogodb-session-and-jade">
+<h1>2017/03/02 -  Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade<a class="headerlink" href="#nodejs-express-generator-express-mogodb-session-and-jade" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="express-generator">
+<h2>Express-generator<a class="headerlink" href="#express-generator" title="Permalink to this headline">¶</a></h2>
+<p>Express-generator can build a web project quickly.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$npm install express-generator
+</pre></div>
+</div>
+<p>Then we can use <em>express</em> to build a project.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$express Note-taking-system
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/011.png"><img alt="../_images/011.png" src="../_images/011.png" style="width: 296.5px; height: 255.5px;" /></a>
+</div>
+<div class="section" id="express">
+<h2>Express <a class="footnote-reference" href="#id4" id="id1">[1]</a><a class="headerlink" href="#express" title="Permalink to this headline">¶</a></h2>
+<p><strong>Express is a minimal and flexible Node.js web application framework</strong> that provides a robust set of features to develop web and mobile applications. It facilitates the rapid development of Node based Web applications.</p>
+<p>Features:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Allows to set up middlewares to respond to HTTP Requests.</li>
+<li>Defines a <strong>routing table</strong> which is used to perform different actions based on HTTP Method and URL.</li>
+<li>Allows to dynamically render HTML Pages based on passing arguments to templates.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="mongodb">
+<h2>MongoDB<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h2>
+<p>NoSQL database.</p>
+<p>Store data in JSON format.</p>
+<p>In Node.js, we need <strong>mongoose</strong> module to access MongoDB.</p>
+</div>
+<div class="section" id="session">
+<h2>Session <a class="footnote-reference" href="#id5" id="id2">[2]</a><a class="headerlink" href="#session" title="Permalink to this headline">¶</a></h2>
+<p>Two type of session : (Database) Session and Cookie-based Session.</p>
+<p>Database Session :</p>
+<blockquote>
+<div><ul class="simple">
+<li>Store their data server side.</li>
+<li>One of your web servers handles the first request, other web servers in your cluster will not have the stored information.</li>
+<li>Data doesn’t have to travel from client to server on each request (clients just need to send an ID and the data is loaded from the local file).</li>
+<li>Can be any size.</li>
+</ul>
+</div></blockquote>
+<p>Cookie-based Session :</p>
+<blockquote>
+<div><ul class="simple">
+<li>Store their data on the client/user end</li>
+<li>Work smoothly when you have a cluster of web servers.</li>
+<li>Cookies can be set to a long lifespan, which means that data stored in a cookie can be stored for months if not years (Users can clear cookies though).</li>
+<li>Browsers typically limit cookies to a maximum size of around <strong>4KB</strong> per domain.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="jade">
+<h2>Jade <a class="footnote-reference" href="#id6" id="id3">[3]</a><a class="headerlink" href="#jade" title="Permalink to this headline">¶</a></h2>
+<p>Jade is an elegant <strong>templating engine</strong>, primarily used for server-side templating in Nodejs. In plain words, Jade gives you a powerful new way to write markup, with a number of advantages over plain HTML.</p>
+<a class="reference internal image-reference" href="../_images/012.png"><img alt="../_images/012.png" src="../_images/012.png" style="width: 236.0px; height: 253.0px;" /></a>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>I use these module in Nodejs to build the Note-taking system project. I try to use express-generator module because I want to learn about the concept of MVC(Model-View-Controller). MVC separates every module clearly , this may help me to maintain this system easily and efficiently in the future.</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Express : <a class="reference external" href="https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm">https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://stackoverflow.com/questions/18239816/django-difference-between-database-backed-sessions-and-cookie-based-session">http://stackoverflow.com/questions/18239816/django-difference-between-database-backed-sessions-and-cookie-based-session</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Jade tutirial : <a class="reference external" href="https://www.sitepoint.com/jade-tutorial-for-beginners/">https://www.sitepoint.com/jade-tutorial-for-beginners/</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/03/02 -  Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade</a><ul>
+<li><a class="reference internal" href="#express-generator">Express-generator</a></li>
+<li><a class="reference internal" href="#express">Express </a></li>
+<li><a class="reference internal" href="#mongodb">MongoDB</a></li>
+<li><a class="reference internal" href="#session">Session </a></li>
+<li><a class="reference internal" href="#jade">Jade </a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="20170309.html"
+                        title="previous chapter">2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20170216.html"
+                        title="next chapter">2017/02/16 - (Paper) Internet Multicast Video Delivery</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170216.html" title="2017/02/16 - (Paper) Internet Multicast Video Delivery"
+             >next</a></li>
+        <li class="right" >
+          <a href="20170309.html" title="2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

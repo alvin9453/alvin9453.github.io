@@ -1,0 +1,86 @@
+`WarGame <http://overthewire.org/wargames/>`_
+=============================================
+bandit
+---------
+13::
+
+   有private key之後就可以用以下方式登入
+   ssh -i the_private_key.txt bandit14@loaclhost
+
+12::
+
+  xxd 很像 hexdump，但可以reverse
+  xxd -r 可以把 hexdump 出來的code reverse回binary
+
+  GNU / Linux 各種壓縮與解壓縮指令 : http://note.drx.tw/2008/04/command.html
+
+  8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+11::
+
+  > cat data.txt | tr 'N-ZA-Mn-za-m' 'A-Za-z'
+
+  The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+
+10::
+
+  > base64 -d data.txt
+
+  IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+9::
+
+  > strings data.txt
+
+  truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+
+8::
+
+  >cat data.txt \| sort \|  uniq -u
+
+  UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+
+7::
+
+  >cat data.txt \| grep millionth
+
+  cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+
+
+6::
+
+  >find / -group bandit6 -size 33c -user bandit7
+
+  HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+
+5::
+
+  >find . -readable -size 1033c
+
+  c means 'bytes'
+
+  DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+
+4::
+
+  koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+
+3::
+
+  pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+
+2::
+
+  UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+
+1::
+
+  CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+
+0::
+
+  boJ9jbbUNNfktd78OOpsqOltutMc3MY1

@@ -1,0 +1,200 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2017/01/05 - (Patent) Systems and methods for collaborative note-taking - part 2 &#8212; Jiawei 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2016/12/29 - (Patent) Systems and methods for collaborative note-taking" href="20161229.html" />
+    <link rel="prev" title="2017/01/12 - WebSocket" href="20170112.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20161229.html" title="2016/12/29 - (Patent) Systems and methods for collaborative note-taking"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="20170112.html" title="2017/01/12 - WebSocket"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="patent-systems-and-methods-for-collaborative-note-taking-part-2">
+<h1>2017/01/05 - (Patent) Systems and methods for collaborative note-taking - part 2 <a class="footnote-reference" href="#id7" id="id1">[1]</a><a class="headerlink" href="#patent-systems-and-methods-for-collaborative-note-taking-part-2" title="Permalink to this headline">¶</a></h1>
+<p><strong>Reading range : from [0045] to the end</strong></p>
+<dl class="docutils">
+<dt>Function words include</dt>
+<dd><ul class="first last simple">
+<li>determines ( the , that)</li>
+<li>conjunctions( and , but )</li>
+<li>prepositions( in, of )</li>
+<li>auxiliary verbs ( be, have )</li>
+<li>modals ( may, could )</li>
+<li>quantifiers( some , both )</li>
+</ul>
+</dd>
+<dt>Salient tokens(words)</dt>
+<dd><ul class="first last simple">
+<li>High count within the document</li>
+<li>Low count across documents</li>
+</ul>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="../_images/patent-fig2.png"><img alt="../_images/patent-fig2.png" src="../_images/patent-fig2.png" style="width: 360.0px; height: 555.0px;" /></a>
+<p><strong>FIG. 2 - An exemplary method of collaborative note-taking according to this invention</strong> <a class="footnote-reference" href="#id8" id="id2">[2]</a></p>
+<p>[0045] The <strong>relevance and correctness information</strong> for the <strong>salient tokens</strong> in the speech information. The classes of the WordNet® lexicon are used to provide an indication of the sematic relatedness vetween the salient tokens in the speech information and the words present in relevant portions of a presentation slide.</p>
+<blockquote>
+<div><a class="reference external" href="https://wordnet.princeton.edu/">WordNet®</a> <a class="footnote-reference" href="#id9" id="id3">[3]</a> is a large lexical database of English.Nouns, verbs, adjectives and adverbs are grouped into sets of cognitive synonyms (synsets), each expressing a distinct concept. Synsets are interlinked by means of conceptual-semantic and lexical relations. The resulting network of meaningfully related words and concepts can be navigated with the browser. WordNet is also freely and publicly available for download. WordNet’s structure makes it a useful tool for computational linguistics and natural language processing.</div></blockquote>
+<p>[0047-48] The human sensible display attrubutes are dynamically determined based on any combination of <strong>confidence score</strong> , <strong>the relevance score</strong>  , user interest and the like. =&gt; Optionally displayed in varying colors, fonts , sizes and so on to attract user’s attention.</p>
+<p>[0061] The <strong>collaborative user feedback signal</strong> is used to adjust the correctness value associative with the salient token.</p>
+<p>[0064] The automatic speech recognition system my be embedeed within the collaborative note-taking system.</p>
+<p>[0065] The <strong>domain information</strong> associated with the speech information has been previously determined and saved into a memory from which the information is retrieved in step S520.</p>
+<a class="reference internal image-reference" href="../_images/patent-fig4.png"><img alt="../_images/patent-fig4.png" src="../_images/patent-fig4.png" style="width: 395.4px; height: 482.7px;" /></a>
+<p><strong>FIG.4 - Salient token</strong> <a class="footnote-reference" href="#id10" id="id4">[4]</a></p>
+<p>[0074] <strong>Correctness scores</strong> associated with a <strong>token</strong> may be increased based on <strong>collaborative user feedback</strong> information indicating that a significant number of collaborative users have added the salient tokens to their private notes.</p>
+<dl class="docutils">
+<dt>[0074] <a class="reference external" href="http://www2.parc.com/isl/groups/nltt/xle/">Xerox Linguistic Environment(XLE)</a> <a class="footnote-reference" href="#id11" id="id5">[5]</a> or any other tools may be used to determine measures of correctness.</dt>
+<dd>XLE consists of cutting-edge algorithms for parsing and generating Lexical Functional Grammars (LFGs) along with a rich graphical user interface for writing and debugging such grammars.</dd>
+</dl>
+<p>[0077] The confidence score may be obtained from an automatic speech recognition system or may be determined directly by the collaborative note-taking system.</p>
+<p>[0085] 921-923 of the speech area 920 reflect the salient tokens in the speech information.</p>
+<a class="reference internal image-reference" href="../_images/patent-fig7.png"><img alt="../_images/patent-fig7.png" src="../_images/patent-fig7.png" style="width: 441.0px; height: 468.6px;" /></a>
+<p><strong>FIG. 7 - Collaborative note-taking user interface</strong> <a class="footnote-reference" href="#id12" id="id6">[6]</a></p>
+<dl class="docutils">
+<dt>[Claim] A method for displaying collaborative user notes comprising the steps of:</dt>
+<dd><ol class="first last arabic simple">
+<li>Determining portions of a first information channel</li>
+<li>Dynamically determining domain information based on the determined portions</li>
+<li>Determining context information temporally associated with the determined portions</li>
+<li>Determining a suggested note based on collaborative user feedback information</li>
+<li>The determined portions of the first information channel and the temporally related context information.</li>
+</ol>
+</dd>
+</dl>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In my opinion, this patent is focus on how to parse and recognize the speaker’s presentation by speaker identifire(e.g. microphone) then associate with the presentation slide to create notes. In these notes, more relevant and interesting material is optionally displayed in varying colors, fonts, size and so on to attract user’s attention. This collaborative note-taking system has some mechanisms(such as user feedback and auto recognition system) to ranked and adjust notes it created.</p>
+<p>This is a totally different system from <em>dropbox paper</em> and <em>hackpad</em> that I often used before. In <em>dropbox paper</em> and <em>hackpad</em> , there is just a simple platform to allow a group of users to make the same note on its web interface in realtime. That is , everyone in this group can notice who is taking notes immediately and everyone can edit the content.</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Patent : <a class="reference external" href="https://www.google.ch/patents/US20090204620">https://www.google.ch/patents/US20090204620</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Fig 2 : <a class="reference external" href="https://patentimages.storage.googleapis.com/US20090204620A1/US20090204620A1-20090813-D00002.png">https://patentimages.storage.googleapis.com/US20090204620A1/US20090204620A1-20090813-D00002.png</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>WordNote : <a class="reference external" href="https://wordnet.princeton.edu/">https://wordnet.princeton.edu/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>Fig 4 : <a class="reference external" href="https://patentimages.storage.googleapis.com/US20090204620A1/US20090204620A1-20090813-D00004.png">https://patentimages.storage.googleapis.com/US20090204620A1/US20090204620A1-20090813-D00004.png</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>XLE : <a class="reference external" href="http://www2.parc.com/isl/groups/nltt/xle/">http://www2.parc.com/isl/groups/nltt/xle/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>Fig 7 : <a class="reference external" href="https://patentimages.storage.googleapis.com/US20090204620A1/US20090204620A1-20090813-D00007.png">https://patentimages.storage.googleapis.com/US20090204620A1/US20090204620A1-20090813-D00007.png</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/01/05 - (Patent) Systems and methods for collaborative note-taking - part 2 </a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="20170112.html"
+                        title="previous chapter">2017/01/12 - WebSocket</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20161229.html"
+                        title="next chapter">2016/12/29 - (Patent) Systems and methods for collaborative note-taking</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20161229.html" title="2016/12/29 - (Patent) Systems and methods for collaborative note-taking"
+             >next</a></li>
+        <li class="right" >
+          <a href="20170112.html" title="2017/01/12 - WebSocket"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+2016/11/08 - DLink DCS910 IP Camera's HTTP request and Authentication 
+=======================================================================
+
+Why?
+----
+
+I noticed that if I open the webpage( http\://10.21.20.178 [#]_) via browser, it would ask me the account and password. But if I open it again by browser tab, it won't ask me anything untial I close the browser.
+
+Therefore, I want to figure out how this webpage authenticate.
+
+.. [#] : DLink DCS910 IP Camera's IP address in Lab409. Thers is a web platform to monitor and to configure.
+
+My observation
+--------------
+
+This is a *HTTP request* I connected to http\://10.21.20.178 in first time::
+
+  GET / HTTP/1.1
+  Host: 10.21.20.178
+  User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0
+  Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+  Accept-Language: en-US,en;q=0.5
+  Accept-Encoding: gzip, deflate
+  Connection: close
+  Upgrade-Insecure-Requests: 1
+
+It would ask for account/password. After I have finished the input( admin / [Empty] ), it would re-send the request and change some content::
+
+  GET / HTTP/1.1
+  Host: 10.21.20.178
+  User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0
+  Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+  Accept-Language: en-US,en;q=0.5
+  Accept-Encoding: gzip, deflate
+  Connection: close
+  Upgrade-Insecure-Requests: 1
+  Authorization: Basic YWRtaW46     ==> Authenticataon content ! (PS : Encode by base64) 
+
+After that , if I open this page in a new browser tab, the requrest would be::
+
+    GET / HTTP/1.1
+    Host: 10.21.20.178
+    User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    Accept-Language: en-US,en;q=0.5
+    Accept-Encoding: gzip, deflate
+    Authorization: Basic YWRtaW46 
+    Connection: close
+    Upgrade-Insecure-Requests: 1
+
+and the line *Authorization\: Basic YWRtaW46* would always exist untial the browser closed.
+
+Summary
+-------
+
+This is all my observation, I still have no idea why and how to do this!
+

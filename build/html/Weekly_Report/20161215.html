@@ -1,0 +1,311 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2016/12/15 - Dynamic Link Library &#8212; Jiawei 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2016/12/08 - Research of Web Real-Time Communication Based on Web Socket" href="20161208.html" />
+    <link rel="prev" title="2016/12/22 - TDOH conference" href="20161222.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20161208.html" title="2016/12/08 - Research of Web Real-Time Communication Based on Web Socket"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="20161222.html" title="2016/12/22 - TDOH conference"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dynamic-link-library">
+<h1>2016/12/15 - Dynamic Link Library<a class="headerlink" href="#dynamic-link-library" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="when-a-program-is-compiling">
+<h2>When a program is compiling…<a class="headerlink" href="#when-a-program-is-compiling" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/compiler_and_linker.png" src="../_images/compiler_and_linker.png" />
+</div>
+<div class="section" id="abstract">
+<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<p>Dynamic linking is a mechanism that links applications to libraries at run time. The libraries remain in their own files and are not copied into the executable files of the applications. DLLs link to an application when the application is run, rather than when it is created. DLLs may contain links to other DLLs.</p>
+<p>Many times, DLLs are placed in files with different extensions such as .exe, .drv or .dll.</p>
+</div>
+<div class="section" id="static-link-vs-dynamic-link">
+<h2>Static Link vs Dynamic Link <a class="footnote-reference" href="#id5" id="id1">[1]</a><a class="headerlink" href="#static-link-vs-dynamic-link" title="Permalink to this headline">¶</a></h2>
+<p>Static Link : Linker copys all library routines used in the program into the executable image while compiling.</p>
+<blockquote>
+<div><p>O : Faster</p>
+<p>X : Require more disk space and memory</p>
+</div></blockquote>
+<p>Dynamic Link : Do not link the library routines while compiling until the image run, when both the executable and the library are placed in memory.</p>
+<blockquote>
+<div><p>X : Slow</p>
+<p>O : See the content below</p>
+</div></blockquote>
+</div>
+<div class="section" id="advantages-of-dll">
+<h2>Advantages of DLL <a class="footnote-reference" href="#id6" id="id2">[2]</a><a class="headerlink" href="#advantages-of-dll" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Uses fewer resources :</li>
+</ol>
+<blockquote>
+<div>DLL files don’t get loaded into the RAM together with the main program; they don’t occupy space unless required. When a DLL file is needed, it is loaded and run.</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Promotes modular architecture</li>
+<li>Aid easy deployment and installation</li>
+</ol>
+<blockquote>
+<div><p>When a function within a DLL needs an update or a fix, the deployment and installation of the DLL does not require the program to be relinked with the DLL. Additionally, if multiple programs use the same DLL, then all of them get benefited from the update or the fix.</p>
+<p>Applications and DLLs can link to other DLLs automatically, if the DLL linkage is specified in the IMPORTS section of the module definition file as a part of the compile. Else, you can explicitly load them using the Windows <em>LoadLibrary</em> function.</p>
+</div></blockquote>
+</div>
+<div class="section" id="types-of-dlls">
+<h2>Types of DLLs <a class="footnote-reference" href="#id7" id="id3">[3]</a><a class="headerlink" href="#types-of-dlls" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>When you load a DLL in an application, two methods of linking let you call the exported DLL functions. The two methods of linking are :</dt>
+<dd><ul class="first last simple">
+<li>load-time dynamic linking</li>
+<li>run-time dynamic linking</li>
+</ul>
+</dd>
+</dl>
+<p>Load-time dynamic linking</p>
+<blockquote>
+<div>In load-time dynamic linking, an application makes explicit calls to the exported DLL functions like local functions. To use load-time dynamic linking, provide a <em>header</em> (.h) file and an import <em>library</em> (.lib) file, when you compile and link the application. When you do this, the linker will provide the system with the information that is required to load the DLL and resolve the exported DLL function locations at load time.</div></blockquote>
+<p>Runtime dynamic linking</p>
+<blockquote>
+<div>In runtime dynamic linking, an application calls either the LoadLibrary function or the <em>LoadLibraryEx</em> function to load the DLL at runtime. After the DLL is successfully loaded, you use the <em>GetProcAddress</em> function, to obtain the address of the exported DLL function that you want to call. When you use runtime dynamic linking, you do not need an import library file.</div></blockquote>
+</div>
+<div class="section" id="write-a-sample-dll">
+<h2>Write a Sample DLL<a class="headerlink" href="#write-a-sample-dll" title="Permalink to this headline">¶</a></h2>
+<p>In Microsoft Visual C++ 6.0, you can create a DLL by selecting either the Win32 Dynamic-Link Library project type or the MFC AppWizard (dll) project type.( It can refer to <a class="reference external" href="http://vincecc.blogspot.tw/2013/10/cc-dll.html">reference [7]</a>  )</p>
+<p>The following code is an example of a DLL that was created in Visual C++ by using the Win32 Dynamic-Link Library project type.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">// SampleDLL.cpp</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;stdafx.h&quot;</span><span class="cp"></span>
+<span class="cp">#define EXPORTING_DLL</span>
+<span class="cp">#include</span> <span class="cpf">&quot;sampleDLL.h&quot;</span><span class="cp"></span>
+
+<span class="n">BOOL</span> <span class="n">APIENTRY</span> <span class="nf">DllMain</span><span class="p">(</span> <span class="n">HANDLE</span> <span class="n">hModule</span><span class="p">,</span> <span class="n">DWORD</span>  <span class="n">ul_reason_for_call</span><span class="p">,</span> <span class="n">LPVOID</span> <span class="n">lpReserved</span> <span class="p">)</span>
+<span class="p">{</span>
+ <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">HelloWorld</span><span class="p">()</span>
+<span class="p">{</span>
+ <span class="n">MessageBox</span><span class="p">(</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">),</span>
+ <span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;In a DLL&quot;</span><span class="p">),</span> <span class="n">MB_OK</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">// File: SampleDLL.h</span>
+<span class="c1">//</span>
+<span class="cp">#ifndef INDLL_H</span>
+<span class="cp">#define INDLL_H</span>
+
+ <span class="cp">#ifdef EXPORTING_DLL</span>
+    <span class="k">extern</span> <span class="nf">__declspec</span><span class="p">(</span><span class="n">dllexport</span><span class="p">)</span> <span class="kt">void</span> <span class="n">HelloWorld</span><span class="p">()</span> <span class="p">;</span>
+ <span class="cp">#else</span>
+    <span class="k">extern</span> <span class="nf">__declspec</span><span class="p">(</span><span class="n">dllimport</span><span class="p">)</span> <span class="kt">void</span> <span class="n">HelloWorld</span><span class="p">()</span> <span class="p">;</span>
+ <span class="cp">#endif</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calling-a-sample-dll">
+<h2>Calling a Sample DLL<a class="headerlink" href="#calling-a-sample-dll" title="Permalink to this headline">¶</a></h2>
+<p>The following code is an example of a Win32 Application project that calls the exported DLL function in the SampleDLL DLL.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">// SampleApp.cpp</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;stdafx.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;sampleDLL.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="n">APIENTRY</span> <span class="nf">WinMain</span><span class="p">(</span><span class="n">HINSTANCE</span> <span class="n">hInstance</span><span class="p">,</span> <span class="n">HINSTANCE</span> <span class="n">hPrevInstance</span><span class="p">,</span> <span class="n">LPSTR</span> <span class="n">lpCmdLine</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nCmdShow</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">HelloWorld</span><span class="p">();</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong> − In <strong>load-time dynamic linking</strong> ( the code above) , you must link the SampleDLL.lib import library that is created when you build the SampleDLL project.</p>
+<p>In <strong>runtime dynamic linking</strong>, you use code that is similar to the following code to call the SampleDLL.dll exported DLL function.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="k">typedef</span> <span class="n">VOID</span> <span class="p">(</span><span class="o">*</span><span class="n">DLLPROC</span><span class="p">)</span> <span class="p">(</span><span class="n">LPTSTR</span><span class="p">);</span>
+<span class="p">...</span>
+
+<span class="n">HINSTANCE</span> <span class="n">hinstDLL</span><span class="p">;</span>
+<span class="n">DLLPROC</span> <span class="n">HelloWorld</span><span class="p">;</span>
+<span class="n">BOOL</span> <span class="n">fFreeDLL</span><span class="p">;</span>
+
+<span class="n">hinstDLL</span> <span class="o">=</span> <span class="n">LoadLibrary</span><span class="p">(</span><span class="s">&quot;sampleDLL.dll&quot;</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">hinstDLL</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+<span class="p">{</span>
+ <span class="n">HelloWorld</span> <span class="o">=</span> <span class="p">(</span><span class="n">DLLPROC</span><span class="p">)</span> <span class="n">GetProcAddress</span><span class="p">(</span><span class="n">hinstDLL</span><span class="p">,</span> <span class="s">&quot;HelloWorld&quot;</span><span class="p">);</span>
+
+ <span class="k">if</span> <span class="p">(</span><span class="n">HelloWorld</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">HelloWorld</span><span class="p">);</span>
+
+ <span class="n">fFreeDLL</span> <span class="o">=</span> <span class="n">FreeLibrary</span><span class="p">(</span><span class="n">hinstDLL</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong> - In runtime dynamic link, <em>typedef VOID (*DLLPROC) (LPTSTR);</em> is necessary. <a class="footnote-reference" href="#id8" id="id4">[4]</a></p>
+<p>When you compile and link the SampleDLL application, the Windows operating system searches for the SampleDLL DLL in the following locations in this order :</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The application folder</li>
+<li>The current folder</li>
+<li>The Windows system folder (The GetSystemDirectory function returns the path of the Windows system folder).</li>
+<li>The Windows folder (The GetWindowsDirectory function returns the path of the Windows folder).</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="dll-registration">
+<h2>DLL - Registration<a class="headerlink" href="#dll-registration" title="Permalink to this headline">¶</a></h2>
+<p>In order to use a DLL, it has to be registered by having appropriate references entered in the Registry. It sometimes happens that a Registry reference gets corrupted and the functions of the DLL cannot be used anymore. The DLL can be re-registered by opening Start-Run and entering the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">regsvr32</span> <span class="n">somefile</span><span class="o">.</span><span class="n">dll</span>
+</pre></div>
+</div>
+<p>This command assumes that somefile.dll is in a directory or folder that is in the PATH. Otherwise, the full path for the DLL must be used. A DLL file can also be unregistered by using the switch “/u” as shown below.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">regsvr32</span> <span class="o">/</span><span class="n">u</span> <span class="n">somefile</span><span class="o">.</span><span class="n">dll</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="https://kb.iu.edu/d/akqn">https://kb.iu.edu/d/akqn</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://dev.tutorialspoint.com/dll/dll_introduction.htm">http://dev.tutorialspoint.com/dll/dll_introduction.htm</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td><a class="reference external" href="http://dev.tutorialspoint.com/dll/dll_writing.htm">http://dev.tutorialspoint.com/dll/dll_writing.htm</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>How to Use DLL : <a class="reference external" href="http://www.tonylin.idv.tw/dokuwiki/doku.php/cpp:dll:windows:howtousedll">http://www.tonylin.idv.tw/dokuwiki/doku.php/cpp:dll:windows:howtousedll</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td>Static vs Dynamic link library :  <a class="reference external" href="https://leterboy.wordpress.com/2009/10/26/static-link-dynamic-link-load/">https://leterboy.wordpress.com/2009/10/26/static-link-dynamic-link-load/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[6]</td><td>Windows 檔案安裝原理 : <a class="reference external" href="http://www.ithome.com.tw/node/59884">http://www.ithome.com.tw/node/59884</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[7]</td><td>MFC Create DLL : <a class="reference external" href="http://vincecc.blogspot.tw/2013/10/cc-dll.html">http://vincecc.blogspot.tw/2013/10/cc-dll.html</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2016/12/15 - Dynamic Link Library</a><ul>
+<li><a class="reference internal" href="#when-a-program-is-compiling">When a program is compiling…</a></li>
+<li><a class="reference internal" href="#abstract">Abstract</a></li>
+<li><a class="reference internal" href="#static-link-vs-dynamic-link">Static Link vs Dynamic Link </a></li>
+<li><a class="reference internal" href="#advantages-of-dll">Advantages of DLL </a></li>
+<li><a class="reference internal" href="#types-of-dlls">Types of DLLs </a></li>
+<li><a class="reference internal" href="#write-a-sample-dll">Write a Sample DLL</a></li>
+<li><a class="reference internal" href="#calling-a-sample-dll">Calling a Sample DLL</a></li>
+<li><a class="reference internal" href="#dll-registration">DLL - Registration</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="20161222.html"
+                        title="previous chapter">2016/12/22 - TDOH conference</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20161208.html"
+                        title="next chapter">2016/12/08 - Research of Web Real-Time Communication Based on Web Socket</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20161208.html" title="2016/12/08 - Research of Web Real-Time Communication Based on Web Socket"
+             >next</a></li>
+        <li class="right" >
+          <a href="20161222.html" title="2016/12/22 - TDOH conference"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

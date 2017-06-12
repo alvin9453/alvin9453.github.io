@@ -1,0 +1,317 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2017/02/16 - (Paper) Internet Multicast Video Delivery &#8212; Jiawei 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/01/12 - WebSocket" href="20170112.html" />
+    <link rel="prev" title="2017/03/02 - Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade" href="20170302.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170112.html" title="2017/01/12 - WebSocket"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="20170302.html" title="2017/03/02 - Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="paper-internet-multicast-video-delivery">
+<h1>2017/02/16 - (Paper) Internet Multicast Video Delivery<a class="headerlink" href="#paper-internet-multicast-video-delivery" title="Permalink to this headline">¶</a></h1>
+<p>Authors: ADITYA GANJAM AND HUI ZHANG</p>
+<p>Published in: Proceedings of the IEEE ( Volume: 93, Issue: 1, Jan. 2005 )</p>
+<p>Full text : <a class="reference external" href="http://ieeexplore.ieee.org/document/1369706/">IEEE link here.</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Internet’s best effort unicast service model lacks both efficient multicast routing and quality of service(QoS) guarantees needed for high-quality point-to-multipoint and multipoint-to-multipoint video delivery.</p>
+<p>Video on Demand ( VoD ) <a class="footnote-reference" href="#id5" id="id1">[1]</a></p>
+<blockquote>
+<div>Video on demand (display) (VOD) are systems which allow users to select and watch/listen to video or audio content such as movies and TV shows when they choose to, rather than having to watch at a specific broadcast time, which was the prevalent approach with over-the-air broadcasting during much of the 20th century. IPTV technology is often used to bring video on demand to televisions and personal computers.</div></blockquote>
+<p>The basic multicast functionality are as follows.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>(1). Group membership management:</dt>
+<dd>A membership management protocol.</dd>
+<dt>(2). Data delivery path maintenance:</dt>
+<dd>A control protocol must construct a delivery path that reaches all the receivers requesting the stream.</dd>
+<dt>(3). Replication and forwarding:</dt>
+<dd>Interior nodes in the delivery path must replicate and forward the stream.</dd>
+</dl>
+</div></blockquote>
+<p><strong>IP multicast</strong> was the first solution to provide multicast functionality in the Internet. A group address identifies a multicast group and any host can send a message to a group by simply sending to the group address. But unfortunately it has proven extremely difficult to do efficiently and at a large scale.</p>
+<p>In contrast, <strong>overlay multicast</strong> use only end hosts connected to the network to perform multicast functionally.</p>
+</div>
+<div class="section" id="multicast-delivery-challenges">
+<h2>Multicast Delivery Challenges<a class="headerlink" href="#multicast-delivery-challenges" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Challenges</dt>
+<dd><p class="first">(1). Efficient delivery path construction.</p>
+<p>(2). Handling group dynamics due to receivers joining and leaving the group.</p>
+<dl class="last docutils">
+<dt>(3). Scalability - 3 dimensions:</dt>
+<dd><p class="first">(a). Number of multicast groups</p>
+<p>(b). Number of receivers per group</p>
+<p class="last">(c). Number of senders per group</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>These challenges are related. Efficient  delivery  path  construction  is  made more difficult by having to constantly change the delivery path due to group dynamics and is made significantly more important due to all dimensions of scalability.</p>
+<img alt="../_images/multicast_video_fig2.png" src="../_images/multicast_video_fig2.png" />
+<p>The simplest multicast delivery architecture over the Internet, <em>native unicast</em>, sends a separate copy of the video from the source to each destination using the unicast path from the source to the destination as shown in Fig.2(a) and 2(d).</p>
+</div>
+<div class="section" id="ip-multicast">
+<h2>IP Multicast<a class="headerlink" href="#ip-multicast" title="Permalink to this headline">¶</a></h2>
+<p>Data originates from a sender, is replicated at routers as required, and is forwarded until it reaches a destination.</p>
+<p>This abstraction is powerful for two reasons:</p>
+<blockquote>
+<div><p>(1). Group addressing provides robust rendezvous mechanisms between senders and receivers in an application.</p>
+<p>(2). Applications can communicate with a group the same way they communication with a single host, simplifying the use of multicast application.</p>
+</div></blockquote>
+<img alt="../_images/multicast_video_fig3.png" src="../_images/multicast_video_fig3.png" />
+<p>A multicast router, in addition to the unicast forwarding table, requires a multicast forwarding table.</p>
+<dl class="docutils">
+<dt>The fact raises two key difference between the two tables:</dt>
+<dd><p class="first">(1). It is difficult to aggregate the multicast forwarding table.</p>
+<p class="last">(2). An entry in the multicast forwarding table may change when hosts join or leave any group. Unicast forwarding table my change only when routers in the network change.</p>
+</dd>
+<dt><strong>Protocols for Multicast Support</strong></dt>
+<dd><p class="first">(1). Multicast Routing :</p>
+<blockquote>
+<div><p>(a). <em>Reverse-path multicasting (RPM)</em> is a variant of RPF.It[#]_ forwards multicast traffic on a spanning tree where the root is the sender of the traffic. Upon receiving a multicast packet, leaf routers may prune themselves from the tree  if no hosts on their network are subscribed to the group. The pruning process proceeds up the tree from each leaf until a router is connected to a host that is subscribed to the group. This algorithm is used to construct a different tree for each sender.</p>
+<p>(b). <em>Core-base trees (CBT)</em> <a class="footnote-reference" href="#id6" id="id2">[2]</a> : When a receiver joins a multicast group, its local CBT router looks up the multicast address and obtains the address of the Core router for the group. It then sends a Join message for the group towards the Core. At each router on the way to the core, forwarding state is instantiated for the group, and an acknowledgment is sent back to the previous router. In this way, a multicast tree is built.  If a sender (that is a group member) sends data to the group, the packets reach its local router, which forwards them to any of its neighbours that are on the multicast tree. Each router that receives a packet forwards it out of all it its interfaces that are on the tree except the one the packet came from. The style of tree CBT builds is called a “bidirectional shared tree”, because the routing state is “bidirectional” - packets can flow both up the tree towards the core and down the tree away from the core depending on the location of the source, and “shared” by all sources to the group.</p>
+</div></blockquote>
+<p class="last">(2). Reliablity/Congestion Control: Protocols for flow and congestion control include Receiver-driven Layered Multicast(RLM). -&gt; Improve the quality of video.</p>
+</dd>
+</dl>
+<p><strong>Note</strong> : Reverse Path Forwarding(RPF)</p>
+<blockquote>
+<div><p>In multicast, the router forwards the packet away from the source to make progress along the distribution tree and prevent routing loops. The router’s multicast forwarding state runs more logically by organizing tables based on the reverse path, from the receiver back to the root of the distribution tree. This process is known as reverse-path forwarding (RPF).</p>
+<p>The router adds a branch to a distribution tree depending on whether the request for traffic from a multicast group passes the reverse-path-forwarding check (RPF check). Every multicast packet received must pass an RPF check before it is eligible to be replicated or forwarded on any interface.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>IP multicast service model has several disadvantages:</dt>
+<dd><p class="first">(1). Implementation of the service model is extremely complex. Routers need to maintain per-flow state, which introduces scalability challenges for both data and control planes in routers.</p>
+<p class="last">(2). It is difficult to implement access control, both for receivers and for source sending of the group.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="overlay-multicast">
+<h2>Overlay Multicast<a class="headerlink" href="#overlay-multicast" title="Permalink to this headline">¶</a></h2>
+<p>In IP multicast all interior nodes are routers and all end hosts are at the left positions. In contrast, in overlay multicast end hosts take all interior and leaf positions.</p>
+<p>End hosts only maintain state for the groups they are participating in.</p>
+<p>The overlay multicast architecture allows for flexibility in choosing the nodes that perform multicast functionality, as shown in Fig.4.</p>
+<img alt="../_images/multicast_video_fig4.png" src="../_images/multicast_video_fig4.png" />
+<p>The model (a) does not solve group scalability, and, therefore, it is good for a small number of large size groups.</p>
+<p>The  advantage of the application endpoint model (b) is that it is self-scaling, meaning  as more hosts join more bandwidth is supplied. However, the system becomes heavily dependent on the bandwidth supplied by hosts participating in the application. Application-endpoint is good for a large
+number of small to medium sized groups.</p>
+<p>The waypoint nodes model (c) can be dynamically invoked to enter a group that is lacking bandwidth capacity to sustain all receivers. These waypoint nodes can be taken from a pool of static provisioned nodes or from a pool of dynamic nodes. In the dynamic case end users may be given monitory or other incentives to contribute idle  bandwidth  to  a  multicast  group.</p>
+<dl class="docutils">
+<dt>Challenges</dt>
+<dd><dl class="first docutils">
+<dt>(1). Supply bandwidth</dt>
+<dd><p class="first">(a). The infrastructure nodes perform replication and forwarding and must be provisioned with enough bandwidth to accommodate the re-ceiver demand.</p>
+<p class="last">(b). The application-endpoint model, although  this has the advantage of potentially being self-scaling, it makes the supply bandwidth an unknown, meaning the system does not know how many hosts it can  sustain at a certain time until it reaches that time.  In contrast, in the dedicated-infrastructure model all supply bandwidth information is known before the system is run, making the issue simpler.</p>
+</dd>
+</dl>
+<p>(2). Forwarder heterogenity</p>
+<p class="last">(3). NAT</p>
+</dd>
+</dl>
+<p>In IP multicast receiver scalabilitiy is an issue because of control message overhead in constructing and maintaining the trees.</p>
+<p>In dedicated-infrastructure the issue is primarily provisioning the system with enough bandwidth and infrastructure nodes.</p>
+<p>In application-endpoint, the known issues are control overhead and depth of the tree.</p>
+</div>
+<div class="section" id="overlay-multicast-designs">
+<h2>Overlay Multicast Designs<a class="headerlink" href="#overlay-multicast-designs" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/multicast_video_table2.png" src="../_images/multicast_video_table2.png" />
+<dl class="docutils">
+<dt>Tree construction - Tree construction algorithms can be categorized as follows :</dt>
+<dd><dl class="first docutils">
+<dt>(1). Static precomputation</dt>
+<dd>Offline</dd>
+<dt>(2). Centralized construction</dt>
+<dd>Online. The source of the broadcast has a complete view of the tree and controls all changes that occur in it.</dd>
+<dt>(3). Self-organization</dt>
+<dd>Online. It reduce the stress on the source and potentially allow it to scale to a much larger size than centralized construction.</dd>
+</dl>
+<p>A static precomputation algorithm fits very well for the dedicated-infrastructure model for overlay multicast because the infrastructure nodes are known ahead of time.</p>
+<p>Application-endpoint and waypoint models  require an online algorithm,  and both centralized construction and self-organization have been explored.</p>
+<p class="last"><em>Stress</em> is defined as the number of identical copies of a packet that traverse a physical link.</p>
+</dd>
+<dt>Performance-aware adaptation:</dt>
+<dd>Performance-aware adaptation works by monitoring the performance, and when it dips beyond certain thresholds the node will perform a <em>parent switch</em> to a potentially better node.</dd>
+<dt>Hierachical clustering:</dt>
+<dd><p class="first">Receiver scalability is a critical challenge with video delivery in the application-endpoint and  waypoint  models.</p>
+<img alt="../_images/multicast_video_fig5.png" src="../_images/multicast_video_fig5.png" />
+<p>In the NICE protocol, nodes are clustered into groups according to their <em>delays</em> and in general know other nodes in their  own cluster, their path to the source, and siblings of their cluster head. This protocol was designed for low bandwidth applications and so <strong>does not fit very well for video delivery</strong> mainly due to this reason of high degre</p>
+<p class="last">The ZIGZAG protocol attempts to alleviate the degree problem by having  foreign  cluster heads forward to noncluster heads that are only one layer apart.</p>
+</dd>
+<dt>Distrubuted hash tables:</dt>
+<dd>Distributed hash tables (DHT) have been applied to efficiently construct a tree to solve receiver scalability issues. A DHT exposes hash table semantics over the group of nodes,where any node can insert or retrieve a value associated with a key.</dd>
+<dt>Multiple trees/mesh:</dt>
+<dd><dl class="first docutils">
+<dt>Multiple tree and mesh structures have been introduced to:</dt>
+<dd><p class="first">(1). improve resiliency to group and network dynamics with redundancy by using <strong>multiple paths</strong> from the source to each destination.</p>
+<p class="last">(2). <strong>increase the supply bandwidth</strong> by using bandwidth from all nodes that can supply it, which cannot be done in single trees.</p>
+</dd>
+</dl>
+<p>To make multiple trees or meshes practical, a multiple description codec (MDC) <a class="footnote-reference" href="#id7" id="id3">[3]</a> must be used to encode the video.</p>
+<dl class="last docutils">
+<dt>NAT/firewall-aware protocol:</dt>
+<dd><p class="first">NATs and firewalls impose fundamental restrictions on pair-wise connectivity of hosts in the overlay. In most cases,  it  is  not  possible  for NATs  and firewalls to communicate directly with one another; however, there are specific exceptions, depending on the transport protocol (UDP or TCP) and the exact behavior of  the  NAT/firewall.</p>
+<p class="last">A  well-structured  tree  is  formed  by  making  public  hosts choose NAT/firewall hosts as parents leaving public parentsfor NAT/firewall hosts.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Note</strong>: MDC <a class="footnote-reference" href="#id8" id="id4">[4]</a></dt>
+<dd><p class="first">Multiple description coding (MDC) is a coding technique that fragments a single media stream into n substreams (n ≥ 2) referred to as descriptions. The packets of each description are routed over multiple, (partially) disjoint paths. In order to decode the media stream, any description can be used, however, the quality improves with the number of descriptions received in parallel. <strong>The idea of MDC is to provide error resilience to media streams</strong>. Since an arbitrary subset of descriptions can be used to decode the original stream, network congestion or packet loss — which are common in best-effort networks such as the Internet — will <strong>not interrupt the stream but only cause a (temporary) loss of quality</strong>. The quality of a stream can be expected to be roughly proportional to data rate sustained by the receiver.</p>
+<p class="last">MDC is a form of data partitioning, thus comparable to layered coding as it is used in MPEG-2 and MPEG-4.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="hybrid-ip-overlay-multicast">
+<h2>Hybrid IP/Overlay Multicast<a class="headerlink" href="#hybrid-ip-overlay-multicast" title="Permalink to this headline">¶</a></h2>
+<p>IP  multicast is used in the islands  and they are  connected through overlay multicast tunnels.</p>
+<p>The hybrid architecture alleviates some issues with group dynamics, receiver scalability, and supply bandwidth.</p>
+<p>Bandwidth demand will be less since routers perform data replication and forwarding within islands.</p>
+<p>The <strong>tradeoff</strong> is increased complexity of the control protocol because control protocols from both architectures must communicate and increased complexity for flow and congestion control due to existing problems with these protocols in IP multicast.</p>
+</div>
+<div class="section" id="internet-between-coding-and-delivery">
+<h2>Internet between coding and delivery<a class="headerlink" href="#internet-between-coding-and-delivery" title="Permalink to this headline">¶</a></h2>
+<p>How do we handle receiver heterogeneity with multiple streams?</p>
+<p>Consider an example where we want to support hosts whose downstream bandwidth is between 100 kb/s (DSL or ISDN host) and 2 Mb/s (university host).We  refer  to  these  hosts  as  low  bandwidth  host  and  high bandwidth host, respectively. It would be very desirable for the low bandwidth host to take advantage of multiple tree properties and receive some subset of the streams, say 4, as well as the high bandwidth host to receive close to 2 Mb/s of  useful  data  and  achieve  high  quality.  This  means  that each MDC stream must be around 100 kb/s/4  25 kb/s.</p>
+<p>However, if all streams are 25 kb/s, the high bandwidth host must join 80 trees! This may be prohibitively large, even if the coding algorithm could efficiently generate 80 streams.</p>
+<img alt="../_images/multicast_video_fig6.png" src="../_images/multicast_video_fig6.png" />
+<p>One example setting for the first solution is eight streams of (25, 25, 25, 25, 50, 100, 200, 400, 800) kb/s, where the low bandwidth host could join all the 25-kb/s trees and the high bandwidth host could join all the trees. This ensures that a low bandwidth host can receive 4 streams.</p>
+<p>The second solution, hosts receive all or almost all the streams; however,they can <strong>adjust the bandwidth</strong> received through each stream to conform to their in-bound bandwidth. This allows the low bandwidth host to receive 25 kb/s each from four streams and a 2-Mb/s host to receive 250 kb/s each from eight streams.</p>
+<p>The third solution, the set of receivers is split up according to their in-bound bandwidth such that the lowest bandwidth host can still get a minimum number of streams. For example, 100 to 400 kb/s receivers can be in a group with 16 trees with 25-kb/s MDC  streams. The other groups can be similarly set up. The disadvantage of this solution is that low downstream bandwidth is usually  correlated with low upstream bandwidth. In general, this may mean that the low bandwidth
+groups will not be able to support themselves.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>The  key  disadvantage of IP multicast is the need to maintain per flow state in all routers leading to scalability issues when scaling the number of simultaneous multicast groups.</p>
+<p>The application-endpoint and waypoint models for the overlay multicast architecture address this issue by pushing all multicast functions to the edge and not sharing the delivery infrastructure among different groups.</p>
+<p>The tradeoffs are that the applications need
+to handle constant group dynamics, bandwidth constraints, and connectivity restrictions.</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>VOD <a class="reference external" href="https://en.wikipedia.org/wiki/Video_on_demand">https://en.wikipedia.org/wiki/Video_on_demand</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Understanding Multicast Reverse Path Forwarding  <a class="reference external" href="https://www.juniper.net/documentation/en_US/junos/topics/concept/multicast-reverse-path-forwarding.html">https://www.juniper.net/documentation/en_US/junos/topics/concept/multicast-reverse-path-forwarding.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Core-base tree <a class="reference external" href="https://www.cl.cam.ac.uk/~jac22/books/mm/book/node78.html">https://www.cl.cam.ac.uk/~jac22/books/mm/book/node78.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>MDC <a class="reference external" href="https://en.wikipedia.org/wiki/Multiple_description_coding">https://en.wikipedia.org/wiki/Multiple_description_coding</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/02/16 - (Paper) Internet Multicast Video Delivery</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#multicast-delivery-challenges">Multicast Delivery Challenges</a></li>
+<li><a class="reference internal" href="#ip-multicast">IP Multicast</a></li>
+<li><a class="reference internal" href="#overlay-multicast">Overlay Multicast</a></li>
+<li><a class="reference internal" href="#overlay-multicast-designs">Overlay Multicast Designs</a></li>
+<li><a class="reference internal" href="#hybrid-ip-overlay-multicast">Hybrid IP/Overlay Multicast</a></li>
+<li><a class="reference internal" href="#internet-between-coding-and-delivery">Internet between coding and delivery</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="20170302.html"
+                        title="previous chapter">2017/03/02 -  Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20170112.html"
+                        title="next chapter">2017/01/12 - WebSocket</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170112.html" title="2017/01/12 - WebSocket"
+             >next</a></li>
+        <li class="right" >
+          <a href="20170302.html" title="2017/03/02 - Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Jiawei 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

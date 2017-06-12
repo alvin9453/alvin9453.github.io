@@ -1,0 +1,97 @@
+2016/12/01 - Server-Sent Events
+=================================
+
+Feature
+-------
+A server-sent event is when a web page automatically gets updates from a server.
+
+This was also possible before, but the web page would have to ask if any updates were available. With server-sent events, the updates come automatically.
+
+Examples: Facebook/Twitter updates, stock price updates, news feeds, sport results, etc.
+
+Server-Sent Events vs. WebSockets
+----------------------------------
+Why would you choose Server-Sent Events over WebSockets?
+
+One reason SSEs have been kept in the shadow is because later APIs like WebSockets provide a richer protocol to perform bi-directional, full-duplex communication. Having a two-way channel is more attractive for things like games, messaging apps, and for cases where you need near real-time updates in both directions. However, **in some scenarios data doesn't need to be sent from the client**. You simply need updates from some server action. A few examples would be friends' status updates, stock tickers, news feeds, or other automated data push mechanisms (e.g. updating a client-side Web SQL Database or IndexedDB object store). If you'll need to send data to a server, XMLHttpRequest is always a friend.
+
+SSEs are sent over traditional HTTP. That means they do not require a special protocol or server implementation to get working. WebSockets on the other hand, require full-duplex connections and new Web Socket servers to handle the protocol. In addition, Server-Sent Events have a variety of features that WebSockets lack by design such as automatic reconnection, event IDs, and the ability to send arbitrary events.
+
+
+Receive Server-Sent Event Notifications
+---------------------------------------
+To subscribe to an event stream, create an *EventSource* object and pass it the URL of your stream:
+
+.. code-block:: javascript
+
+  var source = new EventSource("demo_sse.php");
+  source.onmessage = function(event) {
+    document.getElementById("result").innerHTML += event.data + "<br>";
+  };
+
+**Note**: If the URL passed to the EventSource constructor is an absolute URL, its origin (scheme, domain, port) must match that of the calling page.
+
+Event Stream Format
+-------------------
+
+Sending an event stream from the source is a matter of constructing a plaintext response, served with a text/event-stream Content-Type, that follows the SSE format. In its basic form, the response should contain a **"data:"** line, followed by your message, followed by **two "\n"** characters to end the stream::
+
+  data: My message\n\n
+
+Multiline Data
+---------------
+
+If your message is longer, you can break it up by using multiple "data:" lines. Two or more consecutive lines beginning with "data:" will be treated as a single piece of data, meaning only one message event will be fired. **Each line should end in a single "\n"** (except for the last, which should end with two). The result passed to your message handler is a single string concatenated by newline characters. For example::
+
+  data: first line\n
+  data: second line\n\n
+
+Controlling the Reconnection-timeout
+-------------------------------------
+
+The browser attempts to reconnect to the source roughly 3 seconds after each connection is closed. You can change that timeout by including a line beginning with "retry:", followed by the number of milliseconds to wait before trying to reconnect.
+
+The following example attempts a reconnect after 10 seconds::
+
+  retry: 10000\n
+  data: hello world\n\n
+
+
+
+Check Server-Sent Events Support
+---------------------------------
+In the tryit example above there were some extra lines of code to check browser support for server-sent events:
+
+.. code-block:: javascript
+
+  if(typeof(EventSource) !== "undefined") {
+      // Yes! Server-sent events support!
+      // Some code.....
+  } else {
+      // Sorry! No server-sent events support..
+  }
+
+Server-Side Code Example
+-------------------------
+
+Set the "Content-Type" header to "text/event-stream".
+
+.. code-block:: php
+
+  <?php
+  header('Content-Type: text/event-stream');
+  header('Cache-Control: no-cache');
+
+  $time = date('r');
+  echo "data: The server time is: {$time}\n\n";
+  flush();
+  ?>
+
+Reference
+----------
+
+.. [#] W3CSchool: http://www.w3schools.com/html/html5_serversentevents.asp
+
+.. [#] Html5rocks :  https://www.html5rocks.com/en/tutorials/eventsource/basics/
+
+.. [#] Polling , Long polling , Streaming : https://blog.gtwang.org/web-development/websocket-protocol/
