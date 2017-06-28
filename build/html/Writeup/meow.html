@@ -1,0 +1,192 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Known-plaintext attack &#8212; Weekly Report 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="2016/12/24 - How to compile iSpy source code via VS2015 on my PC" href="../Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.html" title="2016/12/24 - How to compile iSpy source code via VS2015 on my PC"
+             accesskey="P">previous</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="known-plaintext-attack">
+<h1>Known-plaintext attack<a class="headerlink" href="#known-plaintext-attack" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="keynote">
+<h2>Keynote<a class="headerlink" href="#keynote" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Cracking ZIP files</li>
+<li>You need to have one of the original files that compress in the encrypted archive</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>pkcrack</li>
+<li>binarywalk</li>
+<li>dd ( Linux command )</li>
+<li>strings</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="my-observation">
+<h2>My observation<a class="headerlink" href="#my-observation" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/meow.png" src="../_images/meow.png" />
+<p>看起來就是一張很可愛的Pusheen圖片,沒什麼頭緒,用file 看也很正常是張圖片。</p>
+<p>用strings 看一下</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">meow</span><span class="o">/</span><span class="n">UT</span>
+<span class="p">[</span><span class="n">Wux</span>
+<span class="n">meow</span><span class="o">/</span><span class="n">flagUT</span>
+<span class="p">[</span><span class="n">Wux</span>
+<span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span><span class="n">UT</span>
+<span class="p">[</span><span class="n">Wux</span>
+<span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span><span class="n">p296x100</span><span class="o">/</span><span class="n">UT</span>
+<span class="p">[</span><span class="n">Wux</span>
+<span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span><span class="n">p296x100</span><span class="o">/</span><span class="mi">10173502</span><span class="n">_279586372215628_1950740854_n</span><span class="o">.</span><span class="n">pngUT</span>
+</pre></div>
+</div>
+<p>疑，目錄結構（? 看起來這圖片檔裏面應該藏了一個壓縮檔</p>
+<p>binwalk 看一下</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DECIMAL</span>       <span class="n">HEXADECIMAL</span>     <span class="n">DESCRIPTION</span>
+<span class="o">--------------------------------------------------------------------------------</span>
+<span class="mi">0</span>             <span class="mh">0x0</span>             <span class="n">PNG</span> <span class="n">image</span><span class="p">,</span> <span class="mi">296</span> <span class="n">x</span> <span class="mi">279</span><span class="p">,</span> <span class="mi">8</span><span class="o">-</span><span class="n">bit</span><span class="o">/</span><span class="n">color</span> <span class="n">RGBA</span><span class="p">,</span> <span class="n">non</span><span class="o">-</span><span class="n">interlaced</span>
+<span class="mi">41</span>            <span class="mh">0x29</span>            <span class="n">Zlib</span> <span class="n">compressed</span> <span class="n">data</span><span class="p">,</span> <span class="n">compressed</span>
+<span class="mi">48543</span>         <span class="mh">0xBD9F</span>          <span class="n">Zip</span> <span class="n">archive</span> <span class="n">data</span><span class="p">,</span> <span class="n">at</span> <span class="n">least</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span> <span class="n">to</span> <span class="n">extract</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">meow</span><span class="o">/</span>
+<span class="mi">48606</span>         <span class="mh">0xBDDE</span>          <span class="n">Zip</span> <span class="n">archive</span> <span class="n">data</span><span class="p">,</span> <span class="n">encrypted</span> <span class="n">at</span> <span class="n">least</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="n">to</span> <span class="n">extract</span><span class="p">,</span> <span class="n">compressed</span> <span class="n">size</span><span class="p">:</span> <span class="mi">51</span><span class="p">,</span> <span class="n">uncompressed</span> <span class="n">size</span><span class="p">:</span> <span class="mi">47</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">meow</span><span class="o">/</span><span class="n">flag</span>
+<span class="mi">48740</span>         <span class="mh">0xBE64</span>          <span class="n">Zip</span> <span class="n">archive</span> <span class="n">data</span><span class="p">,</span> <span class="n">at</span> <span class="n">least</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span> <span class="n">to</span> <span class="n">extract</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span>
+<span class="mi">48814</span>         <span class="mh">0xBEAE</span>          <span class="n">Zip</span> <span class="n">archive</span> <span class="n">data</span><span class="p">,</span> <span class="n">at</span> <span class="n">least</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span> <span class="n">to</span> <span class="n">extract</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span><span class="n">p296x100</span><span class="o">/</span>
+<span class="mi">48897</span>         <span class="mh">0xBF01</span>          <span class="n">Zip</span> <span class="n">archive</span> <span class="n">data</span><span class="p">,</span> <span class="n">encrypted</span> <span class="n">at</span> <span class="n">least</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="n">to</span> <span class="n">extract</span><span class="p">,</span> <span class="n">compressed</span> <span class="n">size</span><span class="p">:</span> <span class="mi">48404</span><span class="p">,</span> <span class="n">uncompressed</span> <span class="n">size</span><span class="p">:</span> <span class="mi">48543</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span><span class="n">p296x100</span><span class="o">/</span><span class="mi">10173502</span><span class="n">_279586372215628_1950740854_n</span><span class="o">.</span><span class="n">png</span>
+<span class="mi">97912</span>         <span class="mh">0x17E78</span>         <span class="n">End</span> <span class="n">of</span> <span class="n">Zip</span> <span class="n">archive</span><span class="p">,</span> <span class="n">footer</span> <span class="n">length</span><span class="p">:</span> <span class="mi">22</span>
+</pre></div>
+</div>
+<p>哦，ZIP耶</p>
+<p>unzip一下</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">unzip</span> <span class="o">-</span><span class="n">l</span> <span class="n">meow</span><span class="o">.</span><span class="n">png</span>
+<span class="n">Archive</span><span class="p">:</span>  <span class="n">meow</span><span class="o">.</span><span class="n">png</span>
+<span class="n">warning</span> <span class="p">[</span><span class="n">meow</span><span class="o">.</span><span class="n">png</span><span class="p">]:</span>  <span class="mi">48543</span> <span class="n">extra</span> <span class="nb">bytes</span> <span class="n">at</span> <span class="n">beginning</span> <span class="ow">or</span> <span class="n">within</span> <span class="n">zipfile</span>
+  <span class="p">(</span><span class="n">attempting</span> <span class="n">to</span> <span class="n">process</span> <span class="n">anyway</span><span class="p">)</span>
+  <span class="n">Length</span>      <span class="n">Date</span>    <span class="n">Time</span>    <span class="n">Name</span>
+<span class="o">---------</span>  <span class="o">----------</span> <span class="o">-----</span>   <span class="o">----</span>
+        <span class="mi">0</span>  <span class="mi">2016</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">11</span> <span class="mi">16</span><span class="p">:</span><span class="mi">22</span>   <span class="n">meow</span><span class="o">/</span>
+       <span class="mi">47</span>  <span class="mi">2016</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">11</span> <span class="mi">16</span><span class="p">:</span><span class="mi">22</span>   <span class="n">meow</span><span class="o">/</span><span class="n">flag</span>
+        <span class="mi">0</span>  <span class="mi">2016</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">11</span> <span class="mi">16</span><span class="p">:</span><span class="mi">20</span>   <span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span>
+        <span class="mi">0</span>  <span class="mi">2016</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">11</span> <span class="mi">16</span><span class="p">:</span><span class="mi">21</span>   <span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span><span class="n">p296x100</span><span class="o">/</span>
+    <span class="mi">48543</span>  <span class="mi">2014</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">14</span> <span class="mi">05</span><span class="p">:</span><span class="mi">59</span>   <span class="n">meow</span><span class="o">/</span><span class="n">t39</span><span class="o">.</span><span class="mi">1997</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span><span class="n">p296x100</span><span class="o">/</span><span class="mi">10173502</span><span class="n">_279586372215628_1950740854_n</span><span class="o">.</span><span class="n">png</span>
+                <span class="o">---------</span>                     <span class="o">-------</span>
+                    <span class="mi">48590</span>                     <span class="mi">5</span> <span class="n">files</span>
+</pre></div>
+</div>
+<p>Bingo~百分百在圖片後面藏的是ZIP檔啦，連ZIP前面有多少bytes是圖片data都告訴你了XD</p>
+<p>而且看到meow/t39.1997-6/p296x100/10173502_279586372215628_1950740854_n.png 這張圖片的大小竟然也是48543，擺明的就是要我們用Known-plaintext attack</p>
+<p>所以我們要先取得原檔，試著將圖片分離出來</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dd</span> <span class="k">if</span><span class="o">=</span><span class="n">meow</span><span class="o">.</span><span class="n">png</span> <span class="n">of</span><span class="o">=</span><span class="n">mymeow</span><span class="o">.</span><span class="n">png</span> <span class="n">bs</span><span class="o">=</span><span class="mi">48543</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>取得原圖片檔之後，將圖片壓縮</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">zip</span> <span class="n">plaintext</span><span class="o">.</span><span class="n">zip</span> <span class="n">mymeow</span><span class="o">.</span><span class="n">png</span>
+</pre></div>
+</div>
+<p>用binwalk把藏在裏面的zip檔拉出來</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">binwalk</span> <span class="o">-</span><span class="n">e</span> <span class="n">meow</span><span class="o">.</span><span class="n">png</span>
+</pre></div>
+</div>
+<p>之後就可以看到裏面有個zip檔啦，算一下bytes大小，原圖就是這個拉出來的zip + mymeow.png</p>
+<p>最後使用pkcrack</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pkcrack</span> <span class="o">-</span><span class="n">C</span> <span class="n">BD9F</span><span class="o">.</span><span class="n">zip</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;meow/t39.1997-6/p296x100/10173502_279586372215628_1950740854_n.png&quot;</span> <span class="o">-</span><span class="n">P</span> <span class="n">plaintext</span><span class="o">.</span><span class="n">zip</span> <span class="o">-</span><span class="n">p</span> <span class="s2">&quot;mymeow.png&quot;</span> <span class="o">-</span><span class="n">d</span> <span class="n">decrypted</span><span class="o">.</span><span class="n">zip</span> <span class="o">-</span><span class="n">a</span>
+</pre></div>
+</div>
+<p>成功拿到flag~</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<p>[1] : Binary walk  <a class="reference external" href="https://github.com/devttys0/binwalk/wiki/Quick-Start-Guide">https://github.com/devttys0/binwalk/wiki/Quick-Start-Guide</a></p>
+<p>[2] : pkcrack <a class="reference external" href="https://www.hackthis.co.uk/articles/known-plaintext-attack-cracking-zip-files">https://www.hackthis.co.uk/articles/known-plaintext-attack-cracking-zip-files</a></p>
+<p>[3] : AIS3 2015 writeup :  <a class="reference external" href="http://joyhuang9473.github.io/post-ctf/2015/07/27/ais3-writeup-misc2.html">http://joyhuang9473.github.io/post-ctf/2015/07/27/ais3-writeup-misc2.html</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Known-plaintext attack</a><ul>
+<li><a class="reference internal" href="#keynote">Keynote</a></li>
+<li><a class="reference internal" href="#tools">Tools</a></li>
+<li><a class="reference internal" href="#my-observation">My observation</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.html"
+                        title="previous chapter">2016/12/24 - How to compile iSpy source code via VS2015 on my PC</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.html" title="2016/12/24 - How to compile iSpy source code via VS2015 on my PC"
+             >previous</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>
