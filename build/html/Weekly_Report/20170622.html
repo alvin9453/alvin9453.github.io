@@ -1,0 +1,155 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2017/06/22 - Chronos:Serverless Multi-User Chat Over NDN &#8212; Weekly Report 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/06/01 - Design a LINE Bot : Weather Bot!" href="20170601.html" />
+    <link rel="prev" title="Jiawei’s Documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170601.html" title="2017/06/01 - Design a LINE Bot : Weather Bot!"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="chronos-serverless-multi-user-chat-over-ndn">
+<h1>2017/06/22 - Chronos:Serverless Multi-User Chat Over NDN<a class="headerlink" href="#chronos-serverless-multi-user-chat-over-ndn" title="Permalink to this headline">¶</a></h1>
+<p>Zhenkai Zhu∗, Chaoyi Bian†, Alexander Afanasyev∗ , Van Jacobson‡, and Lixia Zhang∗
+∗ {zhenkai, afanasev, lixia} &#64;cs.ucla.edu, UCLA, Los Angeles, California, USA
+†<a class="reference external" href="mailto:bcy&#37;&#52;&#48;pku&#46;edu&#46;cn">bcy<span>&#64;</span>pku<span>&#46;</span>edu<span>&#46;</span>cn</a>, Peking University, Beijing, China
+‡<a class="reference external" href="mailto:van&#37;&#52;&#48;parc&#46;com">van<span>&#64;</span>parc<span>&#46;</span>com</a>, PARC, Palo Alto, California, USA</p>
+<p>Link : <a class="reference external" href="http://named-data.net/techreport/TR008-chronos.pdf">NDN technical Report NDN-0008, 2012</a></p>
+<div class="section" id="why-i-read-this-technical-report">
+<h2>Why I read this technical report?<a class="headerlink" href="#why-i-read-this-technical-report" title="Permalink to this headline">¶</a></h2>
+<p>This is an obsolete version of the paper that announce in IEEE ICNP 2013 - <a class="reference external" href="https://named-data.net/wp-content/uploads/2014/03/chronosync-icnp2013.pdf">Let’s ChronoSync: Decentralized Dataset State
+Synchronization in Named Data Networking</a>. When I read the latest paper, I notice that there is a few details about how ChronoChat works on ChronoSync, such as the situation of only one participant join the chat room, and how to know all the other participants in chartroom. So I need to find the answer in this old paper. Fortunately , I found some descriptions about my question.</p>
+</div>
+<div class="section" id="keynote-of-this-report">
+<h2>Keynote of this report<a class="headerlink" href="#keynote-of-this-report" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="chronos-design">
+<h3>Chronos Design<a class="headerlink" href="#chronos-design" title="Permalink to this headline">¶</a></h3>
+<p>Chronos participants interact using two types of Interest/Data message exchanges: synchronization (sync) and chat data.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>A sync Interest represents the sender’s knowledge of the current chat data set in form of cryptographic digest, obtained using digest tree, and <strong>is delivered to every other participant</strong>.</li>
+<li>As soon as a participant discovers new knowledge about the chat room state, it <strong>sends out chat data Interests</strong> to pull actual messages from their originators.</li>
+</ol>
+</div></blockquote>
+<p>The participants periodically send “heartbeat” messages if they have no chat messages to send.</p>
+</div>
+<div class="section" id="naming-rules">
+<h3>Naming Rules<a class="headerlink" href="#naming-rules" title="Permalink to this headline">¶</a></h3>
+<p>The name for a sync message starts with a broadcast prefix.</p>
+<p>The chat data name consists of a unique prefix that identifies the producer and is  used to efficiently route the Interest, the chat room identifier, and the message sequence number.</p>
+<img alt="../_images/Chrono-NR.png" src="../_images/Chrono-NR.png" />
+</div>
+<div class="section" id="data-structures">
+<h3>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h3>
+<p>The size of the digest log can be constrained by a desired upper bound using periodical purging of old entries.</p>
+<p>Whenever sync Interest gets satisfied or expires, one sends out another one that carries the latest root digest.</p>
+<div class="section" id="participant-join-leave">
+<h4>Participant Join/Leave<a class="headerlink" href="#participant-join-leave" title="Permalink to this headline">¶</a></h4>
+<p>A newcomer probes for information about a chat room by sending out a sync Interest with the reserved digest of the <strong>empty set</strong>.</p>
+<p>If the newcomer is <strong>the only participant</strong> in the chat room, the Interest will not bring back anything. By the time the Interest expires, the newcomer updates the empty digest tree with his default initial producer status with <strong>sequence number being zero</strong> and sends out an new Interest with updated digest. Otherwise, the existing participants recognize the reserved “empty” digest and reply with all the producer statuses, which will be used by the newcomer to build his own digest tree.</p>
+<p>Participants should inform others in the room before actually leaving. That is, the participant that intends to leave should reply to the sync Interest with the data name for an “unavailable” message.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/06/22 - Chronos:Serverless Multi-User Chat Over NDN</a><ul>
+<li><a class="reference internal" href="#why-i-read-this-technical-report">Why I read this technical report?</a></li>
+<li><a class="reference internal" href="#keynote-of-this-report">Keynote of this report</a><ul>
+<li><a class="reference internal" href="#chronos-design">Chronos Design</a></li>
+<li><a class="reference internal" href="#naming-rules">Naming Rules</a></li>
+<li><a class="reference internal" href="#data-structures">Data Structures</a><ul>
+<li><a class="reference internal" href="#participant-join-leave">Participant Join/Leave</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Jiawei’s Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20170601.html"
+                        title="next chapter">2017/06/01 - Design a LINE Bot : Weather Bot!</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170601.html" title="2017/06/01 - Design a LINE Bot : Weather Bot!"
+             >next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>
