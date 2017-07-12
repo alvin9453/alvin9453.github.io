@@ -15,6 +15,7 @@ Weekly Report
     :glob:
     :titlesonly:
 
+    ./Weekly_Report/20170713
     ./Weekly_Report/20170622
     ./Weekly_Report/20170601
     ./Weekly_Report/20170525
@@ -48,6 +49,7 @@ Business Weekly
 	:glob:
 	:titlesonly:
 
+	./Business_Weekly/20170713
 	./Business_Weekly/20170615
 	./Business_Weekly/20170525
 	./Business_Weekly/20170518
@@ -72,6 +74,7 @@ Writeup
 	:glob:
 	:titlesonly:
 
+	./Writeup/2017_AIS3_pre-exam.rst
 	./Writeup/meow
 
 

@@ -2,8 +2,11 @@
 =============================================================
 
 Zhenkai Zhu∗, Chaoyi Bian†, Alexander Afanasyev∗ , Van Jacobson‡, and Lixia Zhang∗
+
 ∗ {zhenkai, afanasev, lixia} @cs.ucla.edu, UCLA, Los Angeles, California, USA
+
 †bcy@pku.edu.cn, Peking University, Beijing, China
+
 ‡van@parc.com, PARC, Palo Alto, California, USA
 
 Link : `NDN technical Report NDN-0008, 2012 <http://named-data.net/techreport/TR008-chronos.pdf>`_
