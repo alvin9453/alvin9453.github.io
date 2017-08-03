@@ -12,7 +12,7 @@ Introduction
 
 This approach highlights that some users and applications , such as IM and VoIP , may care more about the *data* that they can get from the network than they do about *how* it was delivered.
 
-Network communications from a data-oriented perspective , it vecomes straightforward to solve the three challenges :
+Network communications from a data-oriented perspective , it becomes straightforward to solve the three challenges :
 
   i) one can directly name the data instead of naming its container.
 

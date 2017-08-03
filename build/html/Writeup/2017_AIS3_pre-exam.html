@@ -5,12 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>2017 Advanced Information Security Summer School pre-exam &#8212; Weekly Report 1.0 documentation</title>
-    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -58,7 +55,7 @@
 <p>打開網頁(index.html)，只看到一句 : <code class="docutils literal"><span class="pre">Didn't</span> <span class="pre">you</span> <span class="pre">see</span> <span class="pre">the</span> <span class="pre">flag?</span></code></p>
 <p>Source code也沒看到有東西，找了其他地方依然沒看到</p>
 <p>開了terminal，<code class="docutils literal"><span class="pre">curl</span></code> 一下(只有domain name沒有加index.html)結果flag就噴出來了！？</p>
-<p>發現原來web server預設的首頁是“index.php“，但是輸入index.php在url會被導向到index.html，所以就“curl“ 一下這個php就看到答案啦(根本腦筋急轉彎)。</p>
+<p>發現原來web server預設的首頁是``index.php``，但是輸入index.php在url會被導向到index.html，所以就``curl`` 一下這個php就看到答案啦(根本腦筋急轉彎)。</p>
 </div>
 <div class="section" id="web-2">
 <h2>Web 2<a class="headerlink" href="#web-2" title="Permalink to this headline">¶</a></h2>
@@ -70,8 +67,8 @@
 </div>
 <p>試著用網路上的sha1 decoder把他給的sha1 password逆回去發現找不到字串當密碼，好吧果然沒這麼簡單…</p>
 <dl class="docutils">
-<dt>後來發現問題是出在“sha1($password) == $list-&gt;$password “ 這邊 <a class="footnote-reference" href="#id9" id="id1">[1]</a> ，他用兩個“==</dt>
-<dd><code class="docutils literal"><span class="pre">比較</span> <span class="pre">sha1的值時，若sha1算出來的結果有出現像是``0e123...``這種帶有``e``(scientific</span> <span class="pre">notation)的格式，比較時會被當成</span> <span class="pre">**float</span> <span class="pre">number</span> <span class="pre">format</span> <span class="pre">strings</span> <span class="pre">(numerical</span> <span class="pre">strings)**，所以就找了list裡面有``0e</span></code> 開頭的password和他對應的username，將這個username輸入，並找一段sha1之後值為“0e“ 開頭的字串輸入，就順利騙過 <code class="docutils literal"><span class="pre">==</span></code> 拿到flag啦</dd>
+<dt>後來發現問題是出在``sha1($password) == $list-&gt;$password `` 這邊 <a class="footnote-reference" href="#id9" id="id1">[1]</a> ，他用兩個``==</dt>
+<dd><code class="docutils literal"><span class="pre">比較</span> <span class="pre">sha1的值時，若sha1算出來的結果有出現像是``0e123...``這種帶有``e``(scientific</span> <span class="pre">notation)的格式，比較時會被當成</span> <span class="pre">**float</span> <span class="pre">number</span> <span class="pre">format</span> <span class="pre">strings</span> <span class="pre">(numerical</span> <span class="pre">strings)**，所以就找了list裡面有``0e</span></code> 開頭的password和他對應的username，將這個username輸入，並找一段sha1之後值為``0e`` 開頭的字串輸入，就順利騙過 <code class="docutils literal"><span class="pre">==</span></code> 拿到flag啦</dd>
 </dl>
 </div>
 <div class="section" id="web-3">
@@ -96,7 +93,7 @@
 </pre></div>
 </div>
 <p>不管你丟什麼檔案，最後都會被執行哦XD 只是url看起來幫你加jpg而已，所以網頁跳出來的還是圖片的方式</p>
-<p>使用 php phar LFI <a class="footnote-reference" href="#id11" id="id3">[3]</a> <a class="footnote-reference" href="#id12" id="id4">[4]</a> 的方式拿到shell，將含有shell的phar建好丟上去，然後url改成“/?p=phar://&lt;dir&gt;/asdf123.jpg/shell“ 執行phar裡面含有shell的部份，看到目錄底下有一個名字很可疑的檔案，cat一下就是flag囉</p>
+<p>使用 php phar LFI <a class="footnote-reference" href="#id11" id="id3">[3]</a> <a class="footnote-reference" href="#id12" id="id4">[4]</a> 的方式拿到shell，將含有shell的phar建好丟上去，然後url改成``/?p=phar://&lt;dir&gt;/asdf123.jpg/shell`` 執行phar裡面含有shell的部份，看到目錄底下有一個名字很可疑的檔案，cat一下就是flag囉</p>
 </div>
 <div class="section" id="binary-1">
 <h2>Binary 1<a class="headerlink" href="#binary-1" title="Permalink to this headline">¶</a></h2>
@@ -109,13 +106,13 @@
 </div>
 <div class="section" id="misc-2">
 <h2>Misc 2<a class="headerlink" href="#misc-2" title="Permalink to this headline">¶</a></h2>
-<p>網頁寫了一句話“I sent you something:)“ ，f12看一下才是誤導的開始，註解裏面給了一張sudoku.jpg的路徑，拿到這檔案之後什麼屁用都沒用阿QQ  被誤導一陣子之後回去從頭看題目，查了一下server送過來的response，果真header裡面藏了另一張圖的名字，最後flag就藏在這張皮卡丘裡面，pikapika~</p>
+<p>網頁寫了一句話``I sent you something:)`` ，f12看一下才是誤導的開始，註解裏面給了一張sudoku.jpg的路徑，拿到這檔案之後什麼屁用都沒用阿QQ  被誤導一陣子之後回去從頭看題目，查了一下server送過來的response，果真header裡面藏了另一張圖的名字，最後flag就藏在這張皮卡丘裡面，pikapika~</p>
 </div>
 <div class="section" id="misc-4">
 <h2>Misc 4<a class="headerlink" href="#misc-4" title="Permalink to this headline">¶</a></h2>
 <p>ssh進去之後，底下有3個檔案 : flag , shell , shell.c</p>
 <p>而我們登入的帳號並沒有權限可以access flag 這個檔案，必須透過shell這個跟flag相同權限的 excutable file 去access。</p>
-<p>根據shell.c的code，我們可以執行指令在argv[1]，但把PATH拿掉了，代表我們只有built-in command <a class="footnote-reference" href="#id13" id="id5">[5]</a> 可以使用，根據其他大大的提示，built-in 有個command可以load default path回來，所以最後就“./shell “command -p cat f*”“ 看到flag的內容啦~ <code class="docutils literal"><span class="pre">f*</span></code> 是因為shell.c過慮掉所有為flag的字串，所以就這樣繞一下</p>
+<p>根據shell.c的code，我們可以執行指令在argv[1]，但把PATH拿掉了，代表我們只有built-in command <a class="footnote-reference" href="#id13" id="id5">[5]</a> 可以使用，根據其他大大的提示，built-in 有個command可以load default path回來，所以最後就``./shell “command -p cat f*”`` 看到flag的內容啦~ <code class="docutils literal"><span class="pre">f*</span></code> 是因為shell.c過慮掉所有為flag的字串，所以就這樣繞一下</p>
 <p>另外，某大大神人解：<code class="docutils literal"><span class="pre">./shell</span> <span class="pre">read</span> <span class="pre">&quot;PAT&quot;H;</span> <span class="pre">cat</span> <span class="pre">&quot;fl&quot;ag</span></code></p>
 <p>結論：該好好學shell了…</p>
 </div>
@@ -144,7 +141,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>下面註解給了7個數字，for-loop也是跑了７次，所以可以合理推斷註解的7個數字是“printf“ 出來的結果，利用“xor“ 可逆回的特性，<code class="docutils literal"><span class="pre">&quot;AIS3&quot;</span> <span class="pre">^</span> <span class="pre">val1</span> <span class="pre">^</span> <span class="pre">val2</span> <span class="pre">^</span> <span class="pre">val3</span> <span class="pre">^</span> <span class="pre">val4</span> <span class="pre">=</span> <span class="pre">964600246</span></code> , 所以可以得到 <code class="docutils literal"><span class="pre">key</span> <span class="pre">=</span>&#160; <span class="pre">val1</span> <span class="pre">^</span> <span class="pre">...</span> <span class="pre">^</span> <span class="pre">val4</span> <span class="pre">=</span> <span class="pre">&quot;AIS3&quot;</span> <span class="pre">^</span> <span class="pre">964600246</span></code> , 利用這組key，跟其他六組數字做“xor“，就可以得到flag的ASCII啦</p>
+<p>下面註解給了7個數字，for-loop也是跑了７次，所以可以合理推斷註解的7個數字是``printf`` 出來的結果，利用``xor`` 可逆回的特性，<code class="docutils literal"><span class="pre">&quot;AIS3&quot;</span> <span class="pre">^</span> <span class="pre">val1</span> <span class="pre">^</span> <span class="pre">val2</span> <span class="pre">^</span> <span class="pre">val3</span> <span class="pre">^</span> <span class="pre">val4</span> <span class="pre">=</span> <span class="pre">964600246</span></code> , 所以可以得到 <code class="docutils literal"><span class="pre">key</span> <span class="pre">=</span>&#160; <span class="pre">val1</span> <span class="pre">^</span> <span class="pre">...</span> <span class="pre">^</span> <span class="pre">val4</span> <span class="pre">=</span> <span class="pre">&quot;AIS3&quot;</span> <span class="pre">^</span> <span class="pre">964600246</span></code> , 利用這組key，跟其他六組數字做``xor``，就可以得到flag的ASCII啦</p>
 </div>
 <div class="section" id="crypto-3">
 <h2>Crypto 3<a class="headerlink" href="#crypto-3" title="Permalink to this headline">¶</a></h2>
@@ -152,8 +149,8 @@
 </div>
 <div class="section" id="crypto-4">
 <h2>Crypto 4<a class="headerlink" href="#crypto-4" title="Permalink to this headline">¶</a></h2>
-<p>比Crypto 3 多了兩個條件：<code class="docutils literal"><span class="pre">username</span></code> 必須含有 <code class="docutils literal"><span class="pre">Snoopy_do_not_like_cats_hahahaha</span></code> 然後 <code class="docutils literal"><span class="pre">password</span></code> 比需含有 <code class="docutils literal"><span class="pre">ddaa_is_PHD</span></code> 字串，當然sha1 hash 的結果必須相同、且是“”f00d”“ 開頭。</p>
-<p>因此我第一次的作法就兩份pdf各加一個字串、read binary 進程式然後分別塞“0x0~0xff“再後面，直到兩個檔案sha1的結果相同為止、並且是“f00d“ 開頭為止，結果跑了半個多小時還出不來，隔壁大神卻說他一分鐘之內就出來了，同樣都是用PC再跑那擺明就是我哪裡錯了QQ 後來發現這題並沒這麼複雜，我就把兩個字串concate再一起、都塞進pdf裡面，然後再塞“0x0~0xff進去“，發現原來“f00d“ 是設計過的，好快就算出來啦，得到新內容的兩份pdf延續Crypto 3的作法、餵給“username“ 和 <code class="docutils literal"><span class="pre">password</span></code> 就拿到flag啦！</p>
+<p>比Crypto 3 多了兩個條件：<code class="docutils literal"><span class="pre">username</span></code> 必須含有 <code class="docutils literal"><span class="pre">Snoopy_do_not_like_cats_hahahaha</span></code> 然後 <code class="docutils literal"><span class="pre">password</span></code> 比需含有 <code class="docutils literal"><span class="pre">ddaa_is_PHD</span></code> 字串，當然sha1 hash 的結果必須相同、且是``”f00d”`` 開頭。</p>
+<p>因此我第一次的作法就兩份pdf各加一個字串、read binary 進程式然後分別塞``0x0~0xff``再後面，直到兩個檔案sha1的結果相同為止、並且是``f00d`` 開頭為止，結果跑了半個多小時還出不來，隔壁大神卻說他一分鐘之內就出來了，同樣都是用PC再跑那擺明就是我哪裡錯了QQ 後來發現這題並沒這麼複雜，我就把兩個字串concate再一起、都塞進pdf裡面，然後再塞``0x0~0xff進去``，發現原來``f00d`` 是設計過的，好快就算出來啦，得到新內容的兩份pdf延續Crypto 3的作法、餵給``username`` 和 <code class="docutils literal"><span class="pre">password</span></code> 就拿到flag啦！</p>
 </div>
 <div class="section" id="id8">
 <h2>心得<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
@@ -266,7 +263,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

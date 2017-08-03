@@ -1,0 +1,183 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2017/07/27 - (Paper) Video Streaming over Named Data Networking &#8212; Weekly Report 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="paper-video-streaming-over-named-data-networking">
+<h1>2017/07/27 - (Paper) Video Streaming over Named Data Networking<a class="headerlink" href="#paper-video-streaming-over-named-data-networking" title="Permalink to this headline">¶</a></h1>
+<p>IEEE COMSOC MMTC E-Letter</p>
+<p>Derek Kulinski, UCLA Computer Science, <a class="reference external" href="mailto:kulinski&#37;&#52;&#48;cs&#46;ucla&#46;edu">kulinski<span>&#64;</span>cs<span>&#46;</span>ucla<span>&#46;</span>edu</a>
+Jeff Burke, UCLA REMAP, <a class="reference external" href="mailto:jburke&#37;&#52;&#48;remap&#46;ucla&#46;edu">jburke<span>&#64;</span>remap<span>&#46;</span>ucla<span>&#46;</span>edu</a>
+Lixia Zhang, UCLA Computer Science, <a class="reference external" href="mailto:lixia&#37;&#52;&#48;cs&#46;ucla&#46;edu">lixia<span>&#64;</span>cs<span>&#46;</span>ucla<span>&#46;</span>edu</a></p>
+<p>Full Content : <a class="reference external" href="https://named-data.net/wp-content/uploads/2013/07/E-Letter-July13_page6.pdf">Link</a> , page 6 to 9.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Benefits of video streaming over NDN :</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Reducing bandwidth</li>
+<li>Improving performance</li>
+<li>Video consumers can simply request specific video content by names to seek.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="design-goals">
+<h2>Design Goals<a class="headerlink" href="#design-goals" title="Permalink to this headline">¶</a></h2>
+<p>Design goals in this paper :</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Quality consistent with current Internet video expectations</li>
+<li>Simple , low-latency random access into streams, based on actual location in the video stream , using a timecode-based namespace (i.e., the hour, minute, second, and frame of the stream).</li>
+<li>Consumer-side synchronization of streams using the timecode-based namespace, and scalability without impact on the original source of video.</li>
+<li>On-the-fly archival of live streams, making them indistinguishable from pre-recorded streams for the purposes of most playback applications.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>The NDNVideo protocol has two types of participants : publisher and consumer.</p>
+<p>The publisher simply prepares data packets, signs them , and stores them in a repository (persistent store) for retrieval by consumers.Consumer no longer need to establish a session with the publisher , nor inform the publisher about their Quality of Servis(QoS). Consumers are in full control of how much data they receive, and at what rate.</p>
+<p>During packet preparation, the video producer segments the stream using semantically meaningful names, e.g. frames for video and samples for audio, . <em>Namespace</em> shows in Figure 1.</p>
+<img alt="../_images/NDNVideo_namespace.png" src="../_images/NDNVideo_namespace.png" />
+<div class="section" id="encoding">
+<h3>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h3>
+<p>NDNVideo supports all of teh many encoding formats supported by GStreamer <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+</div>
+<div class="section" id="packet-format">
+<h3>Packet format<a class="headerlink" href="#packet-format" title="Permalink to this headline">¶</a></h3>
+<p>NDNVideo handles large(video) and small(audio) samples by packing data in two layer.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Inner layer : All information necessary for the playback of a data buffer, such as timestamp, duration, and length in bytes. The timestamp tells the player at what point in time the buffer is supposed to be played.</li>
+<li>Outer layer : Offset and count. The count indicates how many buffer begin in a given packet, and the offset is used to tell where the first buffer starts.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="random-access">
+<h3>Random access<a class="headerlink" href="#random-access" title="Permalink to this headline">¶</a></h3>
+<p>NDN’s Interest selector fields enable a consumer to express requests that are more sophisicated than just name prefixes.</p>
+<p>The <em>Exclusion Filter</em> is used to tell the network to return the latest index entry.</p>
+</div>
+<div class="section" id="live-streaming">
+<h3>Live Streaming<a class="headerlink" href="#live-streaming" title="Permalink to this headline">¶</a></h3>
+<p>Video publisher simply puts frames in a network-addressable content repository immediately after capture.</p>
+<p>Because different nodes can have different data in their Content Store, the same request might result in different responses from different nodes.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The consumer first issues Interests periodically during its video playback to determine the ever-increasing duration of the stream, by checking for the latest entry in the index namespace. It set the exclusion filter in the Interest packet to only request Data packets with index name components greater than the last index it has seen.</li>
+<li>To enable the consumer to determine the rate at which it should issue Interests, in addition to the timestamp of the buffer, each individual packet also contains a local time at whitch the packet was generated.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="handling-packet-loss">
+<h3>Handling Packet Loss<a class="headerlink" href="#handling-packet-loss" title="Permalink to this headline">¶</a></h3>
+<p>Each data packet is named with the segment name plus segment numbers to make the data names predictable and enable the consumer to pipline requests for the data.</p>
+<p>In order to provide seamless playback, it is important for the consumer to know how long to wait assuming that an Interest or the corresponding data packet is lost.</p>
+</div>
+</div>
+<div class="section" id="current-issue-and-future-work">
+<h2>Current Issue and future work<a class="headerlink" href="#current-issue-and-future-work" title="Permalink to this headline">¶</a></h2>
+<p>The CCNx repository dose not yet support deletion of specific data object, which can be problematic for long-running live streams.</p>
+</div>
+<div class="section" id="my-summary">
+<h2>My Summary<a class="headerlink" href="#my-summary" title="Permalink to this headline">¶</a></h2>
+<p>As we know, video streaming in NDN is a huge problem because every node (or router) may store the data in local content store, and this is not a good solution when many users are watching many videos at the same time. And in this paper , it did not mention how to solve this problem.</p>
+<p>The focus of this paper is all about naming the data segments uniquely, so that consumers can send Interest precisely to pull what data they desire , and consumers can control everything without any other Protocols support.</p>
+<p>After reading this paper, I think there is still many problem in the issue of video streaming over NDN, they just find a feasible way to get the streaming. Benefits, such as improving performance and reducing bandwidth, this paper just show them in session 1 and not proving how to do it.</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>GStreamer : <a class="reference external" href="https://gstreamer.freedesktop.org/">https://gstreamer.freedesktop.org/</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/07/27 - (Paper) Video Streaming over Named Data Networking</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#design-goals">Design Goals</a></li>
+<li><a class="reference internal" href="#architecture">Architecture</a><ul>
+<li><a class="reference internal" href="#encoding">Encoding</a></li>
+<li><a class="reference internal" href="#packet-format">Packet format</a></li>
+<li><a class="reference internal" href="#random-access">Random access</a></li>
+<li><a class="reference internal" href="#live-streaming">Live Streaming</a></li>
+<li><a class="reference internal" href="#handling-packet-loss">Handling Packet Loss</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#current-issue-and-future-work">Current Issue and future work</a></li>
+<li><a class="reference internal" href="#my-summary">My Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>
