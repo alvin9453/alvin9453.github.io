@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2017/08/17 - NDN Packet Format &mdash; Weekly Report 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="next" title="2017/08/03 - Named Data Networking (NDN) installation guide - part 1" href="20170803.html" />
+    <link rel="prev" title="Jiawei’s Documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170803.html" title="2017/08/03 - Named Data Networking (NDN) installation guide - part 1"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ndn-packet-format">
+<h1>2017/08/17 - NDN Packet Format<a class="headerlink" href="#ndn-packet-format" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="type-length-value-tlv-encoding">
+<h2>Type-Length-Value (TLV) Encoding <a class="footnote-reference" href="#id6" id="id1">[1]</a><a class="headerlink" href="#type-length-value-tlv-encoding" title="Permalink to this headline">¶</a></h2>
+<p>Each NDN packet is encoded in a <em>Type-Length-Value (TLV)</em> format. NDN Interest and Data packets are distinguished by the type number in the first and outmost <em>TLV0</em>.</p>
+<p>An NDN packet is mainly a <strong>collection of TLVs</strong> inside TLV0. Some TLVs may contain sub-TLVs, and each sub-TLV may also be further nested.</p>
+<div class="section" id="variable-size-encoding-for-type-t-and-length-l">
+<h3>Variable Size Encoding for type (T) and length (L)<a class="headerlink" href="#variable-size-encoding-for-type-t-and-length-l" title="Permalink to this headline">¶</a></h3>
+<p>To minimize the overhead during early deployment and to allow flexibility of future protocol extensions to meet unforeseeable needs, both type (T) and length (L) take a variable size format. For implementation simplicity, both type and length take the same encoding format.</p>
+</div>
+<div class="section" id="tlv-encoding">
+<h3>TLV Encoding<a class="headerlink" href="#tlv-encoding" title="Permalink to this headline">¶</a></h3>
+<p>TLV encoding for NDN packets is defined as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre>NDN-TLV := TLV-TYPE TLV-LENGTH TLV-VALUE?
+TLV-TYPE := VAR-NUMBER
+TLV-LENGTH := VAR-NUMBER
+TLV-VALUE := BYTE+
+</pre></div>
+</div>
+<p>TLV-TYPE SHOULD be unique at all nested levels. The TLV Type number space and initial assignments listed in Section <a class="reference external" href="http://named-data.net/doc/NDN-TLV/current/types.html#types">TLV-TYPE number assignment</a> of this document.</p>
+<a class="reference internal image-reference" href="../_images/20170817-1.png"><img alt="../_images/20170817-1.png" src="../_images/20170817-1.png" style="width: 287.0px; height: 388.0px;" /></a>
+</div>
+</div>
+<div class="section" id="name">
+<h2>Name <a class="footnote-reference" href="#id7" id="id2">[2]</a><a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
+<p>An NDN Name is a hierarchical name for NDN content, which contains a sequence of name components.</p>
+<div class="section" id="ndn-name-format">
+<h3>NDN Name Format<a class="headerlink" href="#ndn-name-format" title="Permalink to this headline">¶</a></h3>
+<p>We use a 2-level nested TLV to represent a name. The Type in the outer TLV indicates this is a Name. Inner TLVs should be one of NameComponent blocks, as defined in the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>Name ::= NAME-TYPE TLV-LENGTH NameComponent*
+
+NameComponent ::= GenericNameComponent |
+                  ImplicitSha256DigestComponent
+
+GenericNameComponent ::= NAME-COMPONENT-TYPE TLV-LENGTH BYTE*
+
+ImplicitSha256DigestComponent ::= IMPLICIT-SHA256-DIGEST-COMPONENT-TYPE TLV-LENGTH(=32)
+                                  BYTE{32}
+</pre></div>
+</div>
+<p>In Wireshark :</p>
+<img alt="../_images/20170817-2.png" src="../_images/20170817-2.png" />
+</div>
+<div class="section" id="ndn-uri-scheme">
+<h3>NDN URI Scheme<a class="headerlink" href="#ndn-uri-scheme" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>The scheme identifier is <strong>ndn</strong>.</li>
+<li>The authority component (the part after the initial // in the familiar http and ftp URI schemes) is not relevant to NDN. It should not be present, and it is ignored if it is present.</li>
+<li><a class="reference external" href="http://named-data.net/doc/NDN-TLV/current/name.html#ndn-uri-scheme">Component types have the following URI representations</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="interest-packet">
+<h2>Interest Packet<a class="headerlink" href="#interest-packet" title="Permalink to this headline">¶</a></h2>
+<p>NDN Interest packet is TLV defined as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre>Interest ::= INTEREST-TYPE TLV-LENGTH
+             Name
+             Selectors?
+             Nonce
+             InterestLifetime?
+             ForwardingHint?
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Name</span></code> and <code class="docutils literal"><span class="pre">Nonce</span></code> are the only two required elements in an Interest packet.
+<code class="docutils literal"><span class="pre">Selectors</span></code> are optional elements that further qualify Data that may match the Interest. They are used for discovering and selecting the Data that matches best to what the application wants.
+<code class="docutils literal"><span class="pre">InterestLifetime</span></code> and <code class="docutils literal"><span class="pre">ForwardingHint</span></code> are optional and are referred to as <a class="reference external" href="http://named-data.net/doc/NDN-TLV/current/interest.html#guiders">Guiders</a>. They affect Interest forwarding behavior.</p>
+<div class="section" id="id3">
+<h3>Name<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>The Name element in an Interest is synonymous with the term <em>prefix</em>.
+The Name element that can be put in the Interest is further restricted to have at least one NameComponent. Interests that include Name TLV that has zero name components MUST BE discarded.</p>
+</div>
+<div class="section" id="exclude">
+<h3>Exclude <a class="footnote-reference" href="#id8" id="id4">[3]</a><a class="headerlink" href="#exclude" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">Exclude</span></code> selectors allow requesters to specify list and/or ranges of name components that MUST NOT appear as a continuation of the Name prefix in the responding Data packet to the Interest.</p>
+<blockquote>
+<div>For example, if Interest is expressed for <strong>/ndn/edu</strong> and Exclude specifies one name component <strong>ucla</strong>, then neither data producer nor conforming NDN routers are allowed to return any Data packet that has prefix <strong>/ndn/edu/ucla</strong>.</div></blockquote>
+</div>
+<div class="section" id="nonce">
+<h3>Nonce<a class="headerlink" href="#nonce" title="Permalink to this headline">¶</a></h3>
+<p>Nonce defined as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre>Nonce ::= NONCE-TYPE TLV-LENGTH(=4) BYTE{4}
+</pre></div>
+</div>
+<p>The Nonce carries a randomly-generated 4-octet long byte-string. The combination of Name and Nonce should uniquely identify an Interest packet. This is used to detect looping Interests.</p>
+</div>
+</div>
+<div class="section" id="data-packet">
+<h2>Data Packet <a class="footnote-reference" href="#id9" id="id5">[4]</a><a class="headerlink" href="#data-packet" title="Permalink to this headline">¶</a></h2>
+<p>The Data packet represents some arbitrary binary data (held in the Content element) together with its Name, some additional bits of information (MetaInfo), and a digital Signature of the other three elements. The Name is the first element since all NDN packet processing starts with the name. Signature is put at the end of the packet to ease the implementation because signature computation covers all the elements before Signature.</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Type-Length-Value (TLV) Encoding :  <a class="reference external" href="http://named-data.net/doc/NDN-TLV/current/tlv.html">http://named-data.net/doc/NDN-TLV/current/tlv.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Name : <a class="reference external" href="http://named-data.net/doc/NDN-TLV/current/name.html">http://named-data.net/doc/NDN-TLV/current/name.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>Interest Pakcet : <a class="reference external" href="http://named-data.net/doc/NDN-TLV/current/interest">http://named-data.net/doc/NDN-TLV/current/interest</a>.html#</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Exclude : <a class="reference external" href="http://named-data.net/doc/NDN-TLV/current/interest.html#exclude">http://named-data.net/doc/NDN-TLV/current/interest.html#exclude</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td>Data Packet :　<a class="reference external" href="http://named-data.net/doc/NDN-TLV/current/data.html">http://named-data.net/doc/NDN-TLV/current/data.html</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/08/17 - NDN Packet Format</a><ul>
+<li><a class="reference internal" href="#type-length-value-tlv-encoding">Type-Length-Value (TLV) Encoding </a><ul>
+<li><a class="reference internal" href="#variable-size-encoding-for-type-t-and-length-l">Variable Size Encoding for type (T) and length (L)</a></li>
+<li><a class="reference internal" href="#tlv-encoding">TLV Encoding</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#name">Name </a><ul>
+<li><a class="reference internal" href="#ndn-name-format">NDN Name Format</a></li>
+<li><a class="reference internal" href="#ndn-uri-scheme">NDN URI Scheme</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#interest-packet">Interest Packet</a><ul>
+<li><a class="reference internal" href="#id3">Name</a></li>
+<li><a class="reference internal" href="#exclude">Exclude </a></li>
+<li><a class="reference internal" href="#nonce">Nonce</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-packet">Data Packet </a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Jiawei&#8217;s Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20170803.html"
+                        title="next chapter">2017/08/03 - Named Data Networking (NDN) installation guide - part 1</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170803.html" title="2017/08/03 - Named Data Networking (NDN) installation guide - part 1"
+             >next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

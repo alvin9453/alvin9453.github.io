@@ -1,31 +1,33 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2017/03/16 - WebRTC API Example &#8212; Weekly Report 1.0 documentation</title>
+    
+    <title>2017/03/16 - WebRTC API Example &mdash; Weekly Report 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
     <link rel="next" title="2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1" href="20170309.html" />
     <link rel="prev" title="2017/03/23 - Authenticating Node.js Applications With Passport" href="20170323.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,7 +37,7 @@
         <li class="right" >
           <a href="20170323.html" title="2017/03/23 - Authenticating Node.js Applications With Passport"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -47,14 +49,14 @@
   <div class="section" id="webrtc-api-example">
 <h1>2017/03/16 - WebRTC API Example<a class="headerlink" href="#webrtc-api-example" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-problem-i-met-before">
-<h2>The problem I met before …<a class="headerlink" href="#the-problem-i-met-before" title="Permalink to this headline">¶</a></h2>
-<p>I read this book <em>O’Rreilly Real-Time Communication with WebRTC</em> last semester. When I followed the code in this book and run, it always threw some errors or bugs. What deeply annoyed me was some functions or methods are old and can not be used anymore. So I have to spend a lot of time to check the problem is from either my typing error or the wrong code.</p>
+<h2>The problem I met before ...<a class="headerlink" href="#the-problem-i-met-before" title="Permalink to this headline">¶</a></h2>
+<p>I read this book <em>O&#8217;Rreilly Real-Time Communication with WebRTC</em> last semester. When I followed the code in this book and run, it always threw some errors or bugs. What deeply annoyed me was some functions or methods are old and can not be used anymore. So I have to spend a lot of time to check the problem is from either my typing error or the wrong code.</p>
 <a class="reference internal image-reference" href="../_images/book.jpg"><img alt="../_images/book.jpg" src="../_images/book.jpg" style="width: 150.0px; height: 196.8px;" /></a>
 </div>
 <div class="section" id="a-very-good-tutorial">
 <h2>A very good tutorial<a class="headerlink" href="#a-very-good-tutorial" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://codelabs.developers.google.com/codelabs/webrtc-web/#0">This is the good tutorial about WebRTC</a>.</p>
-<p>In this website, it introduces the basic 3 apis(GetUserMedia, RTCPeerConnection , RTCDataChannel) step by step, and also combines them together in an application to demo the power of WebRTC, just like the application in the last chapter of O’Relly’s book.</p>
+<p>In this website, it introduces the basic 3 apis(GetUserMedia, RTCPeerConnection , RTCDataChannel) step by step, and also combines them together in an application to demo the power of WebRTC, just like the application in the last chapter of O&#8217;Relly&#8217;s book.</p>
 <p>I download its source code and follow the tutorial to try all six examples. And finally I run all of them successfully.</p>
 <p>The application : <a class="reference external" href="https://codelabs.developers.google.com/codelabs/webrtc-web/#8">Take a photo and share it via a data channel</a>.</p>
 <a class="reference internal image-reference" href="../_images/013.png"><img alt="../_images/013.png" src="../_images/013.png" style="width: 425.1px; height: 480.0px;" /></a>
@@ -79,7 +81,7 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">2017/03/16 - WebRTC API Example</a><ul>
-<li><a class="reference internal" href="#the-problem-i-met-before">The problem I met before …</a></li>
+<li><a class="reference internal" href="#the-problem-i-met-before">The problem I met before ...</a></li>
 <li><a class="reference internal" href="#a-very-good-tutorial">A very good tutorial</a></li>
 <li><a class="reference internal" href="#some-demos">Some demos</a></li>
 </ul>
@@ -95,11 +97,14 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -115,12 +120,12 @@
         <li class="right" >
           <a href="20170323.html" title="2017/03/23 - Authenticating Node.js Applications With Passport"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

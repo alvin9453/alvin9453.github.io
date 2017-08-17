@@ -15,7 +15,13 @@ Weekly Report
     :glob:
     :titlesonly:
 
-    
+    ./Weekly_Report/20170817
+    ./Weekly_Report/20170803
+    ./Weekly_Report/20170727
+    ./Weekly_Report/20170720
+    ./Weekly_Report/20170713
+    ./Weekly_Report/20170622
+    ./Weekly_Report/20170601
     ./Weekly_Report/20170525
     ./Weekly_Report/20170503
     ./Weekly_Report/20170413
@@ -43,26 +49,39 @@ Business Weekly
 ----------------
 
 .. toctree::
-    :maxdepth: 1
-    :glob:
-    :titlesonly:
+	:maxdepth: 1
+	:glob:
+	:titlesonly:
 
-    ./Business_Weekly/20170525
-    ./Business_Weekly/20170518
-    ./Business_Weekly/20170504
+	./Business_Weekly/20170810  
+	./Business_Weekly/20170713
+	./Business_Weekly/20170615
+	./Business_Weekly/20170525
+	./Business_Weekly/20170518
+	./Business_Weekly/20170504
 
 Notes
 -----
 
 .. toctree::
-    :maxdepth: 1
-    :glob:
-    :titlesonly:
+	:maxdepth: 1
+	:glob:
+	:titlesonly:
 
-    ./Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC
-    ./Notes/iSpy_installation_guide
-    ./Notes/Using_iSpy_to_connect_our_IPCam
-    ./Notes/DLink_DCS910_IP_Cam_HTTP_Request
+	./Notes/Preview_reStructureText_on_Atom
+	./Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC
+
+Writeup
+--------
+
+.. toctree::
+	:maxdepth: 1
+	:glob:
+	:titlesonly:
+
+	./Writeup/2017_AIS3_pre-exam.rst
+	./Writeup/meow
+
 
 
 ..
