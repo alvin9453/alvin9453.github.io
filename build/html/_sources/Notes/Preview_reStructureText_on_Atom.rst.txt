@@ -1,5 +1,5 @@
 Preview reStructureText on Atom
----------------------------------
+================================
 
 On ubuntu
 

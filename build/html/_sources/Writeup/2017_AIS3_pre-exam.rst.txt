@@ -6,7 +6,7 @@
 .. image:: Images/ais3.png
    :scale: 70%
 
-.. image:: Images/AIS3.png
+.. image:: Images/AIS3-1.png
    :scale: 80%
 
 藍色是還沒解出來的題目，看的出來我對pwn和reverse之類的題目還是沒辦法阿QQ 之後可能要再多練練...障礙很大QQ
