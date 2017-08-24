@@ -56,11 +56,12 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <a class="reference internal image-reference" href="../_images/20170824-1.png"><img alt="../_images/20170824-1.png" src="../_images/20170824-1.png" style="width: 526.0px; height: 263.5px;" /></a>
 <p>Named Data Networking (NDN) is a recently proposed networking architecture that shifts the “thin waist” of the Internet from IP’s host-centric model to a data-centric model, together with two important consequences :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Data</span> <span class="n">are</span> <span class="n">named</span> <span class="n">by</span> <span class="n">applications</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">network</span> <span class="n">routes</span> <span class="n">directly</span> <span class="n">on</span> <span class="n">these</span> <span class="n">data</span> <span class="n">names</span><span class="p">,</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">host</span> <span class="n">address</span><span class="o">.</span>
-
-<span class="mf">2.</span> <span class="n">Each</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">associated</span> <span class="k">with</span> <span class="n">a</span> <span class="n">cryptograhpic</span> <span class="n">key</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">secure</span> <span class="n">data</span> <span class="n">directly</span><span class="o">.</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Data are named by applications, and the network routes directly on these data names, rather than host address.</li>
+<li>Each name is associated with a cryptograhpic key, which is used to secure data directly.</li>
+</ol>
+</div></blockquote>
 <p>NDN.JS provides a JavaScript API that can be used to embed NDN data access and publishing at the client-side of existing Web applications. It requires only the addition of <em>WebSockets</em> support in NDN routers, which is currently achieved by a simple JavaScript-based proxy.</p>
 <p>One of the first tools built with NDN.JS was a Mozilla Firefox Add-On, which enables Firefox to process URIs in the NDN scheme (e.g. “ndn:/foo/bar/file.html”) and brings NDN features “up to the user.</p>
 </div>

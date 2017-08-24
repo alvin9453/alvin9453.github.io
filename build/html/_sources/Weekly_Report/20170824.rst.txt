@@ -21,8 +21,6 @@ Introduction
 
 Named Data Networking (NDN) is a recently proposed networking architecture that shifts the “thin waist” of the Internet from IP’s host-centric model to a data-centric model, together with two important consequences :
 
-::
-
     1. Data are named by applications, and the network routes directly on these data names, rather than host address.
 
     2. Each name is associated with a cryptograhpic key, which is used to secure data directly.
