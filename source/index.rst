@@ -68,11 +68,11 @@ Notes
 .. toctree::
 	:maxdepth: 1
 	:glob:
-  :titlesonly:
+	:titlesonly:
 
-  ./Notes/SSH_Login_Without_Password
-  ./Notes/Preview_reStructureText_on_Atom
-  ./Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC
+	./Notes/SSH_Login_Without_Password
+	./Notes/Preview_reStructureText_on_Atom
+	./Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC
 
 
 Writeup

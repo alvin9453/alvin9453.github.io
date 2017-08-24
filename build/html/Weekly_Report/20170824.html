@@ -1,0 +1,199 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking &#8212; Weekly Report 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/08/17 - NDN Packet Format" href="20170817.html" />
+    <link rel="prev" title="Jiawei’s Documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170817.html" title="2017/08/17 - NDN Packet Format"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="paper-ndn-js-a-javascript-client-library-for-named-data-networking">
+<h1>2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking<a class="headerlink" href="#paper-ndn-js-a-javascript-client-library-for-named-data-networking" title="Permalink to this headline">¶</a></h1>
+<p>Wentao Shang∗, Jeff Thompson‡ , Meki Cherkaoui∗, Jeff Burke† and Lixia Zhang∗</p>
+<p>∗Department of Computer Science, UCLA. {wentao,meki,lixia}&#64;cs.ucla.edu.</p>
+<p>‡Los Angeles, California. <a class="reference external" href="mailto:jeff&#37;&#52;&#48;thefirst&#46;org">jeff<span>&#64;</span>thefirst<span>&#46;</span>org</a>.</p>
+<p>†Center for Research in Engineering, Media and Performance, UCLA. <a class="reference external" href="mailto:jburke&#37;&#52;&#48;ucla&#46;edu">jburke<span>&#64;</span>ucla<span>&#46;</span>edu</a></p>
+<p>Proceedings of IEEE INFOCOMM 2013 NOMEN Workshop, April 2013.</p>
+<p>Full Content : <a class="reference external" href="https://named-data.net/wp-content/uploads/NOMEN13-ndnjs.pdf">Link</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/20170824-1.png"><img alt="../_images/20170824-1.png" src="../_images/20170824-1.png" style="width: 526.0px; height: 263.5px;" /></a>
+<p>Named Data Networking (NDN) is a recently proposed networking architecture that shifts the “thin waist” of the Internet from IP’s host-centric model to a data-centric model, together with two important consequences :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Data</span> <span class="n">are</span> <span class="n">named</span> <span class="n">by</span> <span class="n">applications</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">network</span> <span class="n">routes</span> <span class="n">directly</span> <span class="n">on</span> <span class="n">these</span> <span class="n">data</span> <span class="n">names</span><span class="p">,</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">host</span> <span class="n">address</span><span class="o">.</span>
+
+<span class="mf">2.</span> <span class="n">Each</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">associated</span> <span class="k">with</span> <span class="n">a</span> <span class="n">cryptograhpic</span> <span class="n">key</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">secure</span> <span class="n">data</span> <span class="n">directly</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>NDN.JS provides a JavaScript API that can be used to embed NDN data access and publishing at the client-side of existing Web applications. It requires only the addition of <em>WebSockets</em> support in NDN routers, which is currently achieved by a simple JavaScript-based proxy.</p>
+<p>One of the first tools built with NDN.JS was a Mozilla Firefox Add-On, which enables Firefox to process URIs in the NDN scheme (e.g. “ndn:/foo/bar/file.html”) and brings NDN features “up to the user.</p>
+</div>
+<div class="section" id="system-design">
+<h2>System Design<a class="headerlink" href="#system-design" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-design-goals">
+<h3>A. Design Goals<a class="headerlink" href="#a-design-goals" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><em>Pure ( and Compatible ) JavaScript</em> : In order to run on the widest number of browsers and machine types.</li>
+<li><em>Developer-friendly API</em></li>
+<li><em>Content Signing and Verification</em> : The library should support content signing and verifications using RSA signatures and SHA-256 hashes.</li>
+<li>Lightweight: The library should be as simple and low-overhead as possible because it is intended to be used in browsers.</li>
+<li><em>CCNx Compatibility</em></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="b-use-cases">
+<h3>B. Use Cases<a class="headerlink" href="#b-use-cases" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><em>Web content fetching and publishing</em> : Web users can use NDN.JS to communicate with CCN routers to fetch and/or publish content conveniently using the browser.</li>
+<li><em>Peer-to-peer chatting and file sharing</em> : NDN.JS allows Web users to act as both content producer and consumer, which is expected to enable NDN-based P2P communication among Web users.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="c-architecture">
+<h3>C. Architecture<a class="headerlink" href="#c-architecture" title="Permalink to this headline">¶</a></h3>
+<p>NDN.JS includes most of the core functionality of the CCNx client libraries, include data fetching and publishing, content signing and verification, exclusion filters, and binary name storage.</p>
+</div>
+<div class="section" id="d-websockets-transport-service">
+<h3>D. WebSockets Transport Service<a class="headerlink" href="#d-websockets-transport-service" title="Permalink to this headline">¶</a></h3>
+<p>Conventional HTTP-based Web implementations, such as synchronous GET/POST or asynchronous XMLHttpRequest, are not suited for NDN communications due to the lack of “server push” capability.</p>
+<p>The <strong>WebSocket</strong> protocol ,on the other hand, provides a generic JavaScript interface to enable <strong>full-duplex TCP connections</strong> to any remote host.</p>
+<p>NDN.JS adopts WebSocket as the default transport for NDN packet exchange.</p>
+<p>Since current CCN routers do not support the WebSocket protocol, we have developed a WebSocket proxy that accepts WebSocket connections from NDN.JS instances and passes the packets over TCP/UDP to CCN routers.</p>
+<p>The WebSocket proxy is implemented in JavaScript code running on Node.js.</p>
+</div>
+<div class="section" id="e-applications-programing-interface">
+<h3>E. Applications Programing Interface<a class="headerlink" href="#e-applications-programing-interface" title="Permalink to this headline">¶</a></h3>
+<p>The programing interface in NDN.JS is designed to be consistent with PyCCN <a class="footnote-reference" href="#id3" id="id1">[1]</a> . The library is first initialized with the hostname or IP address of a WebSocket proxy or other transport provider.</p>
+<p>After connection to the NDN network, the top leven “NDN” class provides two important methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li>expressInterest : fetch the named data from CCN routers.</li>
+<li>registerPrefix : publish local content by registering the content name to CCN routers.</li>
+</ul>
+</div></blockquote>
+<p>These two methods are asynchronous, which is appropriate for NDN Interest/Data exchange.</p>
+</div>
+</div>
+<div class="section" id="my-summary">
+<h2>My Summary<a class="headerlink" href="#my-summary" title="Permalink to this headline">¶</a></h2>
+<p>I choose this paper because of the Web ChronoChat Application <a class="footnote-reference" href="#id4" id="id2">[2]</a> powered by NDN.JS. So I want to know how to build my own chatroom over NDN. NDN.JS is a tool I may use when I implement the chatroom.</p>
+<p>This paper shows that we can develop our web application by using JavaScript library to realize NDN fetch/publish content easily. Use proxy server to support WebSocket protocol is a temporary solution until CCN routers(or NDN routers) could support WebSocket.</p>
+<p>I think WebSocket is a good solution for full-duplex TCP connections because NDN could not do “server push”. I guess more ndn web applications would rely on WebSocket full-duplex connection.</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>: PyCCN : <a class="reference external" href="https://github.com/named-data/PyCCN">https://github.com/named-data/PyCCN</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>: Web ChronoChat : <a class="reference external" href="http://named-data.net/apps/live/chat/">http://named-data.net/apps/live/chat/</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#system-design">System Design</a><ul>
+<li><a class="reference internal" href="#a-design-goals">A. Design Goals</a></li>
+<li><a class="reference internal" href="#b-use-cases">B. Use Cases</a></li>
+<li><a class="reference internal" href="#c-architecture">C. Architecture</a></li>
+<li><a class="reference internal" href="#d-websockets-transport-service">D. WebSockets Transport Service</a></li>
+<li><a class="reference internal" href="#e-applications-programing-interface">E. Applications Programing Interface</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#my-summary">My Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Jiawei’s Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20170817.html"
+                        title="next chapter">2017/08/17 - NDN Packet Format</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170817.html" title="2017/08/17 - NDN Packet Format"
+             >next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>
