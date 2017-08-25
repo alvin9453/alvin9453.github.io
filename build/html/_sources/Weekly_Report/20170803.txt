@@ -4,7 +4,7 @@
 Introduction
 --------------
 
-In this installation guide, I will demostrate how to install *ndn-cxx*, *nfd*, and use ``ndnping`` to test two node are reacharable. After I succeed to test ``ndnping``, I will use Wireshark to dissect NDN packets.
+In this installation guide, I will demostrate how to install *ndn-cxx*, *nfd*, and use ``ndnping`` to test two node are reachable. After I succeed to test ``ndnping``, I will use Wireshark to dissect NDN packets.
 
 My Platform
 --------------
@@ -98,7 +98,7 @@ Then create the config file :
 
 ::
 
-  sudo cp /usr/local/etc/ndn/nfd.conf.sample /usr/local/etc/ndn/ndn.conf
+  sudo cp /usr/local/etc/ndn/nfd.conf.sample /usr/local/etc/ndn/nfd.conf
 
 Start NFD
 ::
