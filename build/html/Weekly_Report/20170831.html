@@ -1,0 +1,173 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2017/08/31 - NDN-JS Usages &#8212; Weekly Report 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking" href="20170824.html" />
+    <link rel="prev" title="Jiawei’s Documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170824.html" title="2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ndn-js-usages">
+<h1>2017/08/31 - NDN-JS Usages<a class="headerlink" href="#ndn-js-usages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>NDN-JS <a class="footnote-reference" href="#id2" id="id1">[1]</a> is the first native version of the NDN protocol written in JavaScript. It implements the NDN-TLV wire format.</p>
+<p>The primary goal of NDN-JS is to provide a pure Javascript implementation of the NDN API that enables developers to create browser-based or Node.js-based applications using Named Data Networking.</p>
+<p>In this document, I will show how to use <strong>NDN-JS JavaScript API</strong> to ping my <code class="docutils literal"><span class="pre">ndnpingserver</span></code>.</p>
+</div>
+<div class="section" id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p>Clone the NDN-JS from github :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">named</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">ndn</span><span class="o">-</span><span class="n">js</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>And I just use JavaScript API, so I can include the library from websites and <strong>do not have to install anything</strong>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.js">https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.js</a></li>
+<li><a class="reference external" href="https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.min.js">https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.min.js</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="ndnping-by-javascript-api">
+<h2>NDNPING by JavaScript API<a class="headerlink" href="#ndnping-by-javascript-api" title="Permalink to this headline">¶</a></h2>
+<p>Now, change directory to the ndnping example that just cloned from githug :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ndn</span><span class="o">-</span><span class="n">js</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">ndnping</span>
+</pre></div>
+</div>
+<p>Then edit <code class="docutils literal"><span class="pre">ndn-ping.js</span></code>.</p>
+<p>Replace</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">hostip</span> <span class="o">=</span> <span class="s2">&quot;spurs.cs.ucla.edu&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">hostip</span> <span class="o">=</span> <span class="s2">&quot;&lt;your_pingserver_ip_address&gt;&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And find the <code class="docutils literal"><span class="pre">dopings()</span></code> funtion, write the pingserver name here.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">dopings</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ping</span><span class="p">(</span><span class="s2">&quot;/ndn/tw/edu/ncnu/csie/jarvis&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then edit <code class="docutils literal"><span class="pre">ndn-ping.html</span></code>.</p>
+<p>Replace</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;../../build/ndn.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now, open the <code class="docutils literal"><span class="pre">ndn-ping.html</span></code> in browser. The ping message would show like this :</p>
+<p>My demo website here : <a class="reference external" href="http://ms14.voip.edu.tw/~wei0923/NDN/ndnping/">http://ms14.voip.edu.tw/~wei0923/NDN/ndnping/</a></p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>NDN-JS provides JavaScript API to implement the NDN-TLV wire format. This means I can use JavaScipt to develop web application over NDN.</p>
+<p>There are many examples in NDN-JS that I clone from github, and <code class="docutils literal"><span class="pre">ndnping</span></code> is just one of them. I am trying the examples of producer and consumer. So that I can use web to register my name, publish the content and send interest to get the content on web!</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>NDN-JS github : <a class="reference external" href="https://github.com/named-data/ndn-js">https://github.com/named-data/ndn-js</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2017/08/31 - NDN-JS Usages</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#preparation">Preparation</a></li>
+<li><a class="reference internal" href="#ndnping-by-javascript-api">NDNPING by JavaScript API</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Jiawei’s Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20170824.html"
+                        title="next chapter">2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20170824.html" title="2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking"
+             >next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>
