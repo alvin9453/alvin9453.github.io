@@ -1,31 +1,33 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2017/08/03 - Named Data Networking (NDN) installation guide - part 1 &#8212; Weekly Report 1.0 documentation</title>
+    
+    <title>2017/08/03 - Named Data Networking (NDN) installation guide - part 1 &mdash; Weekly Report 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
     <link rel="next" title="2017/07/27 - (Paper) Video Streaming over Named Data Networking" href="20170727.html" />
     <link rel="prev" title="2017/08/17 - NDN Packet Format" href="20170817.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,7 +37,7 @@
         <li class="right" >
           <a href="20170817.html" title="2017/08/17 - NDN Packet Format"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -75,24 +77,24 @@
 </div>
 <div class="section" id="install-all-requirements">
 <h3>Install all requirements<a class="headerlink" href="#install-all-requirements" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">libcrypto</span><span class="o">++-</span><span class="n">dev</span> <span class="n">libsqlite3</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="nb">all</span><span class="o">-</span><span class="n">dev</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install build-essential libcrypto++-dev libsqlite3-dev libboost-all-dev libssl-dev
 </pre></div>
 </div>
 </div>
 <div class="section" id="download-ndn-cxx-source-from-github">
 <h3>Download ndn-cxx source from github <a class="footnote-reference" href="#id10" id="id2">[2]</a><a class="headerlink" href="#download-ndn-cxx-source-from-github" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">named</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">ndn</span><span class="o">-</span><span class="n">cxx</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">ndn</span><span class="o">-</span><span class="n">cxx</span>
+<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/named-data/ndn-cxx &amp;&amp; cd ndn-cxx
 </pre></div>
 </div>
 </div>
 <div class="section" id="build-ndn-cxx">
 <h3>Build ndn-cxx<a class="headerlink" href="#build-ndn-cxx" title="Permalink to this headline">¶</a></h3>
 <p>Change directory to the <code class="docutils literal"><span class="pre">ndn-cxx</span></code>, then use the following commands :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">waf</span> <span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">examples</span>
-<span class="o">./</span><span class="n">waf</span>
-<span class="n">sudo</span> <span class="o">./</span><span class="n">waf</span> <span class="n">install</span>
+<div class="highlight-python"><div class="highlight"><pre>./waf configure --with-examples
+./waf
+sudo ./waf install
 
-<span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libndn</span><span class="o">-</span><span class="n">cxx</span><span class="o">.</span><span class="n">so</span><span class="o">.</span><span class="mf">0.5</span><span class="o">.</span><span class="mi">1</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span>
+sudo ln -s /usr/local/lib/libndn-cxx.so.0.5.1 /usr/lib/
 </pre></div>
 </div>
 <p>Now, if we want to run the ndn-cxx example, we also need NFD to forward our pakcets.</p>
@@ -106,30 +108,30 @@
 </div>
 <div class="section" id="id4">
 <h3>Install all requirements<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">pkg</span><span class="o">-</span><span class="n">config</span> <span class="n">libpcap</span><span class="o">-</span><span class="n">dev</span>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install pkg-config libpcap-dev
 </pre></div>
 </div>
 </div>
 <div class="section" id="download-nfd-source-from-github">
 <h3>Download NFD source from github <a class="footnote-reference" href="#id11" id="id5">[3]</a><a class="headerlink" href="#download-nfd-source-from-github" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">named</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">NFD</span>
+<div class="highlight-python"><div class="highlight"><pre>git clone --recursive https://github.com/named-data/NFD
 </pre></div>
 </div>
 </div>
 <div class="section" id="build-nfd">
 <h3>Build NFD<a class="headerlink" href="#build-nfd" title="Permalink to this headline">¶</a></h3>
 <p>Change directory to the <code class="docutils literal"><span class="pre">NFD</span></code>, then use the following commands :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">waf</span> <span class="n">configure</span>
-<span class="o">./</span><span class="n">waf</span>
-<span class="n">sudo</span> <span class="o">./</span><span class="n">waf</span> <span class="n">install</span>
+<div class="highlight-python"><div class="highlight"><pre>./waf configure
+./waf
+sudo ./waf install
 </pre></div>
 </div>
 <p>Then create the config file :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">nfd</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">sample</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">nfd</span><span class="o">.</span><span class="n">conf</span>
+<div class="highlight-python"><div class="highlight"><pre>sudo cp /usr/local/etc/ndn/nfd.conf.sample /usr/local/etc/ndn/nfd.conf
 </pre></div>
 </div>
 <p>Start NFD</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nfd</span><span class="o">-</span><span class="n">start</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">nfd</span><span class="o">-</span><span class="n">start</span>
 </pre></div>
 </div>
 <p>If <code class="docutils literal"><span class="pre">nfd-start</span></code> succeed, messages may show like below :</p>
@@ -142,14 +144,14 @@
 <h3>Test on localhost<a class="headerlink" href="#test-on-localhost" title="Permalink to this headline">¶</a></h3>
 <p>Now we can run ndn-cxx example to test our installation on localhost.</p>
 <p>Terminal 1 :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ndn</span><span class="o">-</span><span class="n">cxx</span>
-<span class="o">./</span><span class="n">build</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">producer</span>
+<div class="highlight-python"><div class="highlight"><pre>cd ~/ndn-cxx
+./build/examples/producer
 </pre></div>
 </div>
 <img alt="../_images/ndn-producer.png" src="../_images/ndn-producer.png" />
 <p>Terminal 2 :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ndn</span><span class="o">-</span><span class="n">cxx</span>
-<span class="o">./</span><span class="n">build</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">consumer</span>
+<div class="highlight-python"><div class="highlight"><pre>cd ~/ndn-cxx
+./build/examples/consumer
 </pre></div>
 </div>
 <img alt="../_images/20170803_001.png" src="../_images/20170803_001.png" />
@@ -157,12 +159,12 @@
 <div class="section" id="test-on-two-nodes">
 <h3>Test on two nodes<a class="headerlink" href="#test-on-two-nodes" title="Permalink to this headline">¶</a></h3>
 <p>Assume that we have two nodes :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PC1</span> <span class="p">(</span><span class="n">producer</span><span class="p">)</span> <span class="p">:</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.101</span>
-<span class="n">PC2</span> <span class="p">(</span><span class="n">consumer</span><span class="p">)</span> <span class="p">:</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.102</span>
+<div class="highlight-python"><div class="highlight"><pre>PC1 (producer) : 192.168.1.101
+PC2 (consumer) : 192.168.1.102
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">PC2</span></code> needs to know the route to <code class="docutils literal"><span class="pre">PC1</span></code></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nfdc</span> <span class="n">register</span> <span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">testApp</span> <span class="n">udp</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">1.101</span>
+<div class="highlight-python"><div class="highlight"><pre>nfdc register /example/testApp udp://192.168.1.101
 </pre></div>
 </div>
 <p>Then run <code class="docutils literal"><span class="pre">producer</span></code> program on <code class="docutils literal"><span class="pre">PC1</span></code> and run <code class="docutils literal"><span class="pre">consumer</span></code> on <code class="docutils literal"><span class="pre">PC2</span></code>.</p>
@@ -179,41 +181,41 @@
 <li>ping</li>
 <li>dump</li>
 <li>dissect-wireshark</li>
-<li>… <a class="reference external" href="https://github.com/named-data/ndn-tools">see more</a></li>
+<li>... <a class="reference external" href="https://github.com/named-data/ndn-tools">see more</a></li>
 </ul>
 </div></blockquote>
 </div>
 <div class="section" id="download-source-from-github">
 <h3>Download source from github<a class="headerlink" href="#download-source-from-github" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">named</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">ndn</span><span class="o">-</span><span class="n">tools</span><span class="o">.</span><span class="n">git</span>
+<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/named-data/ndn-tools.git
 </pre></div>
 </div>
 </div>
 <div class="section" id="build">
 <h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
 <p>Change directory to the <code class="docutils literal"><span class="pre">ndn-tools</span></code>, then use the following commands :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">waf</span> <span class="n">configure</span>
-<span class="o">./</span><span class="n">waf</span>
-<span class="n">sudo</span> <span class="o">./</span><span class="n">waf</span> <span class="n">install</span>
+<div class="highlight-python"><div class="highlight"><pre>./waf configure
+./waf
+sudo ./waf install
 </pre></div>
 </div>
 </div>
 <div class="section" id="test-ndnping">
 <h3>Test ndnping <a class="footnote-reference" href="#id13" id="id8">[5]</a><a class="headerlink" href="#test-ndnping" title="Permalink to this headline">¶</a></h3>
 <p>PC1 (192.168.1.101)</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ndnpingserver</span> <span class="n">ndn</span><span class="p">:</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">testApp</span>
+<div class="highlight-python"><div class="highlight"><pre>ndnpingserver ndn:/example/testApp
 </pre></div>
 </div>
 <p>PC2 (192.168.1.102)</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nfdc</span> <span class="n">register</span> <span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">testApp</span> <span class="n">udp</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">1.101</span>
-<span class="n">ndnping</span> <span class="n">ndn</span><span class="p">:</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">testApp</span>
+<div class="highlight-python"><div class="highlight"><pre>nfdc register /example/testApp udp://192.168.1.101
+ndnping ndn:/example/testApp
 </pre></div>
 </div>
 </div>
 <div class="section" id="using-wireshark-to-dissect-ndn-packets">
 <h3>Using Wireshark to dissect NDN packets<a class="headerlink" href="#using-wireshark-to-dissect-ndn-packets" title="Permalink to this headline">¶</a></h3>
-<p>To enable NDN packets dissector for all future Wireshark sessions, you can create/edit Wireshark’s <code class="docutils literal"><span class="pre">init.lua</span></code> script, which located in <code class="docutils literal"><span class="pre">/usr/share/wireshark</span></code>. The <code class="docutils literal"><span class="pre">dofile</span></code> command should be added to the end of <code class="docutils literal"><span class="pre">init.lua</span></code> file:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span> <span class="n">dofile</span><span class="p">(</span><span class="s2">&quot;/full/path/to/ndn.lua&quot;</span><span class="p">)</span>
+<p>To enable NDN packets dissector for all future Wireshark sessions, you can create/edit Wireshark&#8217;s <code class="docutils literal"><span class="pre">init.lua</span></code> script, which located in <code class="docutils literal"><span class="pre">/usr/share/wireshark</span></code>. The <code class="docutils literal"><span class="pre">dofile</span></code> command should be added to the end of <code class="docutils literal"><span class="pre">init.lua</span></code> file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">--</span> <span class="n">dofile</span><span class="p">(</span><span class="s2">&quot;/full/path/to/ndn.lua&quot;</span><span class="p">)</span>
 <span class="n">dofile</span><span class="p">(</span><span class="s2">&quot;/usr/local/share/ndn-dissect-wireshark/ndn.lua&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -309,11 +311,14 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -329,12 +334,12 @@
         <li class="right" >
           <a href="20170817.html" title="2017/08/17 - NDN Packet Format"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

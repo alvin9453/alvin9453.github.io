@@ -1,31 +1,33 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>NDN-Tools Usages &#8212; Weekly Report 1.0 documentation</title>
+    
+    <title>NDN-Tools Usages &mdash; Weekly Report 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
     <link rel="next" title="SSH Login Without Passwrod" href="SSH_Login_Without_Password.html" />
     <link rel="prev" title="2017/05/04 - 說make him call you back 傷面子 &amp; 從WorkFace談創業精神" href="../Business_Weekly/20170504.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,7 +37,7 @@
         <li class="right" >
           <a href="../Business_Weekly/20170504.html" title="2017/05/04 - 說make him call you back 傷面子 &amp; 從WorkFace談創業精神"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -48,25 +50,25 @@
 <h1>NDN-Tools Usages<a class="headerlink" href="#ndn-tools-usages" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>This document would show some ndn-tools’ command to communicate with other machine over NDN.</p>
+<p>This document would show some ndn-tools&#8217; command to communicate with other machine over NDN.</p>
 </div>
 <div class="section" id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
 <p>First, create a remote face :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">nfdc</span> <span class="n">face</span> <span class="n">create</span> <span class="n">udp4</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">remote_ip_addr</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">6363</span>
+<div class="highlight-python"><div class="highlight"><pre>&gt; nfdc face create udp4://&lt;remote_ip_addr&gt;:6363
 </pre></div>
 </div>
 <p>then use <code class="docutils literal"><span class="pre">nfdc</span> <span class="pre">face</span> <span class="pre">list</span></code> like below to check this face is created successfully.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">nfdc</span> <span class="n">face</span> <span class="nb">list</span>
-<span class="o">...</span>
-<span class="o">...</span>
-<span class="n">faceid</span><span class="o">=</span><span class="mi">280</span> <span class="n">remote</span><span class="o">=</span><span class="n">udp4</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">remote_ip_addr</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">6363</span> <span class="n">local</span><span class="o">=</span><span class="n">udp4</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">my_ip_addr</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">6363</span>
-<span class="o">....</span>
-<span class="o">....</span>
+<div class="highlight-python"><div class="highlight"><pre>&gt; nfdc face list
+...
+...
+faceid=280 remote=udp4://&lt;remote_ip_addr&gt;:6363 local=udp4://&lt;my_ip_addr&gt;:6363
+....
+....
 </pre></div>
 </div>
 <p>Next, add the route :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nfdc</span> <span class="n">route</span> <span class="n">add</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">tw</span><span class="o">/</span><span class="n">edu</span><span class="o">/</span><span class="n">ncnu</span><span class="o">/</span><span class="n">csie</span><span class="o">/</span><span class="n">jarvis</span> <span class="n">udp4</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">remote_ip_addr</span><span class="o">&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre>nfdc route add /ndn/tw/edu/ncnu/csie/jarvis udp4://&lt;remote_ip_addr&gt;
 </pre></div>
 </div>
 <p>And <code class="docutils literal"><span class="pre">NFD</span></code> knows how to send interest to the route now!</p>
@@ -74,11 +76,11 @@
 <div class="section" id="ndnping">
 <h2>ndnping <a class="footnote-reference" href="#id2" id="id1">[1]</a><a class="headerlink" href="#ndnping" title="Permalink to this headline">¶</a></h2>
 <p>Open the <code class="docutils literal"><span class="pre">ndnpingserver</span></code> first:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ndnpingserver</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">tw</span><span class="o">/</span><span class="n">edu</span><span class="o">/</span><span class="n">ncnu</span><span class="o">/</span><span class="n">csie</span><span class="o">/</span><span class="n">jarvis</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ndnpingserver</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">tw</span><span class="o">/</span><span class="n">edu</span><span class="o">/</span><span class="n">ncnu</span><span class="o">/</span><span class="n">csie</span><span class="o">/</span><span class="n">jarvis</span>
 </pre></div>
 </div>
 <p>Then open another terminal to use <code class="docutils literal"><span class="pre">ndnping</span></code> :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ndnping</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">tw</span><span class="o">/</span><span class="n">edu</span><span class="o">/</span><span class="n">ncnu</span><span class="o">/</span><span class="n">csie</span><span class="o">/</span><span class="n">jarvis</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ndnping</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">tw</span><span class="o">/</span><span class="n">edu</span><span class="o">/</span><span class="n">ncnu</span><span class="o">/</span><span class="n">csie</span><span class="o">/</span><span class="n">jarvis</span>
 </pre></div>
 </div>
 </div>
@@ -86,11 +88,11 @@
 <h2>ndnputchunk and ndncatchunk<a class="headerlink" href="#ndnputchunk-and-ndncatchunk" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">ndnputchunk</span></code> is put a file content in content store (RAM in the computer), and user could retrieve data by <code class="docutils literal"><span class="pre">ndncatchunk</span></code>.</p>
 <p>Upload a file :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ndnputchunk</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">file</span><span class="o">/</span><span class="n">name</span><span class="o">/</span><span class="n">myfile</span> <span class="o">&lt;</span> <span class="n">myfile</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ndnputchunk</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="nb">file</span><span class="o">/</span><span class="n">name</span><span class="o">/</span><span class="n">myfile</span> <span class="o">&lt;</span> <span class="n">myfile</span>
 </pre></div>
 </div>
 <p>Retrieve this file :</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ndncatchunk</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="n">file</span><span class="o">/</span><span class="n">name</span><span class="o">/</span><span class="n">myfile</span> <span class="o">&gt;</span> <span class="n">myfile</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ndncatchunk</span> <span class="o">/</span><span class="n">ndn</span><span class="o">/</span><span class="nb">file</span><span class="o">/</span><span class="n">name</span><span class="o">/</span><span class="n">myfile</span> <span class="o">&gt;</span> <span class="n">myfile</span>
 </pre></div>
 </div>
 </div>
@@ -133,11 +135,14 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -153,12 +158,12 @@
         <li class="right" >
           <a href="../Business_Weekly/20170504.html" title="2017/05/04 - 說make him call you back 傷面子 &amp; 從WorkFace談創業精神"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

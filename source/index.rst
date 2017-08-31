@@ -55,6 +55,7 @@ Business Weekly
 	:glob:
 	:titlesonly:
 
+	./Business_Weekly/20170831
 	./Business_Weekly/20170824
 	./Business_Weekly/20170810
 	./Business_Weekly/20170713

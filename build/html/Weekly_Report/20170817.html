@@ -1,31 +1,33 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2017/08/17 - NDN Packet Format &#8212; Weekly Report 1.0 documentation</title>
+    
+    <title>2017/08/17 - NDN Packet Format &mdash; Weekly Report 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
     <link rel="next" title="2017/08/03 - Named Data Networking (NDN) installation guide - part 1" href="20170803.html" />
     <link rel="prev" title="2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking" href="20170824.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,7 +37,7 @@
         <li class="right" >
           <a href="20170824.html" title="2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -57,7 +59,7 @@
 <div class="section" id="tlv-encoding">
 <h3>TLV Encoding<a class="headerlink" href="#tlv-encoding" title="Permalink to this headline">¶</a></h3>
 <p>TLV encoding for NDN packets is defined as follows:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>NDN-TLV := TLV-TYPE TLV-LENGTH TLV-VALUE?
+<div class="highlight-python"><div class="highlight"><pre>NDN-TLV := TLV-TYPE TLV-LENGTH TLV-VALUE?
 TLV-TYPE := VAR-NUMBER
 TLV-LENGTH := VAR-NUMBER
 TLV-VALUE := BYTE+
@@ -73,15 +75,15 @@ TLV-VALUE := BYTE+
 <div class="section" id="ndn-name-format">
 <h3>NDN Name Format<a class="headerlink" href="#ndn-name-format" title="Permalink to this headline">¶</a></h3>
 <p>We use a 2-level nested TLV to represent a name. The Type in the outer TLV indicates this is a Name. Inner TLVs should be one of NameComponent blocks, as defined in the following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Name</span> <span class="p">::</span><span class="o">=</span> <span class="n">NAME</span><span class="o">-</span><span class="n">TYPE</span> <span class="n">TLV</span><span class="o">-</span><span class="n">LENGTH</span> <span class="n">NameComponent</span><span class="o">*</span>
+<div class="highlight-python"><div class="highlight"><pre>Name ::= NAME-TYPE TLV-LENGTH NameComponent*
 
-<span class="n">NameComponent</span> <span class="p">::</span><span class="o">=</span> <span class="n">GenericNameComponent</span> <span class="o">|</span>
-                  <span class="n">ImplicitSha256DigestComponent</span>
+NameComponent ::= GenericNameComponent |
+                  ImplicitSha256DigestComponent
 
-<span class="n">GenericNameComponent</span> <span class="p">::</span><span class="o">=</span> <span class="n">NAME</span><span class="o">-</span><span class="n">COMPONENT</span><span class="o">-</span><span class="n">TYPE</span> <span class="n">TLV</span><span class="o">-</span><span class="n">LENGTH</span> <span class="n">BYTE</span><span class="o">*</span>
+GenericNameComponent ::= NAME-COMPONENT-TYPE TLV-LENGTH BYTE*
 
-<span class="n">ImplicitSha256DigestComponent</span> <span class="p">::</span><span class="o">=</span> <span class="n">IMPLICIT</span><span class="o">-</span><span class="n">SHA256</span><span class="o">-</span><span class="n">DIGEST</span><span class="o">-</span><span class="n">COMPONENT</span><span class="o">-</span><span class="n">TYPE</span> <span class="n">TLV</span><span class="o">-</span><span class="n">LENGTH</span><span class="p">(</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-                                  <span class="n">BYTE</span><span class="p">{</span><span class="mi">32</span><span class="p">}</span>
+ImplicitSha256DigestComponent ::= IMPLICIT-SHA256-DIGEST-COMPONENT-TYPE TLV-LENGTH(=32)
+                                  BYTE{32}
 </pre></div>
 </div>
 <p>In Wireshark :</p>
@@ -101,7 +103,7 @@ TLV-VALUE := BYTE+
 <div class="section" id="interest-packet">
 <h2>Interest Packet<a class="headerlink" href="#interest-packet" title="Permalink to this headline">¶</a></h2>
 <p>NDN Interest packet is TLV defined as follows:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>Interest ::= INTEREST-TYPE TLV-LENGTH
+<div class="highlight-python"><div class="highlight"><pre>Interest ::= INTEREST-TYPE TLV-LENGTH
              Name
              Selectors?
              Nonce
@@ -126,7 +128,7 @@ The Name element that can be put in the Interest is further restricted to have a
 <div class="section" id="nonce">
 <h3>Nonce<a class="headerlink" href="#nonce" title="Permalink to this headline">¶</a></h3>
 <p>Nonce defined as follows:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Nonce</span> <span class="p">::</span><span class="o">=</span> <span class="n">NONCE</span><span class="o">-</span><span class="n">TYPE</span> <span class="n">TLV</span><span class="o">-</span><span class="n">LENGTH</span><span class="p">(</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="n">BYTE</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre>Nonce ::= NONCE-TYPE TLV-LENGTH(=4) BYTE{4}
 </pre></div>
 </div>
 <p>The Nonce carries a randomly-generated 4-octet long byte-string. The combination of Name and Nonce should uniquely identify an Interest packet. This is used to detect looping Interests.</p>
@@ -211,11 +213,14 @@ The Name element that can be put in the Interest is further restricted to have a
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -231,12 +236,12 @@ The Name element that can be put in the Interest is further restricted to have a
         <li class="right" >
           <a href="20170824.html" title="2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>
