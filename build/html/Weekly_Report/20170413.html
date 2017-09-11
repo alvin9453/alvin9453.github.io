@@ -1,33 +1,31 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>2017/04/13 - Web Application Messaging Protocol &mdash; Weekly Report 1.0 documentation</title>
-    
+    <title>2017/04/13 - Web Application Messaging Protocol &#8212; Weekly Report 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2017/04/06 - Git tutorial" href="20170406.html" />
     <link rel="prev" title="2017/05/04 - (Paper) Let’s ChronoSync: Decentralized Dataset State Synchronization in Named Data Networking" href="20170503.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +35,7 @@
         <li class="right" >
           <a href="20170503.html" title="2017/05/04 - (Paper) Let’s ChronoSync: Decentralized Dataset State Synchronization in Named Data Networking"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -65,11 +63,11 @@
 <p>Old client-server model: a Caller needs to have knowledge about where the Callee resides and how to reach it.</p>
 <a class="reference internal image-reference" href="../_images/unified_routing_rpc_client_server.png"><img alt="../_images/unified_routing_rpc_client_server.png" src="../_images/unified_routing_rpc_client_server.png" style="width: 294.7px; height: 112.0px;" /></a>
 <p>The problems coming from <strong>strong coupling</strong> between application components were long recognized and this (besides other requirements) lead to the publish-subscribe model.</p>
-<p>Publish-subscribe model : a Publisher submits information to an abstract &#8220;topic&#8221;, and Subscribers only receive information indirectly by announcing their interest on a respective &#8220;topic&#8221;. Both do not know about each other. They are decoupled via the &#8220;topic&#8221; and via an intermediary usually called Broker:</p>
+<p>Publish-subscribe model : a Publisher submits information to an abstract “topic”, and Subscribers only receive information indirectly by announcing their interest on a respective “topic”. Both do not know about each other. They are decoupled via the “topic” and via an intermediary usually called Broker:</p>
 <a class="reference internal image-reference" href="../_images/broker.png"><img alt="../_images/broker.png" src="../_images/broker.png" style="width: 273.7px; height: 249.9px;" /></a>
 <p>Now, WAMP translates the benefits of loose coupling to RPC. Different from the client-server model, WAMP also decouples Callers and Callees by introducing an intermediary - the Dealer:</p>
 <a class="reference internal image-reference" href="../_images/dealer.png"><img alt="../_images/dealer.png" src="../_images/dealer.png" style="width: 283.5px; height: 255.5px;" /></a>
-<p>Similar to a Broker&#8217;s role with PubSub, the Dealer is responsible for routing a call originating from the Caller to the Callee and route back results or errors vice-versa.</p>
+<p>Similar to a Broker’s role with PubSub, the Dealer is responsible for routing a call originating from the Caller to the Callee and route back results or errors vice-versa.</p>
 <a class="reference internal image-reference" href="../_images/wamp_iot.png"><img alt="../_images/wamp_iot.png" src="../_images/wamp_iot.png" style="width: 474.6px; height: 348.6px;" /></a>
 </div>
 <div class="section" id="summary">
@@ -106,21 +104,18 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="20170503.html"
-                        title="previous chapter">2017/05/04 - (Paper) Let&#8217;s ChronoSync: Decentralized Dataset State Synchronization in Named Data Networking</a></p>
+                        title="previous chapter">2017/05/04 - (Paper) Let’s ChronoSync: Decentralized Dataset State Synchronization in Named Data Networking</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="20170406.html"
                         title="next chapter">2017/04/06 - Git tutorial</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -136,12 +131,12 @@
         <li class="right" >
           <a href="20170503.html" title="2017/05/04 - (Paper) Let’s ChronoSync: Decentralized Dataset State Synchronization in Named Data Networking"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

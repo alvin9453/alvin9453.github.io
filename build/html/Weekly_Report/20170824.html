@@ -1,33 +1,31 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking &mdash; Weekly Report 1.0 documentation</title>
-    
+    <title>2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking &#8212; Weekly Report 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2017/08/17 - NDN Packet Format" href="20170817.html" />
     <link rel="prev" title="2017/08/31 - NDN-JS Usages" href="20170831.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +35,7 @@
         <li class="right" >
           <a href="20170831.html" title="2017/08/31 - NDN-JS Usages"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -105,7 +103,7 @@
 <div class="section" id="e-applications-programing-interface">
 <h3>E. Applications Programing Interface<a class="headerlink" href="#e-applications-programing-interface" title="Permalink to this headline">¶</a></h3>
 <p>The programing interface in NDN.JS is designed to be consistent with PyCCN <a class="footnote-reference" href="#id3" id="id1">[1]</a> . The library is first initialized with the hostname or IP address of a WebSocket proxy or other transport provider.</p>
-<p>After connection to the NDN network, the top leven &#8220;NDN&#8221; class provides two important methods:</p>
+<p>After connection to the NDN network, the top leven “NDN” class provides two important methods:</p>
 <blockquote>
 <div><ul class="simple">
 <li>expressInterest : fetch the named data from CCN routers.</li>
@@ -119,7 +117,7 @@
 <h2>My Summary<a class="headerlink" href="#my-summary" title="Permalink to this headline">¶</a></h2>
 <p>I choose this paper because of the Web ChronoChat Application <a class="footnote-reference" href="#id4" id="id2">[2]</a> powered by NDN.JS. So I want to know how to build my own chatroom over NDN. NDN.JS is a tool I may use when I implement the chatroom.</p>
 <p>This paper shows that we can develop our web application by using JavaScript library to realize NDN fetch/publish content easily. Use proxy server to support WebSocket protocol is a temporary solution until CCN routers(or NDN routers) could support WebSocket.</p>
-<p>I think WebSocket is a good solution for full-duplex TCP connections because NDN could not do &#8220;server push&#8221;. I guess more ndn web applications would rely on WebSocket full-duplex connection.</p>
+<p>I think WebSocket is a good solution for full-duplex TCP connections because NDN could not do “server push”. I guess more ndn web applications would rely on WebSocket full-duplex connection.</p>
 </div>
 <div class="section" id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
@@ -171,14 +169,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -194,12 +189,12 @@
         <li class="right" >
           <a href="20170831.html" title="2017/08/31 - NDN-JS Usages"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

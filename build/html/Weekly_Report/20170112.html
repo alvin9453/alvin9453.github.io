@@ -1,33 +1,31 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>2017/01/12 - WebSocket &mdash; Weekly Report 1.0 documentation</title>
-    
+    <title>2017/01/12 - WebSocket &#8212; Weekly Report 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2017/01/05 - (Patent) Systems and methods for collaborative note-taking - part 2" href="20170105.html" />
     <link rel="prev" title="2017/02/16 - (Paper) Internet Multicast Video Delivery" href="20170216.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +35,7 @@
         <li class="right" >
           <a href="20170216.html" title="2017/02/16 - (Paper) Internet Multicast Video Delivery"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -58,54 +56,54 @@
 <p>To establish a WebSocket connection, the client and server upgrade from the HTTP protocol to the WebSocket protocol during their initial handshake.</p>
 <img alt="../_images/ws_handshake.png" src="../_images/ws_handshake.png" />
 <p>From client to server</p>
-<div class="highlight-python"><div class="highlight"><pre>GET /chat HTTP/1.1
-Host: example.com
-Connection: Upgrade
-Sec-WebSocket-Protocol: sample
-Upgrade: websocket
-Sec-WebSocket-Key: 7cxQRnWs91xJW9T0QLSuVQ==
-Origin: http://example.com
-[8-byte security key]
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">chat</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="n">Connection</span><span class="p">:</span> <span class="n">Upgrade</span>
+<span class="n">Sec</span><span class="o">-</span><span class="n">WebSocket</span><span class="o">-</span><span class="n">Protocol</span><span class="p">:</span> <span class="n">sample</span>
+<span class="n">Upgrade</span><span class="p">:</span> <span class="n">websocket</span>
+<span class="n">Sec</span><span class="o">-</span><span class="n">WebSocket</span><span class="o">-</span><span class="n">Key</span><span class="p">:</span> <span class="mi">7</span><span class="n">cxQRnWs91xJW9T0QLSuVQ</span><span class="o">==</span>
+<span class="n">Origin</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="p">[</span><span class="mi">8</span><span class="o">-</span><span class="n">byte</span> <span class="n">security</span> <span class="n">key</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>From server to client</p>
-<div class="highlight-python"><div class="highlight"><pre>HTTP/1.1 101 WebSocket Protocol Handshake
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: 7cxQRnWs91xJW9T0QLSuVQ==
-WebSocket-Protocol: sample
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">101</span> <span class="n">WebSocket</span> <span class="n">Protocol</span> <span class="n">Handshake</span>
+<span class="n">Upgrade</span><span class="p">:</span> <span class="n">websocket</span>
+<span class="n">Connection</span><span class="p">:</span> <span class="n">Upgrade</span>
+<span class="n">Sec</span><span class="o">-</span><span class="n">WebSocket</span><span class="o">-</span><span class="n">Accept</span><span class="p">:</span> <span class="mi">7</span><span class="n">cxQRnWs91xJW9T0QLSuVQ</span><span class="o">==</span>
+<span class="n">WebSocket</span><span class="o">-</span><span class="n">Protocol</span><span class="p">:</span> <span class="n">sample</span>
 </pre></div>
 </div>
 <p>Once established, WebSocket messages can be sent back and forth between the client and the server in full-duplex mode. This means that text-based messages can be sent full-duplex, in either direction at the same time. On the network each message starts with a 0x00 byte, ends with a 0xFF byte, and contains UTF-8 data in between.</p>
 </div>
 <div class="section" id="a-dramatic-reduction-in-unnecessary-network-traffic-and-latency">
 <h2>A Dramatic Reduction in Unnecessary Network Traffic and Latency<a class="headerlink" href="#a-dramatic-reduction-in-unnecessary-network-traffic-and-latency" title="Permalink to this headline">¶</a></h2>
-<p>If we use polling...
+<p>If we use polling…
 HTTP request header</p>
-<div class="highlight-python"><div class="highlight"><pre>GET /PollingStock//PollingStock HTTP/1.1
-Host: localhost:8080
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.5) Gecko/20091102
-Firefox/3.5.5
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-us
-Accept-Encoding: gzip,deflate
-Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
-Keep-Alive: 300
-Connection: keep-alive
-Referer: http://www.example.com/PollingStock/
-Cookie: showInheritedConstant=false; showInheritedProtectedConstant=false;
-showInheritedProperty=false; showInheritedProtectedProperty=false;
-showInheritedMethod=false; showInheritedProtectedMethod=false;
-showInheritedEvent=false; showInheritedStyle=false; showInheritedEffect=false
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">PollingStock</span><span class="o">//</span><span class="n">PollingStock</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span>
+<span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">Windows</span><span class="p">;</span> <span class="n">U</span><span class="p">;</span> <span class="n">Windows</span> <span class="n">NT</span> <span class="mf">5.1</span><span class="p">;</span> <span class="n">en</span><span class="o">-</span><span class="n">US</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="mf">1.9</span><span class="o">.</span><span class="mf">1.5</span><span class="p">)</span> <span class="n">Gecko</span><span class="o">/</span><span class="mi">20091102</span>
+<span class="n">Firefox</span><span class="o">/</span><span class="mf">3.5</span><span class="o">.</span><span class="mi">5</span>
+<span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xhtml</span><span class="o">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="o">*/*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="p">:</span> <span class="n">en</span><span class="o">-</span><span class="n">us</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span><span class="n">deflate</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Charset</span><span class="p">:</span> <span class="n">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="o">*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span>
+<span class="n">Keep</span><span class="o">-</span><span class="n">Alive</span><span class="p">:</span> <span class="mi">300</span>
+<span class="n">Connection</span><span class="p">:</span> <span class="n">keep</span><span class="o">-</span><span class="n">alive</span>
+<span class="n">Referer</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">PollingStock</span><span class="o">/</span>
+<span class="n">Cookie</span><span class="p">:</span> <span class="n">showInheritedConstant</span><span class="o">=</span><span class="n">false</span><span class="p">;</span> <span class="n">showInheritedProtectedConstant</span><span class="o">=</span><span class="n">false</span><span class="p">;</span>
+<span class="n">showInheritedProperty</span><span class="o">=</span><span class="n">false</span><span class="p">;</span> <span class="n">showInheritedProtectedProperty</span><span class="o">=</span><span class="n">false</span><span class="p">;</span>
+<span class="n">showInheritedMethod</span><span class="o">=</span><span class="n">false</span><span class="p">;</span> <span class="n">showInheritedProtectedMethod</span><span class="o">=</span><span class="n">false</span><span class="p">;</span>
+<span class="n">showInheritedEvent</span><span class="o">=</span><span class="n">false</span><span class="p">;</span> <span class="n">showInheritedStyle</span><span class="o">=</span><span class="n">false</span><span class="p">;</span> <span class="n">showInheritedEffect</span><span class="o">=</span><span class="n">false</span>
 </pre></div>
 </div>
 <p>HTTP Response Header</p>
-<div class="highlight-python"><div class="highlight"><pre>HTTP/1.x 200 OK
-X-Powered-By: Servlet/2.5
-Server: Sun Java System Application Server 9.1_02
-Content-Type: text/html;charset=UTF-8
-Content-Length: 21
-Date: Sat, 07 Nov 2009 00:32:46 GMT
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.</span><span class="n">x</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Powered</span><span class="o">-</span><span class="n">By</span><span class="p">:</span> <span class="n">Servlet</span><span class="o">/</span><span class="mf">2.5</span>
+<span class="n">Server</span><span class="p">:</span> <span class="n">Sun</span> <span class="n">Java</span> <span class="n">System</span> <span class="n">Application</span> <span class="n">Server</span> <span class="mf">9.1</span><span class="n">_02</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="p">;</span><span class="n">charset</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">21</span>
+<span class="n">Date</span><span class="p">:</span> <span class="n">Sat</span><span class="p">,</span> <span class="mi">07</span> <span class="n">Nov</span> <span class="mi">2009</span> <span class="mi">00</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mi">46</span> <span class="n">GMT</span>
 </pre></div>
 </div>
 <p>The total HTTP request and response header information overhead contains 871 bytes and that does not even include any data. Of course, this is just an example and you can have less than 871 bytes of header data, but there are also common cases where the header data exceeded 2,000 bytes. In this example application, the data for a typical stock topic message is only about 20 characters long. As you can see, it is effectively drowned out by the excessive header information, which was not even required in the first place.</p>
@@ -153,7 +151,7 @@ established and before the connection is closed.</p>
 verify that the remote endpoint is still responsive.</p>
 </dd>
 <dt>Pong</dt>
-<dd><p class="first">A Pong frame sent in response to a Ping frame must have identical &#8220;Application data&#8221; as found in the message body of the Ping frame being replied to.</p>
+<dd><p class="first">A Pong frame sent in response to a Ping frame must have identical “Application data” as found in the message body of the Ping frame being replied to.</p>
 <p>If an endpoint receives a Ping frame and has not yet sent Pong frame(s) in response to previous Ping frame(s), the endpoint MAY elect to send a Pong frame for only the most recently processed Ping frame.</p>
 <p class="last">A Pong frame MAY be sent unsolicited.  This serves as a unidirectional <strong>heartbeat</strong>. A response to an unsolicited Pong frame is not expected.</p>
 </dd>
@@ -222,14 +220,11 @@ verify that the remote endpoint is still responsive.</p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -245,12 +240,12 @@ verify that the remote endpoint is still responsive.</p>
         <li class="right" >
           <a href="20170216.html" title="2017/02/16 - (Paper) Internet Multicast Video Delivery"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

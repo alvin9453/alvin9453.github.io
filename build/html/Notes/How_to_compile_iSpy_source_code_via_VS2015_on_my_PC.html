@@ -1,33 +1,31 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>2016/12/24 - How to compile iSpy source code via VS2015 on my PC &mdash; Weekly Report 1.0 documentation</title>
-    
+    <title>2016/12/24 - How to compile iSpy source code via VS2015 on my PC &#8212; Weekly Report 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2017 Advanced Information Security Summer School pre-exam" href="../Writeup/2017_AIS3_pre-exam.html" />
     <link rel="prev" title="Preview reStructureText on Atom" href="Preview_reStructureText_on_Atom.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +35,7 @@
         <li class="right" >
           <a href="Preview_reStructureText_on_Atom.html" title="Preview reStructureText on Atom"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -60,11 +58,11 @@
 <div class="section" id="guide-64-bits">
 <h2>Guide (64 bits)<a class="headerlink" href="#guide-64-bits" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple" start="0">
-<li>Don&#8217;t open and compile the file before doing these steps below.</li>
-<li>Move the <em>Video.FFMPEG.64.vcxproj</em> and <em>Video.FFMPEG.vcxproj</em> away from <em>/iSpy-master/FFMPEG</em>. Don&#8217;t delete them, just keep them in another directory.</li>
+<li>Don’t open and compile the file before doing these steps below.</li>
+<li>Move the <em>Video.FFMPEG.64.vcxproj</em> and <em>Video.FFMPEG.vcxproj</em> away from <em>/iSpy-master/FFMPEG</em>. Don’t delete them, just keep them in another directory.</li>
 <li>Copy all files under the path <em>/iSpy-master/FFMPEG/ffmpeg64/bin</em> and paste to <em>/iSpy-master/FFMPEG/bin</em> .</li>
 <li>Copy the dll: <em>/iSpy-master/FFMPEG/ffmpeg64/bin/iSpy.Video.FFMPEG.dll * and paste to */iSpy-master/FFMPEG/bin</em>. (If <em>iSpy.Video.FFMPEG.dll</em> is already existed in <em>/iSpy-master/FFMPEG/bin</em> , just delete or replace it. )</li>
-<li>Open .sln file <em>/iSpy-master/iSpy64.sln</em> (you may see the error message box like the picture1 below, just click &#8220;OK&#8221;). Press <strong>F5</strong> to build and run the project , it would be failed and show error message like the picture 2 below. That&#8217;s all right!</li>
+<li>Open .sln file <em>/iSpy-master/iSpy64.sln</em> (you may see the error message box like the picture1 below, just click “OK”). Press <strong>F5</strong> to build and run the project , it would be failed and show error message like the picture 2 below. That’s all right!</li>
 </ol>
 <p>Picture 1:</p>
 <blockquote>
@@ -82,7 +80,7 @@
 <div class="section" id="why-we-need-these-wired-steps">
 <h2>Why we need these wired steps?<a class="headerlink" href="#why-we-need-these-wired-steps" title="Permalink to this headline">¶</a></h2>
 <p>According to the <a class="reference external" href="https://github.com/ispysoftware/iSpy/blob/master/readme.txt">readme</a> ,
-the FFMPEG project requires that visual studio 2010 is installed. FFMPEG project on visual studio 2015 is considered to an error because of &#8220;Not Safety&#8221;. So we have to do the steps above and do not load this project in our solution explore( in solution, we can unload <em>iSpy.Video.FFMPEG</em> project ).</p>
+the FFMPEG project requires that visual studio 2010 is installed. FFMPEG project on visual studio 2015 is considered to an error because of “Not Safety”. So we have to do the steps above and do not load this project in our solution explore( in solution, we can unload <em>iSpy.Video.FFMPEG</em> project ).</p>
 <img alt="../_images/load_failed.png" src="../_images/load_failed.png" />
 </div>
 </div>
@@ -112,14 +110,11 @@ the FFMPEG project requires that visual studio 2010 is installed. FFMPEG project
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -135,12 +130,12 @@ the FFMPEG project requires that visual studio 2010 is installed. FFMPEG project
         <li class="right" >
           <a href="Preview_reStructureText_on_Atom.html" title="Preview reStructureText on Atom"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>
