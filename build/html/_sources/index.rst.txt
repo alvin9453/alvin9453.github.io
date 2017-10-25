@@ -77,6 +77,7 @@ Notes
 	:glob:
 	:titlesonly:
 
+	./Notes/ChronoChat_connects_to_NFD
 	./Notes/ndn-tools_usage
 	./Notes/SSH_Login_Without_Password
 	./Notes/Preview_reStructureText_on_Atom
