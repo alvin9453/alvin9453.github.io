@@ -1,0 +1,111 @@
+2017/11/13 - Named Data Networking (NDN) installation guide - part 2
+=============================================================================
+
+Introduction
+--------------
+
+In this installation guide, I will demostrate how to install *ndnfs-port* and use ``fetch-media.html`` in **NDN-JS**.
+
+My Platform
+--------------
+
+Ubuntu 16.04.2 Server (64-bit)
+
+NDNFS installation [#]_
+---------------------------
+
+Overview
+```````````````
+
+NDNFS: NDN-friendly file system (based on FUSE)
+
+Install ndn-cpp [#]_
+``````````````````````
+
+Before installing NDNFS, we have to install **ndn-cpp** first.
+
+::
+    
+    git clone https://github.com/named-data/ndn-cpp.git && cd ndn-cpp
+    git reset --hard 52152710bc7f12cbe22376b414bb5c05923f4d99    // release v1.0 (The latest version will fail to build.)
+    ./configure
+    make
+    sudo make install clean
+    sudo /sbin/ldconfig
+
+Requirements
+````````````````
+
+::
+
+    sudo apt-get install fuse libfuse-dev pkg-config sqlite3 libprotobuf-dev protobuf-compiler libboost-all-dev libsqlite3-dev
+
+
+Download from github and build NDNFS
+```````````````````````````````````````````
+
+::
+    
+    git clone https://github.com/remap/ndnfs-port.git && cd ndnfs-port
+    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig 
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+    ./waf configure --boost-lib=/usr/lib/x86_64-linux-gnu/
+    ./waf
+
+Configure NDNFS
+`````````````````````````````
+
+Create two folder : One is the actual folder(dir), and the other one is the mount point folder(ndnfs).
+
+::
+
+    mkdir /tmp/ndnfs
+    mkdir /tmp/dir
+    cd ndnfs-port
+    ./build/ndnfs -s /tmp/dir /tmp/ndnfs
+
+We have to put our files in the mount folder (/tmp/ndnfs). If someone puts files in actual folder and then mount this folder, we can not access the file via NDNJS fetch-media.js.(I think this is a bug.)
+
+Then open NDNFS with a name by option ``-p``
+::
+
+     ./ndnfs-port/build/ndnfs-server -p /ndn/tw/edu/ncnu/csie/jarvis/weeklyreport &
+
+
+Test on NDN-JS fetch-media.html
+------------------------------------
+
+Requirements
+```````````````
+
+To test on NDN-JS, we also need **NFD** and **NDN-JS**. Please read  `installation guide - part 1 <"https://alvin9453.github.io/build/html/Weekly_Report/20170803.html">`_ to install **NFD**.
+
+And we don't need to install **NDN-JS** because it just some JavaScript library, we can use them directly.
+::
+
+    git clone https://github.com/named-data/ndn-js.git && cd ndn-js
+    git reset --hard 28012475e98cd769b23013f99b4d07cd329b7663
+
+Make sure the Apache (Web Service) is open, this example have to use this machine as an Web Server.
+
+
+Open browser to test 
+`````````````````````
+
+User browser to access your NDN-JS file (e.g.  http://<your_ndn_machine_ip_address>/ndn-js/examples/browser/fetch-media.html ).
+
+Then you will see the fetch-media page, just replace the name and ip address, press connect button.
+
+And you will see like this below : 
+
+.. image:: Images/20171113.PNG
+   :scale: 70%
+
+
+
+Reference
+-----------
+
+.. [#] NDNFS : https://github.com/remap/ndnfs-port
+
+.. [#] NDN-CPP : https://github.com/named-data/ndn-cpp
