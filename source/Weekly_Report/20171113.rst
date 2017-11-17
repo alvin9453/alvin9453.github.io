@@ -78,7 +78,7 @@ Test on NDN-JS fetch-media.html
 Requirements
 ```````````````
 
-To test on NDN-JS, we also need **NFD** and **NDN-JS**. Please read  `installation guide - part 1 <"https://alvin9453.github.io/build/html/Weekly_Report/20170803.html">`_ to install **NFD**.
+To test on NDN-JS, we also need **NFD** and **NDN-JS**. Please read  `installation guide - part 1 <20170803.html>`_ to install **NFD**.
 
 And we don't need to install **NDN-JS** because it just some JavaScript library, we can use them directly.
 ::
