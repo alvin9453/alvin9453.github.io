@@ -43,6 +43,7 @@ Download ndn-cxx source from github [#]_
 ::
 
    git clone https://github.com/named-data/ndn-cxx && cd ndn-cxx
+   git reset --hard b555b00c280b9c9ed46f24a1fbebc73b720601af
 
 Build ndn-cxx
 ````````````````
@@ -81,7 +82,8 @@ Download NFD source from github [#]_
 
 ::
 
-  git clone --recursive https://github.com/named-data/NFD
+  git clone --recursive https://github.com/named-data/NFD && cd NFD
+  git reset --hard f4056d0242536f85b7d7b4de1b5ac50dad65c233
 
 Build NFD
 ````````````
@@ -172,8 +174,8 @@ Download source from github
 
 ::
 
-  git clone https://github.com/named-data/ndn-tools.git
-
+  git clone https://github.com/named-data/ndn-tools.git && cd ndn-tools
+  git reset --hard c9575a6aa3372875aecb627d9e169c0955135bd8
 
 Build
 ````````

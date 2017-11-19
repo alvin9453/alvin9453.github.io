@@ -15,6 +15,10 @@ Weekly Report
     :glob:
     :titlesonly:
 
+    ./Weekly_Report/20171120
+    ./Weekly_Report/20171113
+    ./Weekly_Report/20170918
+    ./Weekly_Report/20170911
     ./Weekly_Report/20170831
     ./Weekly_Report/20170824
     ./Weekly_Report/20170817
@@ -55,6 +59,11 @@ Business Weekly
 	:glob:
 	:titlesonly:
 
+	./Business_Weekly/20171113
+	./Business_Weekly/20171106
+	./Business_Weekly/20171023
+	./Business_Weekly/20170918
+	./Business_Weekly/20170911
 	./Business_Weekly/20170831
 	./Business_Weekly/20170824
 	./Business_Weekly/20170810
@@ -72,6 +81,7 @@ Notes
 	:glob:
 	:titlesonly:
 
+	./Notes/ChronoChat_connects_to_NFD
 	./Notes/ndn-tools_usage
 	./Notes/SSH_Login_Without_Password
 	./Notes/Preview_reStructureText_on_Atom

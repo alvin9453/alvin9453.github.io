@@ -72,7 +72,7 @@ with
 
 Now, open the ``ndn-ping.html`` in browser. The ping message would show like this :
 
-.. image: Images/20170831_001.png
+.. image:: Images/20170831_001.png
 
 My demo website here : http://ms14.voip.edu.tw/~wei0923/NDN/ndnping/
 
