@@ -73,6 +73,21 @@ NDNFit has a preconfigured trust schema that can be published as named, signed d
 
 .. image:: Images/20171120-5.PNG
 
+2.5 Access Control
+``````````````````````
+
+Name-based access control (NAC) provides a data-centric access control mechanism with the basic relationships between keys and data.
+
+.. image:: Images/20171120-6.PNG
+
+
+Conclusion
+`````````````
+
+Both mHealth and NDN use data exchange as **thin waist** architecture. That's why they want to develop an NDNFit based on mHealth.
+
+NDN provides an another data exchange solution on network layer instead of application in TCP/IP.
+
 
 Reference
 -------------
