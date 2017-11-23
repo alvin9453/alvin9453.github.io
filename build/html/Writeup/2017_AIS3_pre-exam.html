@@ -1,33 +1,31 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>2017 Advanced Information Security Summer School pre-exam &mdash; Weekly Report 1.0 documentation</title>
-    
+    <title>2017 Advanced Information Security Summer School pre-exam &#8212; Weekly Report 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Known-plaintext attack" href="meow.html" />
     <link rel="prev" title="2016/12/24 - How to compile iSpy source code via VS2015 on my PC" href="../Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +35,7 @@
         <li class="right" >
           <a href="../Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.html" title="2016/12/24 - How to compile iSpy source code via VS2015 on my PC"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -51,7 +49,7 @@
 <p>附上戰績圖，做個紀念</p>
 <a class="reference internal image-reference" href="../_images/ais3.png"><img alt="../_images/ais3.png" src="../_images/ais3.png" style="width: 655.9px; height: 393.4px;" /></a>
 <a class="reference internal image-reference" href="../_images/AIS3-1.png"><img alt="../_images/AIS3-1.png" src="../_images/AIS3-1.png" style="width: 362.4px; height: 441.6px;" /></a>
-<p>藍色是還沒解出來的題目，看的出來我對pwn和reverse之類的題目還是沒辦法阿QQ 之後可能要再多練練...障礙很大QQ</p>
+<p>藍色是還沒解出來的題目，看的出來我對pwn和reverse之類的題目還是沒辦法阿QQ 之後可能要再多練練…障礙很大QQ</p>
 <div class="section" id="web-1">
 <h2>Web 1<a class="headerlink" href="#web-1" title="Permalink to this headline">¶</a></h2>
 <p>打開網頁(index.html)，只看到一句 : <code class="docutils literal"><span class="pre">Didn't</span> <span class="pre">you</span> <span class="pre">see</span> <span class="pre">the</span> <span class="pre">flag?</span></code></p>
@@ -64,10 +62,10 @@
 <p>一開始會看到一個輸入帳號密碼的登入畫面，順便附上php 的source code給你。</p>
 <p>source code裡面會看到一個username 對應password的list，密碼用sha1加密過</p>
 <p>要得到flag的條件</p>
-<div class="highlight-python"><div class="highlight"><pre>if( $username == $list-&gt;$username &amp;&amp; sha1($password) == $list-&gt;$password )
+<div class="highlight-default"><div class="highlight"><pre><span></span>if( $username == $list-&gt;$username &amp;&amp; sha1($password) == $list-&gt;$password )
 </pre></div>
 </div>
-<p>試著用網路上的sha1 decoder把他給的sha1 password逆回去發現找不到字串當密碼，好吧果然沒這麼簡單...</p>
+<p>試著用網路上的sha1 decoder把他給的sha1 password逆回去發現找不到字串當密碼，好吧果然沒這麼簡單…</p>
 <dl class="docutils">
 <dt>後來發現問題是出在``sha1($password) == $list-&gt;$password `` 這邊 <a class="footnote-reference" href="#id9" id="id1">[1]</a> ，他用兩個``==</dt>
 <dd><code class="docutils literal"><span class="pre">比較</span> <span class="pre">sha1的值時，若sha1算出來的結果有出現像是``0e123...``這種帶有``e``(scientific</span> <span class="pre">notation)的格式，比較時會被當成</span> <span class="pre">**float</span> <span class="pre">number</span> <span class="pre">format</span> <span class="pre">strings</span> <span class="pre">(numerical</span> <span class="pre">strings)**，所以就找了list裡面有``0e</span></code> 開頭的password和他對應的username，將這個username輸入，並找一段sha1之後值為``0e`` 開頭的字串輸入，就順利騙過 <code class="docutils literal"><span class="pre">==</span></code> 拿到flag啦</dd>
@@ -81,7 +79,7 @@
 <div class="section" id="web-4">
 <h2>Web 4<a class="headerlink" href="#web-4" title="Permalink to this headline">¶</a></h2>
 <p>延續第三題的題目，在index.php裡面找到了通往檔案上傳頁的路徑，過去看了一下，code表示必須上傳jpg檔，其他檔案一律無法（但他只檢查副檔名，不檢查內容），而且根據php filter看到upload頁面的source code(如下)表示:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">$ip = $_SERVER[&quot;REMOTE_ADDR&quot;];</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">$ip = $_SERVER[&quot;REMOTE_ADDR&quot;];</span>
 <span class="x">$dir = &quot;$target_dir/$ip&quot;;</span>
 <span class="x">if(!is_dir($dir))</span>
 <span class="x">  mkdir($dir);</span>
@@ -99,7 +97,7 @@
 </div>
 <div class="section" id="binary-1">
 <h2>Binary 1<a class="headerlink" href="#binary-1" title="Permalink to this headline">¶</a></h2>
-<p>這題我只有解10秒，我的電腦是ubuntu，有裝wine，這題給的是一個exe檔，拿到後直接執行，flag就噴出來了...好吧先下一題，時間寶貴XD</p>
+<p>這題我只有解10秒，我的電腦是ubuntu，有裝wine，這題給的是一個exe檔，拿到後直接執行，flag就噴出來了…好吧先下一題，時間寶貴XD</p>
 <p>使用Windows的同學表示難過，怎麼執行都看不到XD</p>
 </div>
 <div class="section" id="misc-1">
@@ -114,14 +112,14 @@
 <h2>Misc 4<a class="headerlink" href="#misc-4" title="Permalink to this headline">¶</a></h2>
 <p>ssh進去之後，底下有3個檔案 : flag , shell , shell.c</p>
 <p>而我們登入的帳號並沒有權限可以access flag 這個檔案，必須透過shell這個跟flag相同權限的 excutable file 去access。</p>
-<p>根據shell.c的code，我們可以執行指令在argv[1]，但把PATH拿掉了，代表我們只有built-in command <a class="footnote-reference" href="#id13" id="id5">[5]</a> 可以使用，根據其他大大的提示，built-in 有個command可以load default path回來，所以最後就``./shell &#8220;command -p cat f*&#8221;`` 看到flag的內容啦~ <code class="docutils literal"><span class="pre">f*</span></code> 是因為shell.c過慮掉所有為flag的字串，所以就這樣繞一下</p>
+<p>根據shell.c的code，我們可以執行指令在argv[1]，但把PATH拿掉了，代表我們只有built-in command <a class="footnote-reference" href="#id13" id="id5">[5]</a> 可以使用，根據其他大大的提示，built-in 有個command可以load default path回來，所以最後就``./shell “command -p cat f*”`` 看到flag的內容啦~ <code class="docutils literal"><span class="pre">f*</span></code> 是因為shell.c過慮掉所有為flag的字串，所以就這樣繞一下</p>
 <p>另外，某大大神人解：<code class="docutils literal"><span class="pre">./shell</span> <span class="pre">read</span> <span class="pre">&quot;PAT&quot;H;</span> <span class="pre">cat</span> <span class="pre">&quot;fl&quot;ag</span></code></p>
-<p>結論：該好好學shell了...</p>
+<p>結論：該好好學shell了…</p>
 </div>
 <div class="section" id="crypto-1">
 <h2>Crypto 1<a class="headerlink" href="#crypto-1" title="Permalink to this headline">¶</a></h2>
 <p>題目原始碼如下 :</p>
-<div class="highlight-C"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<div class="highlight-C"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">val1</span> <span class="o">=</span> <span class="o">?????????</span><span class="p">,</span> <span class="n">val2</span> <span class="o">=</span> <span class="o">?????????</span><span class="p">,</span> <span class="n">val3</span> <span class="o">=</span> <span class="o">???????</span><span class="p">,</span> <span class="n">val4</span> <span class="o">=</span> <span class="o">??????</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
   <span class="kt">char</span> <span class="n">flag</span><span class="p">[</span><span class="mi">29</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;????????????????????????????&quot;</span><span class="p">;</span> <span class="c1">// Hint: The flag begins with AIS3</span>
@@ -143,7 +141,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>下面註解給了7個數字，for-loop也是跑了７次，所以可以合理推斷註解的7個數字是``printf`` 出來的結果，利用``xor`` 可逆回的特性，<code class="docutils literal"><span class="pre">&quot;AIS3&quot;</span> <span class="pre">^</span> <span class="pre">val1</span> <span class="pre">^</span> <span class="pre">val2</span> <span class="pre">^</span> <span class="pre">val3</span> <span class="pre">^</span> <span class="pre">val4</span> <span class="pre">=</span> <span class="pre">964600246</span></code> , 所以可以得到 <code class="docutils literal"><span class="pre">key</span> <span class="pre">=</span>&nbsp; <span class="pre">val1</span> <span class="pre">^</span> <span class="pre">...</span> <span class="pre">^</span> <span class="pre">val4</span> <span class="pre">=</span> <span class="pre">&quot;AIS3&quot;</span> <span class="pre">^</span> <span class="pre">964600246</span></code> , 利用這組key，跟其他六組數字做``xor``，就可以得到flag的ASCII啦</p>
+<p>下面註解給了7個數字，for-loop也是跑了７次，所以可以合理推斷註解的7個數字是``printf`` 出來的結果，利用``xor`` 可逆回的特性，<code class="docutils literal"><span class="pre">&quot;AIS3&quot;</span> <span class="pre">^</span> <span class="pre">val1</span> <span class="pre">^</span> <span class="pre">val2</span> <span class="pre">^</span> <span class="pre">val3</span> <span class="pre">^</span> <span class="pre">val4</span> <span class="pre">=</span> <span class="pre">964600246</span></code> , 所以可以得到 <code class="docutils literal"><span class="pre">key</span> <span class="pre">=</span>&#160; <span class="pre">val1</span> <span class="pre">^</span> <span class="pre">...</span> <span class="pre">^</span> <span class="pre">val4</span> <span class="pre">=</span> <span class="pre">&quot;AIS3&quot;</span> <span class="pre">^</span> <span class="pre">964600246</span></code> , 利用這組key，跟其他六組數字做``xor``，就可以得到flag的ASCII啦</p>
 </div>
 <div class="section" id="crypto-3">
 <h2>Crypto 3<a class="headerlink" href="#crypto-3" title="Permalink to this headline">¶</a></h2>
@@ -151,7 +149,7 @@
 </div>
 <div class="section" id="crypto-4">
 <h2>Crypto 4<a class="headerlink" href="#crypto-4" title="Permalink to this headline">¶</a></h2>
-<p>比Crypto 3 多了兩個條件：<code class="docutils literal"><span class="pre">username</span></code> 必須含有 <code class="docutils literal"><span class="pre">Snoopy_do_not_like_cats_hahahaha</span></code> 然後 <code class="docutils literal"><span class="pre">password</span></code> 比需含有 <code class="docutils literal"><span class="pre">ddaa_is_PHD</span></code> 字串，當然sha1 hash 的結果必須相同、且是``&#8221;f00d&#8221;`` 開頭。</p>
+<p>比Crypto 3 多了兩個條件：<code class="docutils literal"><span class="pre">username</span></code> 必須含有 <code class="docutils literal"><span class="pre">Snoopy_do_not_like_cats_hahahaha</span></code> 然後 <code class="docutils literal"><span class="pre">password</span></code> 比需含有 <code class="docutils literal"><span class="pre">ddaa_is_PHD</span></code> 字串，當然sha1 hash 的結果必須相同、且是``”f00d”`` 開頭。</p>
 <p>因此我第一次的作法就兩份pdf各加一個字串、read binary 進程式然後分別塞``0x0~0xff``再後面，直到兩個檔案sha1的結果相同為止、並且是``f00d`` 開頭為止，結果跑了半個多小時還出不來，隔壁大神卻說他一分鐘之內就出來了，同樣都是用PC再跑那擺明就是我哪裡錯了QQ 後來發現這題並沒這麼複雜，我就把兩個字串concate再一起、都塞進pdf裡面，然後再塞``0x0~0xff進去``，發現原來``f00d`` 是設計過的，好快就算出來啦，得到新內容的兩份pdf延續Crypto 3的作法、餵給``username`` 和 <code class="docutils literal"><span class="pre">password</span></code> 就拿到flag啦！</p>
 </div>
 <div class="section" id="id8">
@@ -163,7 +161,7 @@
 <table class="docutils footnote" frame="void" id="id9" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Why md5(&#8216;240610708&#8217;) is equal to md5(&#8216;QNKCDZO&#8217;)?  : <a class="reference external" href="https://stackoverflow.com/questions/22140204/why-md5240610708-is-equal-to-md5qnkcdzo">https://stackoverflow.com/questions/22140204/why-md5240610708-is-equal-to-md5qnkcdzo</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Why md5(‘240610708’) is equal to md5(‘QNKCDZO’)?  : <a class="reference external" href="https://stackoverflow.com/questions/22140204/why-md5240610708-is-equal-to-md5qnkcdzo">https://stackoverflow.com/questions/22140204/why-md5240610708-is-equal-to-md5qnkcdzo</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id10" rules="none">
@@ -240,14 +238,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -263,12 +258,12 @@
         <li class="right" >
           <a href="../Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.html" title="2016/12/24 - How to compile iSpy source code via VS2015 on my PC"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

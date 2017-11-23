@@ -81,6 +81,7 @@ Notes
 	:glob:
 	:titlesonly:
 
+	./Notes/SEO-Search_Engine_Optimization
 	./Notes/ChronoChat_connects_to_NFD
 	./Notes/ndn-tools_usage
 	./Notes/SSH_Login_Without_Password
