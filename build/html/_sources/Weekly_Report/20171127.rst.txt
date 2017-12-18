@@ -1,0 +1,82 @@
+2017/11/27 - Firepad
+======================
+
+Overview
+----------
+
+Firepad [#]_ is an open source real-time collaborative text editor. It provides true collaborative editing, complete with intelligent operational transform-based [#]_ merging and conflict resolution. 
+
+Everyone can build any application that requires collaborative editing of text documents. Firepad supports both rich text and code editing out-of-the-box, and it's easy to extend for other use cases.
+
+Behind the scenes, Firepad uses the Firebase Realtime Database [#]_ for cloud data storage and synchronization.
+
+.. image :: Images/20171127-1.PNG
+
+How to use
+------------
+
+Use this example : `Firepad example <https://github.com/firebase/firepad/blob/master/examples/richtext.html>`_
+(If you use this example, you don't follow the steps below. Just copy and paste.)
+
+
+1. Downloading Firepad
+::
+
+    <head>
+        <!-- Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+        <!-- CodeMirror -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css"/>
+
+        <!-- Firepad -->
+        <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
+        <script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+    </head>
+
+2. Go to `firebase website <https://firebase.google.com/>`_ , create a project , and copy the config content like below
+::
+
+    var config = {
+        apiKey: "AIzaSyC_JdByNm-E1CAJUkePsr-YJZl7W77oL3g",
+        authDomain: "firepad-tests.firebaseapp.com",
+        databaseURL: "https://firepad-tests.firebaseio.com"
+    };
+
+
+3. Initialize the Firebase SDK and Firepad
+::
+
+    <body onload="init()">
+        <div id="firepad"></div>
+        <script>
+        function init() {
+            // Initialize the Firebase SDK.
+            firebase.initializeApp({
+            apiKey: '<API_KEY>',
+            databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
+            });
+
+            // Get Firebase Database reference.
+            var firepadRef = firebase.database().ref();
+
+            // Create CodeMirror (with lineWrapping on).
+            var codeMirror = CodeMirror(document.getElementById('firepad'), { lineWrapping: true });
+
+            // Create Firepad (with rich text toolbar and shortcuts enabled).
+            var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+                { richTextShortcuts: true, richTextToolbar: true, defaultText: 'Hello, World!' });
+        }
+        </script>
+    </body>
+
+
+Reference
+-----------
+
+.. [#] Firepad : https://firepad.io/
+
+.. [#] Operational Transformation : http://operational-transformation.github.io/
+
+.. [#] Firebase : https://firebase.google.com/docs/database/?utm_source=landing&utm_medium=email&utm_campaign=firepad

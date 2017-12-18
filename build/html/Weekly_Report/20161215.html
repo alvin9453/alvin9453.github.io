@@ -1,33 +1,31 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>2016/12/15 - Dynamic Link Library &mdash; Weekly Report 1.0 documentation</title>
-    
+    <title>2016/12/15 - Dynamic Link Library &#8212; Weekly Report 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2016/12/08 - Research of Web Real-Time Communication Based on Web Socket" href="20161208.html" />
     <link rel="prev" title="2016/12/22 - TDOH conference" href="20161222.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +35,7 @@
         <li class="right" >
           <a href="20161222.html" title="2016/12/22 - TDOH conference"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -49,7 +47,7 @@
   <div class="section" id="dynamic-link-library">
 <h1>2016/12/15 - Dynamic Link Library<a class="headerlink" href="#dynamic-link-library" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="when-a-program-is-compiling">
-<h2>When a program is compiling...<a class="headerlink" href="#when-a-program-is-compiling" title="Permalink to this headline">¶</a></h2>
+<h2>When a program is compiling…<a class="headerlink" href="#when-a-program-is-compiling" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/compiler_and_linker.png" src="../_images/compiler_and_linker.png" />
 </div>
 <div class="section" id="abstract">
@@ -76,7 +74,7 @@
 <li>Uses fewer resources :</li>
 </ol>
 <blockquote>
-<div>DLL files don&#8217;t get loaded into the RAM together with the main program; they don&#8217;t occupy space unless required. When a DLL file is needed, it is loaded and run.</div></blockquote>
+<div>DLL files don’t get loaded into the RAM together with the main program; they don’t occupy space unless required. When a DLL file is needed, it is loaded and run.</div></blockquote>
 <ol class="arabic simple" start="2">
 <li>Promotes modular architecture</li>
 <li>Aid easy deployment and installation</li>
@@ -107,7 +105,7 @@
 <h2>Write a Sample DLL<a class="headerlink" href="#write-a-sample-dll" title="Permalink to this headline">¶</a></h2>
 <p>In Microsoft Visual C++ 6.0, you can create a DLL by selecting either the Win32 Dynamic-Link Library project type or the MFC AppWizard (dll) project type.( It can refer to <a class="reference external" href="http://vincecc.blogspot.tw/2013/10/cc-dll.html">reference [7]</a>  )</p>
 <p>The following code is an example of a DLL that was created in Visual C++ by using the Win32 Dynamic-Link Library project type.</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="c1">// SampleDLL.cpp</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">// SampleDLL.cpp</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;stdafx.h&quot;</span><span class="cp"></span>
 <span class="cp">#define EXPORTING_DLL</span>
@@ -125,7 +123,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-c"><div class="highlight"><pre><span class="c1">// File: SampleDLL.h</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">// File: SampleDLL.h</span>
 <span class="c1">//</span>
 <span class="cp">#ifndef INDLL_H</span>
 <span class="cp">#define INDLL_H</span>
@@ -143,7 +141,7 @@
 <div class="section" id="calling-a-sample-dll">
 <h2>Calling a Sample DLL<a class="headerlink" href="#calling-a-sample-dll" title="Permalink to this headline">¶</a></h2>
 <p>The following code is an example of a Win32 Application project that calls the exported DLL function in the SampleDLL DLL.</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="c1">// SampleApp.cpp</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">// SampleApp.cpp</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;stdafx.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;sampleDLL.h&quot;</span><span class="cp"></span>
@@ -157,7 +155,7 @@
 </div>
 <p><strong>NOTE</strong> − In <strong>load-time dynamic linking</strong> ( the code above) , you must link the SampleDLL.lib import library that is created when you build the SampleDLL project.</p>
 <p>In <strong>runtime dynamic linking</strong>, you use code that is similar to the following code to call the SampleDLL.dll exported DLL function.</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="p">...</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="p">...</span>
 <span class="k">typedef</span> <span class="n">VOID</span> <span class="p">(</span><span class="o">*</span><span class="n">DLLPROC</span><span class="p">)</span> <span class="p">(</span><span class="n">LPTSTR</span><span class="p">);</span>
 <span class="p">...</span>
 
@@ -193,11 +191,11 @@
 <div class="section" id="dll-registration">
 <h2>DLL - Registration<a class="headerlink" href="#dll-registration" title="Permalink to this headline">¶</a></h2>
 <p>In order to use a DLL, it has to be registered by having appropriate references entered in the Registry. It sometimes happens that a Registry reference gets corrupted and the functions of the DLL cannot be used anymore. The DLL can be re-registered by opening Start-Run and entering the following command:</p>
-<div class="highlight-python"><div class="highlight"><pre>regsvr32 somefile.dll
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">regsvr32</span> <span class="n">somefile</span><span class="o">.</span><span class="n">dll</span>
 </pre></div>
 </div>
-<p>This command assumes that somefile.dll is in a directory or folder that is in the PATH. Otherwise, the full path for the DLL must be used. A DLL file can also be unregistered by using the switch &#8220;/u&#8221; as shown below.</p>
-<div class="highlight-python"><div class="highlight"><pre>regsvr32 /u somefile.dll
+<p>This command assumes that somefile.dll is in a directory or folder that is in the PATH. Otherwise, the full path for the DLL must be used. A DLL file can also be unregistered by using the switch “/u” as shown below.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">regsvr32</span> <span class="o">/</span><span class="n">u</span> <span class="n">somefile</span><span class="o">.</span><span class="n">dll</span>
 </pre></div>
 </div>
 </div>
@@ -257,7 +255,7 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">2016/12/15 - Dynamic Link Library</a><ul>
-<li><a class="reference internal" href="#when-a-program-is-compiling">When a program is compiling...</a></li>
+<li><a class="reference internal" href="#when-a-program-is-compiling">When a program is compiling…</a></li>
 <li><a class="reference internal" href="#abstract">Abstract</a></li>
 <li><a class="reference internal" href="#static-link-vs-dynamic-link">Static Link vs Dynamic Link </a></li>
 <li><a class="reference internal" href="#advantages-of-dll">Advantages of DLL </a></li>
@@ -279,14 +277,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -302,12 +297,12 @@
         <li class="right" >
           <a href="20161222.html" title="2016/12/22 - TDOH conference"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>
