@@ -15,6 +15,7 @@ Weekly Report
     :glob:
     :titlesonly:
 
+    ./Weekly_Report/20180101
     ./Weekly_Report/20171127
     ./Weekly_Report/20171120
     ./Weekly_Report/20171113
@@ -60,6 +61,7 @@ Business Weekly
 	:glob:
 	:titlesonly:
 
+	./Business_Weekly/20171218
 	./Business_Weekly/20171113
 	./Business_Weekly/20171106
 	./Business_Weekly/20171023
