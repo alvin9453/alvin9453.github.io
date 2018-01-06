@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2018/01/01 - Patent Discussion &mdash; Weekly Report 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="next" title="SEO - Search Engine Optimization" href="SEO-Search_Engine_Optimization.html" />
+    <link rel="prev" title="2017/05/04 - 說make him call you back 傷面子 &amp; 從WorkFace談創業精神" href="../Business_Weekly/20170504.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="SEO-Search_Engine_Optimization.html" title="SEO - Search Engine Optimization"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../Business_Weekly/20170504.html" title="2017/05/04 - 說make him call you back 傷面子 &amp; 從WorkFace談創業精神"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="patent-discussion">
+<h1>2018/01/01 - Patent Discussion<a class="headerlink" href="#patent-discussion" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="scenario-discussion">
+<h2>Scenario Discussion<a class="headerlink" href="#scenario-discussion" title="Permalink to this headline">¶</a></h2>
+<p>角色*4 : 老師、學生、助教、系統</p>
+<p>討論:</p>
+<ol class="arabic simple">
+<li>每個角色分開挑論</li>
+<li>同步投影片由學生決定</li>
+<li>(第4點 : 老師與助教在上課時，可以同步觀看指定學生的筆記內容，隨時了解學習狀況 ) 要有global view，可以有個User List列出所有同學的筆記，畫面上會看到該名同學最後一筆紀錄的內容，點進去才會看到指定同學的全部筆記內容</li>
+<li>(第5點 : 老師可以在上課時，要求學生在筆記內記下一個問題 ) 除了問題答，還要有選擇題(像IRF)，看如何設計，還能統計答題情況。筆記輸入/Q 或 /Comment 在筆記上，就會以不同的顏色顯示，然後還可以自動統計這頁有多少問題、每個問題有哪些答案</li>
+<li>(第3點 : 系統會儲存與該章節相對應的筆記內容 ) 紀錄做筆記當下的Timestamp以及投影片頁數</li>
+<li>(第6點 : 輸入想要觀看筆記的學生姓名，即可觀看該名同學的筆記內容 ) 老師和助教可以Asign學生到Group，並可以選擇能不能看到同組成員的筆記，學生也可以自行選擇要不要顯示別人的筆記</li>
+<li>(第7點 : 學生自己可以設定是否要將筆記內容與所有人分享、或是與特定的人分享 ) 觀看筆記有分&#8221;未分組&#8221;或&#8221;已分組&#8221;，&#8221;已分組&#8221;的同學可以看到組員所有的筆記，&#8221;未分組&#8221;的同學必須自己先設定想要給誰看，那個人才看的到</li>
+<li>助教與老師的差別只有要不要操作投影片</li>
+</ol>
+</div>
+<div class="section" id="study">
+<h2>尚待討論與Study的部分<a class="headerlink" href="#study" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>滑鼠游標 or 上面寫字 (做不到就Future Work)</li>
+<li>全螢幕模式</li>
+<li>投影片同步，送出畫面是multicat還是unicast? 是只送出頁數還是整個投影片?</li>
+<li>筆記書入的Q&amp;A 或 Comment這些特殊的筆記內容，要思考一下該如何對應，如何判斷是哪位使用者所輸入</li>
+</ol>
+</div>
+<div class="section" id="charts">
+<h2>Charts<a class="headerlink" href="#charts" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.google.com/presentation/d/1LWncV1TGTs7hKyrk6cgk497ZoTe8CKgVT2q3RPXuiuw/edit#slide=id.g2f5f6e07fd_2_75">Link</a></p>
+<div class="section" id="dfd-entity">
+<h3>DFD : 描述Entity間交換那些資料<a class="headerlink" href="#dfd-entity" title="Permalink to this headline">¶</a></h3>
+<p>第一層 : 四個角色，分別送給誰，老師送那些資料給學生
+然後每層再獨立往下設計</p>
+</div>
+<div class="section" id="er-model">
+<h3>ER-Model<a class="headerlink" href="#er-model" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Note 跟 Lesssson 對應</li>
+<li>新增Powerpoint (思考一下Powerpoint 跟 Lesson間 是否需要兩個都存在? 還是把Powerpoint對應Course就可以了)</li>
+</ol>
+</div>
+<div class="section" id="structure-chart">
+<h3>Structure Chart<a class="headerlink" href="#structure-chart" title="Permalink to this headline">¶</a></h3>
+<p>Print Note 需要再往下細分</p>
+</div>
+<div class="section" id="id1">
+<h3>系統架構圖<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>MongoDB 看可否併進去Firebase，讓整個系統簡單些</p>
+</div>
+</div>
+<div class="section" id="check-point">
+<h2>Check Point<a class="headerlink" href="#check-point" title="Permalink to this headline">¶</a></h2>
+<p>下星期二(1/9) 晚上九點 : 把尚待討論與需要Study的細節確定，之後即可開始寫程式，每兩週追蹤進度</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2018/01/01 - Patent Discussion</a><ul>
+<li><a class="reference internal" href="#scenario-discussion">Scenario Discussion</a></li>
+<li><a class="reference internal" href="#study">尚待討論與Study的部分</a></li>
+<li><a class="reference internal" href="#charts">Charts</a><ul>
+<li><a class="reference internal" href="#dfd-entity">DFD : 描述Entity間交換那些資料</a></li>
+<li><a class="reference internal" href="#er-model">ER-Model</a></li>
+<li><a class="reference internal" href="#structure-chart">Structure Chart</a></li>
+<li><a class="reference internal" href="#id1">系統架構圖</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#check-point">Check Point</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Business_Weekly/20170504.html"
+                        title="previous chapter">2017/05/04 - 說make him call you back 傷面子 &amp; 從WorkFace談創業精神</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="SEO-Search_Engine_Optimization.html"
+                        title="next chapter">SEO - Search Engine Optimization</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="SEO-Search_Engine_Optimization.html" title="SEO - Search Engine Optimization"
+             >next</a></li>
+        <li class="right" >
+          <a href="../Business_Weekly/20170504.html" title="2017/05/04 - 說make him call you back 傷面子 &amp; 從WorkFace談創業精神"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>
