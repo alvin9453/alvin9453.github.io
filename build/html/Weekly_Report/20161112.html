@@ -1,33 +1,31 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>2016/11/12 - Report of using Zoneminder to connect IP Cameras &mdash; Weekly Report 1.0 documentation</title>
-    
+    <title>2016/11/12 - Report of using Zoneminder to connect IP Cameras &#8212; Weekly Report 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2016/11/05 - SSDP" href="20161105.html" />
     <link rel="prev" title="2016/11/24 - C++ Overloading, Abstract Class and Polymorphism" href="20161124.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +35,7 @@
         <li class="right" >
           <a href="20161124.html" title="2016/11/24 - C++ Overloading, Abstract Class and Polymorphism"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -58,7 +56,7 @@
 <img alt="../_images/zm-409Success.png" src="../_images/zm-409Success.png" />
 <p>Success!</p>
 <img alt="../_images/ya.png" src="../_images/ya.png" />
-<p>Although I succeed in <em>HTTP</em>, <em>RTSP</em> is still in trouble. I found this device&#8217;s <strong>RTSP url</strong> in this <a class="reference external" href="http://www.soleratec.com/support/rtsp/rtsp_listing?camera_company=D-Link&amp;camera_model=DCS-910">website</a>, but when I type <strong>admin:&#64;10.21.20.178</strong> by <em>RTP/RTSP</em> method, log would show the error message : &#8216;Response parse failure in &#8216;<em>HTTP/1.0 405 Method Not Allowed Allow: GET, HEAD 405 Method Not Allowed</em>&#8216; after the message &#8220;<em>Starting Capture</em>&#8221;.</p>
+<p>Although I succeed in <em>HTTP</em>, <em>RTSP</em> is still in trouble. I found this device’s <strong>RTSP url</strong> in this <a class="reference external" href="http://www.soleratec.com/support/rtsp/rtsp_listing?camera_company=D-Link&amp;camera_model=DCS-910">website</a>, but when I type <strong>admin:&#64;10.21.20.178</strong> by <em>RTP/RTSP</em> method, log would show the error message : ‘Response parse failure in ‘<em>HTTP/1.0 405 Method Not Allowed Allow: GET, HEAD 405 Method Not Allowed</em>’ after the message “<em>Starting Capture</em>”.</p>
 <p>I think this old device dose not support <em>RTSP</em> protocol.</p>
 </div>
 <div class="section" id="report-of-hunt-hlc-74ed-ip-address-10-21-6-40">
@@ -66,7 +64,7 @@
 <p>I found its <em>HTTP url</em> is <strong>http://10.21.6.40/GetStream.cgi?Video=0</strong> or <strong>/GetStream?Audio=0</strong> , but I failed to get the stream. Here is the setting :</p>
 <img alt="../_images/fail108.png" src="../_images/fail108.png" />
 <p>I notice that when I tpye this url on IE , it would start to download .cgi file, but there is nothing happen on Chrome.</p>
-<p>And the part of <em>RTSP</em>, I can use this software <strong>VLCProtable</strong> to get its stream, but I failed on Zoneminder....</p>
+<p>And the part of <em>RTSP</em>, I can use this software <strong>VLCProtable</strong> to get its stream, but I failed on Zoneminder….</p>
 </div>
 </div>
 
@@ -95,14 +93,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -118,12 +113,12 @@
         <li class="right" >
           <a href="20161124.html" title="2016/11/24 - C++ Overloading, Abstract Class and Polymorphism"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

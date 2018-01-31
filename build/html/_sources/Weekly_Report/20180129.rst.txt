@@ -1,0 +1,22 @@
+2018/01/29 - Single Sign-on
+================================
+
+What is Single sign-on? [#]_
+--------------------------------
+
+Single sign-on (SSO) is a session and user authentication service that permits a user to use one set of login credentials (e.g., name and password) to access multiple applications. The service authenticates the end user for all the applications the user has been given rights to and eliminates further prompts when the user switches applications during the same session. On the back end, SSO is helpful for logging user activities as well as monitoring user accounts.
+
+In a basic web SSO service, an agent module on the application server retrieves the specific authentication credentials for an individual user from a dedicated SSO policy server, while authenticating the user against a user repository such as a lightweight directory access protocol (LDAP) directory.
+
+[#]_
+
+.. image :: Images/20180129.png
+
+
+
+Reference
+----------------
+
+.. [#] http://searchsecurity.techtarget.com/definition/single-sign-on
+
+.. [#] https://www.linkedin.com/pulse/single-identity-sign-on-sso-federation-tom-smith
