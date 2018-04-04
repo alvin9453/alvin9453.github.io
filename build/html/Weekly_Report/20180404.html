@@ -1,0 +1,165 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2018/04/04 - Javascript ES6 Promise &#8212; Weekly Report 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2018/01/29 - Single Sign-on" href="20180129.html" />
+    <link rel="prev" title="Jiawei’s Documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20180129.html" title="2018/01/29 - Single Sign-on"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="javascript-es6-promise">
+<h1>2018/04/04 - Javascript ES6 Promise<a class="headerlink" href="#javascript-es6-promise" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="why-we-need-promise">
+<h2>Why we need Promise? <a class="footnote-reference" href="#id5" id="id1">[1]</a><a class="headerlink" href="#why-we-need-promise" title="Permalink to this headline">¶</a></h2>
+<p>Javascript 有分同步(Synchronous)和非同步(Asynchronous)模式。在同步模式下，每個任務必須按照順序執行，後面的任務要等前面的任務執行完；非同步模式則相反，後面的任務不用等前面的，各自執行各自的任務，例如setTimeout、setInterval都是這種模式。以下面的 code 為例:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">);</span>
+<span class="p">},</span><span class="mi">1000</span><span class="p">);</span>
+
+
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">);</span>
+<span class="p">},</span><span class="mi">1000</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>若想第一秒看到 A 的結果，過一秒再看到 B 的話，我們可能會寫出上面的 Code，但 Javascript 運行後的結果卻是一秒後同時印出 A 和 B。若我們想先達到預期的效果，就必須使用很多的 Callback 來實現這樣同步的例子。</p>
+<p>但到了 ES6 ，出現了 Promise 的語法來解決用一堆 Callback (俗成Callback Hell) 的情況。取自 <em>Peter Chang - ES7 Async Await 聖經</em> <a class="footnote-reference" href="#id6" id="id2">[2]</a> 的一段話還有圖片 :</p>
+<blockquote>
+<div>在ES5 時期，Javascript 開發者生活在一個地獄,，叫做Callback Hell。面對著千層 Callback Function，痛苦地 console.log 進行 Debug，消磨生命。直到ES6的降臨，Promise 被指派去拯救開發者脫離煉獄，把千層 Callback Function 扁平化，轉換成為串聯結構，Promise是黑暗隧道中的一道光。今天，Async/Await 是 Promise 的化身，降臨在ES7中。</div></blockquote>
+<a class="reference internal image-reference" href="../_images/20180404-1.jpeg"><img alt="../_images/20180404-1.jpeg" src="../_images/20180404-1.jpeg" style="width: 327.5px; height: 399.0px;" /></a>
+<p><code class="docutils literal"><span class="pre">Promise</span></code> 與 <code class="docutils literal"><span class="pre">Async</span></code> <code class="docutils literal"><span class="pre">Await</span></code> 都是 Javascript 處理同步非同步問題的語法， <code class="docutils literal"><span class="pre">Async</span></code> <code class="docutils literal"><span class="pre">Await</span></code> 背後處理就是 Promise ，這邊先針對 Promise 作介紹。</p>
+</div>
+<div class="section" id="what-is-promise">
+<h2>What is Promise ?<a class="headerlink" href="#what-is-promise" title="Permalink to this headline">¶</a></h2>
+<p>Promise 可以想成他的中文翻譯 - 「承諾」，想像成 A 承諾 B 要去做某件事，A 做完之後才回報結果給 B 作使用，而這個結果只有兩種狀況：成功與失敗，不會有處於成功失敗不明的中間狀況。</p>
+<p>所以換成程式的講法，要使用 Promise，一開始要先 <code class="docutils literal"><span class="pre">new</span></code> 一個 <code class="docutils literal"><span class="pre">Promise</span></code> 物件，物件中的建構式包含兩個參數： <code class="docutils literal"><span class="pre">resolve</span> <span class="pre">(</span> <span class="pre">成功</span> <span class="pre">)</span></code> 與 <code class="docutils literal"><span class="pre">reject</span> <span class="pre">(</span> <span class="pre">失敗</span> <span class="pre">)</span></code>。</p>
+<p>基本創建 Promise 的方法如下 : <code class="docutils literal"><span class="pre">resolve</span></code> 在函式或流程成功，或有合法值的狀況下會執行， <code class="docutils literal"><span class="pre">reject</span></code> 則是在失敗或有錯誤的時候會執行， <code class="docutils literal"><span class="pre">resolve</span></code> 和 <code class="docutils literal"><span class="pre">reject</span></code> 都有一個回傳值，可將這個會傳值透過``.then``傳給下一個流程。</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">asyncFunction</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span>
+            <span class="nx">resolve</span><span class="p">(</span><span class="s2">&quot;Success Message&quot;</span><span class="p">);</span> <span class="c1">// 成功</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="nx">reject</span><span class="p">(</span><span class="s2">&quot;Failed Message&quot;</span><span class="p">);</span> <span class="c1">// 失敗</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>使用這個 function 並用 <code class="docutils literal"><span class="pre">then</span></code> 去串接 :</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">asyncFunction</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="nx">success</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span>
+<span class="p">},</span> <span class="nx">failed</span> <span class="p">=&gt;{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">failed</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>最後的結果，就會根據傳進 <code class="docutils literal"><span class="pre">asyncFunction(value)</span></code> 的 <a href="#id3"><span class="problematic" id="id4">``</span></a>value``值，去印出是 “Success Message” 或是 “Failed Message” 。</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>JavaScript 同步延遲 ( Promise + setTimeout ) : <a class="reference external" href="http://www.oxxostudio.tw/articles/201706/javascript-promise-settimeout.html">http://www.oxxostudio.tw/articles/201706/javascript-promise-settimeout.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>[Javascript] ES7 Async Await 聖經 : <a class="reference external" href="https://medium.com/&#64;peterchang_82818/javascript-es7-async-await-%E6%95%99%E5%AD%B8-703473854f29-tutorial-example-703473854f29">https://medium.com/&#64;peterchang_82818/javascript-es7-async-await-%E6%95%99%E5%AD%B8-703473854f29-tutorial-example-703473854f29</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2018/04/04 - Javascript ES6 Promise</a><ul>
+<li><a class="reference internal" href="#why-we-need-promise">Why we need Promise? </a></li>
+<li><a class="reference internal" href="#what-is-promise">What is Promise ?</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Jiawei’s Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20180129.html"
+                        title="next chapter">2018/01/29 - Single Sign-on</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20180129.html" title="2018/01/29 - Single Sign-on"
+             >next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
