@@ -15,6 +15,7 @@ Weekly Report
     :glob:
     :titlesonly:
 
+    ./Weekly_Report/20180510
     ./Weekly_Report/20180404
     ./Weekly_Report/20180403
     ./Weekly_Report/20180129

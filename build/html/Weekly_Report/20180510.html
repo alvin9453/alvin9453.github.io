@@ -1,0 +1,221 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2018/05/10 - C++ Bus error v.s Segmentation fault &#8212; Weekly Report 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2018/04/04 - Javascript ES6 Promise" href="20180404.html" />
+    <link rel="prev" title="Jiawei’s Documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20180404.html" title="2018/04/04 - Javascript ES6 Promise"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="c-bus-error-v-s-segmentation-fault">
+<h1>2018/05/10 - C++ Bus error v.s Segmentation fault<a class="headerlink" href="#c-bus-error-v-s-segmentation-fault" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>緣起<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>今天在當C++程式設計的助教時，老師課堂正在教 <a class="reference external" href="http://www.cplusplus.com/reference/ctime/tm/">struct tm</a> 以及 <a class="reference external" href="http://www.cplusplus.com/reference/ctime/asctime/">asctime</a> 的用法，然後請大家寫一份作業 - 作業內容就是把自己的生日塞到 <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span></code> 的 member 裡面，並用 <code class="docutils literal"><span class="pre">asctime</span></code> 印出來。</p>
+<p>結果，剛開始學 <code class="docutils literal"><span class="pre">struct</span></code> 的大一同學在練習的時候，很多人用下面的寫法 :</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="cpf">&lt;ctime&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="k">struct</span> <span class="n">tm</span> <span class="o">*</span> <span class="n">timeinfo</span><span class="p">;</span>
+
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_year</span> <span class="o">=</span> <span class="mi">94</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_mon</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_mday</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_sec</span> <span class="o">=</span> <span class="mi">56</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_min</span> <span class="o">=</span> <span class="mi">34</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_hour</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_wday</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;I was born at : %s&quot;</span> <span class="p">,</span> <span class="n">asctime</span><span class="p">(</span><span class="n">timeinfo</span><span class="p">));</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然後，就噴了 <code class="docutils literal"><span class="pre">Bus</span> <span class="pre">error</span></code>. 而另外有人則是將 <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span> <span class="pre">*</span> <span class="pre">timeinfo;</span></code> 改成 <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span> <span class="pre">*</span> <span class="pre">timeinfo</span> <span class="pre">=</span> <span class="pre">NULL;</span></code>，這樣的結果一樣會有Error，但卻是 <code class="docutils literal"><span class="pre">Segmentation</span> <span class="pre">falut</span></code> ! 到底為什麼會不一樣呢? 只是差一個 NULL 怎麼訊息就不一樣了呢 ?</p>
+</div>
+<div class="section" id="bus-error">
+<h2>為什麼這段程式會產生 Bus error ?<a class="headerlink" href="#bus-error" title="Permalink to this headline">¶</a></h2>
+<p>由上面的範例程式可以很明顯的看出， <code class="docutils literal"><span class="pre">timeinfo</span></code> 是一個 uninitialized pointer to <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span></code>。我們只知道 <code class="docutils literal"><span class="pre">timeinfo</span></code> 這個 pointer 對應的 data type，但是到底指向哪一個 <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span></code> 在這個程式裡面並沒有說明。</p>
+<p>也就是說，這個 pointer 根本沒有拿出箭頭指向任何地方。</p>
+<p>但是，程式裡面卻使用 <code class="docutils literal"><span class="pre">timeinfo-&gt;tm_year</span></code> (等同於 <code class="docutils literal"><span class="pre">(*timeinfo).tm_year</span></code> ) 這樣的語法，呼叫了 <code class="docutils literal"><span class="pre">timeinfo</span></code> 這個 pointer 所指到的記憶體位置內的 <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span></code> ，並呼叫 <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span></code> 裡面的成員 <code class="docutils literal"><span class="pre">tm_year</span></code>。</p>
+<p>我們已經知道 <code class="docutils literal"><span class="pre">timeinfo</span></code> 並沒有指向任何地方，那怎麼可能做 deference 呢 ? Compile 的時候沒有問題，但是執行時就會發現這樣的程式碼導致了 <code class="docutils literal"><span class="pre">Bus</span> <span class="pre">error</span></code>.</p>
+<p>原因可以由下方對 <code class="docutils literal"><span class="pre">Bus</span> <span class="pre">error</span></code> 的解釋得到解答。</p>
+</div>
+<div class="section" id="what-is-bus-error">
+<h2>What is Bus error ?<a class="headerlink" href="#what-is-bus-error" title="Permalink to this headline">¶</a></h2>
+<p>在這篇 <a href="#id2"><span class="problematic" id="id3">`</span></a>Stack Overflow : What is a bus error? &lt;<a class="reference external" href="https://stackoverflow.com/questions/212466/what-is-a-bus-error">https://stackoverflow.com/questions/212466/what-is-a-bus-error</a>&gt;`_[1]_ 的討論中，有人是這麼解釋的 :</p>
+<blockquote>
+<div>A bus error is trying to access memory that can’t possibly be there.
+You’ve used an address that’s meaningless to the system, or the wrong kind of address for that operation.</div></blockquote>
+<p>也就是說，我們去存取**根本不存在於此程式中的記憶體**。</p>
+<p>由上面程式的例子而言，<code class="docutils literal"><span class="pre">timeinfo</span></code> 根本不指向任何位置，而我們又去存取這個不存在的記憶體，因此噴了 <code class="docutils literal"><span class="pre">bus</span> <span class="pre">error</span></code>。</p>
+</div>
+<div class="section" id="segmentation-falut">
+<h2>為什麼範例程式程式會產生 Segmentation falut ?<a class="headerlink" href="#segmentation-falut" title="Permalink to this headline">¶</a></h2>
+<p>我將上述的範例程式稍微修改 :</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="cpf">&lt;ctime&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="k">struct</span> <span class="n">tm</span> <span class="o">*</span> <span class="n">timeinfo</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>  <span class="c1">// 只修改了這行，加了一個 NULL 當作 Init value</span>
+
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_year</span> <span class="o">=</span> <span class="mi">94</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_mon</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_mday</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_sec</span> <span class="o">=</span> <span class="mi">56</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_min</span> <span class="o">=</span> <span class="mi">34</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_hour</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">timeinfo</span><span class="o">-&gt;</span><span class="n">tm_wday</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;I was born at : %s&quot;</span> <span class="p">,</span> <span class="n">asctime</span><span class="p">(</span><span class="n">timeinfo</span><span class="p">));</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>與之前範例程式的唯一差別就是 <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span> <span class="pre">*</span> <span class="pre">timeinfo</span> <span class="pre">=</span> <span class="pre">NULL;</span></code> 這行宣告了，但結果卻不是 <code class="docutils literal"><span class="pre">Bus</span> <span class="pre">error</span></code> 而是 <code class="docutils literal"><span class="pre">Segmentation</span> <span class="pre">falut</span></code>, 這細微的差別到底產生了什麼變化 ?</p>
+</div>
+<div class="section" id="what-is-segmentation-falut">
+<h2>What is Segmentation falut ?<a class="headerlink" href="#what-is-segmentation-falut" title="Permalink to this headline">¶</a></h2>
+<p>一樣在這篇 <em>Stack Overflow : What is a bus error?</em> <a class="footnote-reference" href="#id9" id="id4">[1]</a> 的討論中，有人是這麼解釋的 :</p>
+<blockquote>
+<div>A Segmemtation falut is accessing memory that you’re not allowed to access. It’s read-only, you don’t have permission, etc…</div></blockquote>
+<p>另一篇文章 <a class="footnote-reference" href="#id10" id="id5">[2]</a> 是這麼說明的 :</p>
+<blockquote>
+<div>Segmentation Fault (also known as SIGSEGV and is usually signal 11) occur when the program tries to write/read outside the memory allocated for it or when writing memory which can only be read.</div></blockquote>
+<p>也就是說，我們去存取**我們沒有權限或不應該存取的記憶體**。</p>
+<p>以上面的程式而言，<code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span> <span class="pre">*</span> <span class="pre">timeinfo</span> <span class="pre">=</span> <span class="pre">NULL;</span></code> 宣告了 <code class="docutils literal"><span class="pre">timeinfo</span></code> 這個 pointer 指到了一個空的位置 ( 和 Uninitialized Pointer 沒有指向任何地方是不一樣的!_[3] )。</p>
+<p>可想而知，這個空的位置(NULL)裡面根本是空的，那又怎麼會有 <code class="docutils literal"><span class="pre">struct</span> <span class="pre">tm</span></code> 讓我們存取呢? 因此我們動到了不該存取的記憶體位置，產生了 Segmemtation falut.</p>
+</div>
+<div class="section" id="id6">
+<h2>自己的總結<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Bus</span> <span class="pre">error</span></code> : 存取根本**不存在**的記憶體位置</p>
+<p><code class="docutils literal"><span class="pre">Segmentation</span> <span class="pre">falut</span></code> : 存取**不能存取**的記憶體位置，如上述的 <strong>NULL</strong>。</p>
+<p><a href="#id7"><span class="problematic" id="id8">**</span></a>不存在 (Uninitialized Pointer)**跟**NULL (NULL Pointer)**的差別在於是否有向程式交代這個 pointer 的行為。指向 NULL 表示程式是目前想讓 pointer 先空著；但 Uninitialized Pointer 卻是完全讓程式無所適從，而產生了非預期的行為。</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[1]</a></td><td>Stack Overflow - What is a bus error? : <a class="reference external" href="https://stackoverflow.com/questions/212466/what-is-a-bus-error">https://stackoverflow.com/questions/212466/what-is-a-bus-error</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[2]</a></td><td>Segmentation Fault (SIGSEGV) vs Bus Error (SIGBUS) : <a class="reference external" href="https://www.geeksforgeeks.org/segmentation-fault-sigsegv-vs-bus-error-sigbus/">https://www.geeksforgeeks.org/segmentation-fault-sigsegv-vs-bus-error-sigbus/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Pointers - Invalid pointers and null pointers : <a class="reference external" href="http://www.cplusplus.com/doc/tutorial/pointers/">http://www.cplusplus.com/doc/tutorial/pointers/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>What Does Null Mean in Computer Programming?  : <a class="reference external" href="https://www.thoughtco.com/definition-of-null-958118">https://www.thoughtco.com/definition-of-null-958118</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2018/05/10 - C++ Bus error v.s Segmentation fault</a><ul>
+<li><a class="reference internal" href="#id1">緣起</a></li>
+<li><a class="reference internal" href="#bus-error">為什麼這段程式會產生 Bus error ?</a></li>
+<li><a class="reference internal" href="#what-is-bus-error">What is Bus error ?</a></li>
+<li><a class="reference internal" href="#segmentation-falut">為什麼範例程式程式會產生 Segmentation falut ?</a></li>
+<li><a class="reference internal" href="#what-is-segmentation-falut">What is Segmentation falut ?</a></li>
+<li><a class="reference internal" href="#id6">自己的總結</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Jiawei’s Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="20180404.html"
+                        title="next chapter">2018/04/04 - Javascript ES6 Promise</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="20180404.html" title="2018/04/04 - Javascript ES6 Promise"
+             >next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Jiawei’s Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
