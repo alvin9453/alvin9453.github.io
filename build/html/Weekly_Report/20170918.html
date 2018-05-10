@@ -1,31 +1,33 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2017/09/18 - (Paper) The Story of ChronoShare, or How NDN Brought Distrubuted Secure File Sharing Back &#8212; Weekly Report 1.0 documentation</title>
+    
+    <title>2017/09/18 - (Paper) The Story of ChronoShare, or How NDN Brought Distrubuted Secure File Sharing Back &mdash; Weekly Report 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
     <link rel="next" title="2017/09/11 - MicroForwarder.js: an NDN Forwarder Extension for Web Browsers" href="20170911.html" />
     <link rel="prev" title="2017/11/13 - Named Data Networking (NDN) installation guide - part 2" href="20171113.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,7 +37,7 @@
         <li class="right" >
           <a href="20171113.html" title="2017/11/13 - Named Data Networking (NDN) installation guide - part 2"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,14 +58,14 @@
 <div class="section" id="a-few-words-about-chronosync">
 <h2>A Few words about ChronoSync<a class="headerlink" href="#a-few-words-about-chronosync" title="Permalink to this headline">¶</a></h2>
 <p>ChronoSync enables dataset synchronization among a group of participants in a distributed way.</p>
-<p>ChronoSync encodes the knowledge about the whole dataset into a compact crypto digest form(e.g. using SHA256). which we call the <em>state digest</em>. This digest is carried in a special “sync” Interest which reaches all participants in a group. Eventually, sync Interest from all participants will carry an indentical state digest, indicating the knowledge about the dataset has been synchronized, and there will be a pending sync Interest at each participant, awaiting for the new data to be generated.</p>
+<p>ChronoSync encodes the knowledge about the whole dataset into a compact crypto digest form(e.g. using SHA256). which we call the <em>state digest</em>. This digest is carried in a special &#8220;sync&#8221; Interest which reaches all participants in a group. Eventually, sync Interest from all participants will carry an indentical state digest, indicating the knowledge about the dataset has been synchronized, and there will be a pending sync Interest at each participant, awaiting for the new data to be generated.</p>
 </div>
 <div class="section" id="chronoshare-design">
 <h2>ChronoShare Design<a class="headerlink" href="#chronoshare-design" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="a-design-decisions">
 <h3>A. Design Decisions<a class="headerlink" href="#a-design-decisions" title="Permalink to this headline">¶</a></h3>
 <p>Synchronize the file set of the shared folder.</p>
-<p>ChronoShare treats individual user operations on files as streams of “actions”, where each action specifies which file has been modified and what changes has been made (new file, updated content, changed file system permissions, or removing a file).</p>
+<p>ChronoShare treats individual user operations on files as streams of &#8220;actions&#8221;, where each action specifies which file has been modified and what changes has been made (new file, updated content, changed file system permissions, or removing a file).</p>
 </div>
 <div class="section" id="b-system-entities-roles-and-assumptions">
 <h3>B. System Entities, Roles, and Assumptions<a class="headerlink" href="#b-system-entities-roles-and-assumptions" title="Permalink to this headline">¶</a></h3>
@@ -77,12 +79,12 @@
 <div><p>1). Files :</p>
 <blockquote>
 <div><img alt="../_images/20170918_002.png" src="../_images/20170918_002.png" />
-<p>Files in ChronoShare’s shared folder are split into segments, each segment forming an NDN data packet that is named.</p>
+<p>Files in ChronoShare&#8217;s shared folder are split into segments, each segment forming an NDN data packet that is named.</p>
 </div></blockquote>
 <p>2). Actions :</p>
 <blockquote>
 <div><img alt="../_images/20170918_003.png" src="../_images/20170918_003.png" />
-<p>Each user publishes a “stream” of actions under user’s namespace, which identifies the corresponding ChronoShare application and specific shared folder instance.</p>
+<p>Each user publishes a &#8220;stream&#8221; of actions under user&#8217;s namespace, which identifies the corresponding ChronoShare application and specific shared folder instance.</p>
 <p>The content of the action does not need to include the full NDN name of the file in the shared folder, only the relative name of the file in the shared folder and additional meta information about the revision of this file.</p>
 </div></blockquote>
 <p>3). Knowledge about actions (ChronoSync) :</p>
@@ -144,11 +146,14 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -164,12 +169,12 @@
         <li class="right" >
           <a href="20171113.html" title="2017/11/13 - Named Data Networking (NDN) installation guide - part 2"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>
