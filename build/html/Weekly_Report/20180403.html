@@ -1,33 +1,31 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>2018/04/03 - Javascript ES6 Arrow function &mdash; Weekly Report 1.0 documentation</title>
-    
+    <title>2018/04/03 - Javascript ES6 Arrow function &#8212; Weekly Report 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2018/01/29 - Single Sign-on" href="20180129.html" />
     <link rel="prev" title="2018/04/04 - Javascript ES6 Promise" href="20180404.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +35,7 @@
         <li class="right" >
           <a href="20180404.html" title="2018/04/04 - Javascript ES6 Promise"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -50,35 +48,35 @@
 <h1>2018/04/03 - Javascript ES6 Arrow function<a class="headerlink" href="#javascript-es6-arrow-function" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="arrow-function">
 <h2>Arrow function <a class="footnote-reference" href="#id2" id="id1">[1]</a><a class="headerlink" href="#arrow-function" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// ECMAScript 傳統函數定義語法</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="c1">// ECMAScript 傳統函數定義語法</span>
 <span class="kd">function</span><span class="p">(</span><span class="nx">parameter_list</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="c1">// ES6 新語法，注意中間的箭頭 =&gt; ，口語可讀作將左邊的參數交給右邊的程式區塊處理。</span>
-<span class="p">(</span><span class="nx">parameter_list</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="p">(</span><span class="nx">parameter_list</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="c1">// 簡寫原則1: 有一個以上的參數時，可以省略表示參數清單的 () 。</span>
-<span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+<span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{}</span>
 <span class="c1">// or</span>
-<span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+<span class="nx">x</span> <span class="p">=&gt;</span> <span class="p">{}</span>
 
-<span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+<span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{}</span>
 <span class="c1">// or</span>
-<span class="nx">x</span><span class="p">,</span><span class="nx">y</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+<span class="nx">x</span><span class="p">,</span><span class="nx">y</span> <span class="p">=&gt;</span> <span class="p">{}</span>
 
 <span class="c1">// 簡寫原則1但書: 但沒有參數時，不可省略 () 。</span>
-<span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+<span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{}</span>
 
 <span class="c1">// 簡寫原則2: 函數本體只有一行敘述時，可以省略表示函數區塊的 {} 。</span>
 <span class="c1">//   而且這時自動將該行執行結果作為函數回傳值，不能使用 return 。</span>
-<span class="nx">x</span><span class="p">,</span><span class="nx">y</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">x</span><span class="p">,</span><span class="nx">y</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="c1">// or</span>
-<span class="nx">x</span><span class="p">,</span><span class="nx">y</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
+<span class="nx">x</span><span class="p">,</span><span class="nx">y</span> <span class="p">=&gt;</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
 </pre></div>
 </div>
 </div>
@@ -117,14 +115,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -140,12 +135,12 @@
         <li class="right" >
           <a href="20180404.html" title="2018/04/04 - Javascript ES6 Promise"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

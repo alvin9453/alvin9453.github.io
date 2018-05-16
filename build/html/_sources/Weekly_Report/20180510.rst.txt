@@ -48,15 +48,16 @@
 What is Bus error ?
 -------------------------
 
-在這篇 `Stack Overflow : What is a bus error? <https://stackoverflow.com/questions/212466/what-is-a-bus-error>`_[1]_ 的討論中，有人是這麼解釋的 : 
+在這篇 *Stack Overflow : What is a bus error?* [1]_ 的討論中，有人是這麼解釋的 : 
 
     A bus error is trying to access memory that can't possibly be there. 
     You've used an address that's meaningless to the system, or the wrong kind of address for that operation.
 
-也就是說，我們去存取**根本不存在於此程式中的記憶體**。
+也就是說，我們去存取 **根本不存在於此程式中的記憶體** 。
 
-由上面程式的例子而言，``timeinfo`` 根本不指向任何位置，而我們又去存取這個不存在的記憶體，因此噴了 ``bus error``。
+由上面程式的例子而言，``timeinfo`` 根本不指向任何位置，而我們又去存取這個不存在於這個程式的記憶體，因此 OS 偵測到了我們試圖去存取 **根本不存在** 或是 **其他 Process 的記憶體位置** ，因此強制中斷此程式、噴了 ``bus error``。
 
+注意 : 此時 ``timeinfo`` 可能是 **任何的位置** ，完全無法預期。
 
 為什麼範例程式程式會產生 Segmentation falut ?
 ------------------------------------------------------------------------------------------------------
@@ -89,7 +90,7 @@ What is Bus error ?
 What is Segmentation falut ?
 -------------------------------
 
-一樣在這篇 *Stack Overflow : What is a bus error?* [1]_ 的討論中，有人是這麼解釋的 : 
+一樣在這篇 *Stack Overflow : What is a bus error?* 的討論中，有人是這麼解釋的 : 
 
     A Segmemtation falut is accessing memory that you're not allowed to access. It's read-only, you don't have permission, etc...
 
@@ -97,20 +98,20 @@ What is Segmentation falut ?
 
     Segmentation Fault (also known as SIGSEGV and is usually signal 11) occur when the program tries to write/read outside the memory allocated for it or when writing memory which can only be read.
 
-也就是說，我們去存取**我們沒有權限或不應該存取的記憶體**。
+也就是說，我們去存取 **我們沒有權限或不應該存取的記憶體** 。
 
-以上面的程式而言，``struct tm * timeinfo = NULL;`` 宣告了 ``timeinfo`` 這個 pointer 指到了一個空的位置 ( 和 Uninitialized Pointer 沒有指向任何地方是不一樣的!_[3] )。
+以上面的程式而言，``struct tm * timeinfo = NULL;`` 宣告了 ``timeinfo`` 這個 pointer 指到了一個空的位置 ( 和 Uninitialized Pointer 沒有指向任何地方是不一樣的! [3]_ )。
 
 可想而知，這個空的位置(NULL)裡面根本是空的，那又怎麼會有 ``struct tm`` 讓我們存取呢? 因此我們動到了不該存取的記憶體位置，產生了 Segmemtation falut.
 
 自己的總結
 --------------------------------
 
-``Bus error`` : 存取根本**不存在**的記憶體位置
+``Bus error`` : 存取根本 **不存在於此程式** 的記憶體位置
 
-``Segmentation falut`` : 存取**不能存取**的記憶體位置，如上述的 **NULL**。
+``Segmentation falut`` : 存取 **不該存取** 的記憶體位置，如上述的 **NULL**。
 
-**不存在 (Uninitialized Pointer)**跟**NULL (NULL Pointer)**的差別在於是否有向程式交代這個 pointer 的行為。指向 NULL 表示程式是目前想讓 pointer 先空著；但 Uninitialized Pointer 卻是完全讓程式無所適從，而產生了非預期的行為。
+**不存在 (Uninitialized Pointer)** 跟 **NULL (NULL Pointer)** 的差別在於是否有向程式交代這個 pointer 的行為。指向 NULL 表示程式是目前想讓 pointer 先空著；但 Uninitialized Pointer 卻是完全讓程式無所適從，而產生了非預期的行為。
 
 Reference
 -----------------
