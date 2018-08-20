@@ -1,31 +1,33 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2018/04/04 - Javascript ES6 Promise &#8212; Weekly Report 1.0 documentation</title>
+    
+    <title>2018/04/04 - Javascript ES6 Promise &mdash; Weekly Report 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
     <link rel="next" title="2018/04/03 - Javascript ES6 Arrow function" href="20180403.html" />
     <link rel="prev" title="2018/05/10 - C++ Bus error v.s Segmentation fault" href="20180510.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,7 +37,7 @@
         <li class="right" >
           <a href="20180510.html" title="2018/05/10 - C++ Bus error v.s Segmentation fault"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -49,7 +51,7 @@
 <div class="section" id="why-we-need-promise">
 <h2>Why we need Promise? <a class="footnote-reference" href="#id5" id="id1">[1]</a><a class="headerlink" href="#why-we-need-promise" title="Permalink to this headline">¶</a></h2>
 <p>Javascript 有分同步(Synchronous)和非同步(Asynchronous)模式。在同步模式下，每個任務必須按照順序執行，後面的任務要等前面的任務執行完；非同步模式則相反，後面的任務不用等前面的，各自執行各自的任務，例如setTimeout、setInterval都是這種模式。以下面的 code 為例:</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">);</span>
 <span class="p">},</span><span class="mi">1000</span><span class="p">);</span>
 
@@ -71,7 +73,7 @@
 <p>Promise 可以想成他的中文翻譯 - 「承諾」，想像成 A 承諾 B 要去做某件事，A 做完之後才回報結果給 B 作使用，而這個結果只有兩種狀況：成功與失敗，不會有處於成功失敗不明的中間狀況。</p>
 <p>所以換成程式的講法，要使用 Promise，一開始要先 <code class="docutils literal"><span class="pre">new</span></code> 一個 <code class="docutils literal"><span class="pre">Promise</span></code> 物件，物件中的建構式包含兩個參數： <code class="docutils literal"><span class="pre">resolve</span> <span class="pre">(</span> <span class="pre">成功</span> <span class="pre">)</span></code> 與 <code class="docutils literal"><span class="pre">reject</span> <span class="pre">(</span> <span class="pre">失敗</span> <span class="pre">)</span></code>。</p>
 <p>基本創建 Promise 的方法如下 : <code class="docutils literal"><span class="pre">resolve</span></code> 在函式或流程成功，或有合法值的狀況下會執行， <code class="docutils literal"><span class="pre">reject</span></code> 則是在失敗或有錯誤的時候會執行， <code class="docutils literal"><span class="pre">resolve</span></code> 和 <code class="docutils literal"><span class="pre">reject</span></code> 都有一個回傳值，可將這個會傳值透過``.then``傳給下一個流程。</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">asyncFunction</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">asyncFunction</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
         <span class="k">if</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span>
             <span class="nx">resolve</span><span class="p">(</span><span class="s2">&quot;Success Message&quot;</span><span class="p">);</span> <span class="c1">// 成功</span>
@@ -83,14 +85,14 @@
 </pre></div>
 </div>
 <p>使用這個 function 並用 <code class="docutils literal"><span class="pre">then</span></code> 去串接 :</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">asyncFunction</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="nx">success</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">asyncFunction</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="nx">success</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span>
-<span class="p">},</span> <span class="nx">failed</span> <span class="p">=&gt;{</span>
+<span class="p">},</span> <span class="nx">failed</span> <span class="o">=&gt;</span><span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">failed</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>最後的結果，就會根據傳進 <code class="docutils literal"><span class="pre">asyncFunction(value)</span></code> 的 <a href="#id3"><span class="problematic" id="id4">``</span></a>value``值，去印出是 “Success Message” 或是 “Failed Message” 。</p>
+<p>最後的結果，就會根據傳進 <code class="docutils literal"><span class="pre">asyncFunction(value)</span></code> 的 <a href="#id3"><span class="problematic" id="id4">``</span></a>value``值，去印出是 &#8220;Success Message&#8221; 或是 &#8220;Failed Message&#8221; 。</p>
 </div>
 <div class="section" id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
@@ -134,11 +136,14 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -154,12 +159,12 @@
         <li class="right" >
           <a href="20180510.html" title="2018/05/10 - C++ Bus error v.s Segmentation fault"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

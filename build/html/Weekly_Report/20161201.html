@@ -1,31 +1,33 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2016/12/01 - Server-Sent Events &#8212; Weekly Report 1.0 documentation</title>
+    
+    <title>2016/12/01 - Server-Sent Events &mdash; Weekly Report 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Weekly Report 1.0 documentation" href="../index.html" />
     <link rel="next" title="2016/11/24 - C++ Overloading, Abstract Class and Polymorphism" href="20161124.html" />
     <link rel="prev" title="2016/12/08 - Research of Web Real-Time Communication Based on Web Socket" href="20161208.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,7 +37,7 @@
         <li class="right" >
           <a href="20161208.html" title="2016/12/08 - Research of Web Real-Time Communication Based on Web Socket"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -55,13 +57,13 @@
 <div class="section" id="server-sent-events-vs-websockets">
 <h2>Server-Sent Events vs. WebSockets<a class="headerlink" href="#server-sent-events-vs-websockets" title="Permalink to this headline">¶</a></h2>
 <p>Why would you choose Server-Sent Events over WebSockets?</p>
-<p>One reason SSEs have been kept in the shadow is because later APIs like WebSockets provide a richer protocol to perform bi-directional, full-duplex communication. Having a two-way channel is more attractive for things like games, messaging apps, and for cases where you need near real-time updates in both directions. However, <strong>in some scenarios data doesn’t need to be sent from the client</strong>. You simply need updates from some server action. A few examples would be friends’ status updates, stock tickers, news feeds, or other automated data push mechanisms (e.g. updating a client-side Web SQL Database or IndexedDB object store). If you’ll need to send data to a server, XMLHttpRequest is always a friend.</p>
+<p>One reason SSEs have been kept in the shadow is because later APIs like WebSockets provide a richer protocol to perform bi-directional, full-duplex communication. Having a two-way channel is more attractive for things like games, messaging apps, and for cases where you need near real-time updates in both directions. However, <strong>in some scenarios data doesn&#8217;t need to be sent from the client</strong>. You simply need updates from some server action. A few examples would be friends&#8217; status updates, stock tickers, news feeds, or other automated data push mechanisms (e.g. updating a client-side Web SQL Database or IndexedDB object store). If you&#8217;ll need to send data to a server, XMLHttpRequest is always a friend.</p>
 <p>SSEs are sent over traditional HTTP. That means they do not require a special protocol or server implementation to get working. WebSockets on the other hand, require full-duplex connections and new Web Socket servers to handle the protocol. In addition, Server-Sent Events have a variety of features that WebSockets lack by design such as automatic reconnection, event IDs, and the ability to send arbitrary events.</p>
 </div>
 <div class="section" id="receive-server-sent-event-notifications">
 <h2>Receive Server-Sent Event Notifications<a class="headerlink" href="#receive-server-sent-event-notifications" title="Permalink to this headline">¶</a></h2>
 <p>To subscribe to an event stream, create an <em>EventSource</em> object and pass it the URL of your stream:</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="s2">&quot;demo_sse.php&quot;</span><span class="p">);</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="s2">&quot;demo_sse.php&quot;</span><span class="p">);</span>
 <span class="nx">source</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">;</span>
 <span class="p">};</span>
@@ -71,32 +73,32 @@
 </div>
 <div class="section" id="event-stream-format">
 <h2>Event Stream Format<a class="headerlink" href="#event-stream-format" title="Permalink to this headline">¶</a></h2>
-<p>Sending an event stream from the source is a matter of constructing a plaintext response, served with a text/event-stream Content-Type, that follows the SSE format. In its basic form, the response should contain a <strong>“data:”</strong> line, followed by your message, followed by <strong>two “n”</strong> characters to end the stream:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">:</span> <span class="n">My</span> <span class="n">message</span>\<span class="n">n</span>\<span class="n">n</span>
+<p>Sending an event stream from the source is a matter of constructing a plaintext response, served with a text/event-stream Content-Type, that follows the SSE format. In its basic form, the response should contain a <strong>&#8220;data:&#8221;</strong> line, followed by your message, followed by <strong>two &#8220;n&#8221;</strong> characters to end the stream:</p>
+<div class="highlight-python"><div class="highlight"><pre>data: My message\n\n
 </pre></div>
 </div>
 </div>
 <div class="section" id="multiline-data">
 <h2>Multiline Data<a class="headerlink" href="#multiline-data" title="Permalink to this headline">¶</a></h2>
-<p>If your message is longer, you can break it up by using multiple “data:” lines. Two or more consecutive lines beginning with “data:” will be treated as a single piece of data, meaning only one message event will be fired. <strong>Each line should end in a single “n”</strong> (except for the last, which should end with two). The result passed to your message handler is a single string concatenated by newline characters. For example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">:</span> <span class="n">first</span> <span class="n">line</span>\<span class="n">n</span>
-<span class="n">data</span><span class="p">:</span> <span class="n">second</span> <span class="n">line</span>\<span class="n">n</span>\<span class="n">n</span>
+<p>If your message is longer, you can break it up by using multiple &#8220;data:&#8221; lines. Two or more consecutive lines beginning with &#8220;data:&#8221; will be treated as a single piece of data, meaning only one message event will be fired. <strong>Each line should end in a single &#8220;n&#8221;</strong> (except for the last, which should end with two). The result passed to your message handler is a single string concatenated by newline characters. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre>data: first line\n
+data: second line\n\n
 </pre></div>
 </div>
 </div>
 <div class="section" id="controlling-the-reconnection-timeout">
 <h2>Controlling the Reconnection-timeout<a class="headerlink" href="#controlling-the-reconnection-timeout" title="Permalink to this headline">¶</a></h2>
-<p>The browser attempts to reconnect to the source roughly 3 seconds after each connection is closed. You can change that timeout by including a line beginning with “retry:”, followed by the number of milliseconds to wait before trying to reconnect.</p>
+<p>The browser attempts to reconnect to the source roughly 3 seconds after each connection is closed. You can change that timeout by including a line beginning with &#8220;retry:&#8221;, followed by the number of milliseconds to wait before trying to reconnect.</p>
 <p>The following example attempts a reconnect after 10 seconds:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">retry</span><span class="p">:</span> <span class="mi">10000</span>\<span class="n">n</span>
-<span class="n">data</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span>\<span class="n">n</span>\<span class="n">n</span>
+<div class="highlight-python"><div class="highlight"><pre>retry: 10000\n
+data: hello world\n\n
 </pre></div>
 </div>
 </div>
 <div class="section" id="check-server-sent-events-support">
 <h2>Check Server-Sent Events Support<a class="headerlink" href="#check-server-sent-events-support" title="Permalink to this headline">¶</a></h2>
 <p>In the tryit example above there were some extra lines of code to check browser support for server-sent events:</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">EventSource</span><span class="p">)</span> <span class="o">!==</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">EventSource</span><span class="p">)</span> <span class="o">!==</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Yes! Server-sent events support!</span>
     <span class="c1">// Some code.....</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -107,8 +109,8 @@
 </div>
 <div class="section" id="server-side-code-example">
 <h2>Server-Side Code Example<a class="headerlink" href="#server-side-code-example" title="Permalink to this headline">¶</a></h2>
-<p>Set the “Content-Type” header to “text/event-stream”.</p>
-<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<p>Set the &#8220;Content-Type&#8221; header to &#8220;text/event-stream&#8221;.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: text/event-stream&#39;</span><span class="p">);</span>
 <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Cache-Control: no-cache&#39;</span><span class="p">);</span>
 
@@ -173,11 +175,14 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -193,12 +198,12 @@
         <li class="right" >
           <a href="20161208.html" title="2016/12/08 - Research of Web Real-Time Communication Based on Web Socket"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Weekly Report 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Jiawei.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+        &copy; Copyright 2016, Jiawei.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>
