@@ -10,19 +10,11 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ammaraskar/sphinx-action@master
       with:
-        build-command: "sphinx-build -b html . _build"
+        build-command: "sphinx-build -b html . _build/html"
         docs-folder: "source/"
     - name: Commit documentation changes
       run: |
         git clone https://github.com/alvin9453/alvin9453.github.io.git --branch gh-pages --single-branch gh-pages
-        pwd
-        ls
-        echo " -- ls source/"
-        ls source/
-        echo " -- ls source/_build"
-        ls source/_build
-        echo " -- ls source/_build/html"
-        ls source/_build/html
         cp -r source/_build/html/* gh-pages/
         cd gh-pages
         git config --local user.email "action@github.com"
