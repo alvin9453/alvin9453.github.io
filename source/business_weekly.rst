@@ -1,7 +1,7 @@
 Business Weekly
-===============
+=================
 
-Business Weekly
+The reading notes for Business Weekly(商業週刊)
 
 .. toctree::
     :titlesonly:

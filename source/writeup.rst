@@ -1,7 +1,7 @@
 Write up
 ===============
 
-My write up
+Just...some write up.
 
 .. toctree::
     :titlesonly:

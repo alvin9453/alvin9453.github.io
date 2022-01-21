@@ -1,7 +1,7 @@
-Notes
-===============
+Misc Notes
+=================
 
-My Notes
+Misc notes for non-classified topic.
 
 .. toctree::
     :titlesonly:

@@ -1,7 +1,7 @@
-Weekly Report
-===============
+My Lab's Weekly Report
+===========================
 
-The Lab Weekly Report
+This is my personal weekly report. Just record what I learn and what I read every week!
 
 .. toctree::
    :titlesonly:
