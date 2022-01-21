@@ -4,8 +4,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Jiawei's Documentation
-=========================
+Alvin's Notes & Document
+============================
+
+This is the note and document to record everything I learned.
+
+Hope I can be more professional !
 
 .. toctree::
    :titlesonly:
