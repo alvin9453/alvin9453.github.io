@@ -12,7 +12,7 @@ Jiawei's Documentation
 
    weekly_report
    business_weekly
-   notes
+   misc
    writeup
 
 ..
