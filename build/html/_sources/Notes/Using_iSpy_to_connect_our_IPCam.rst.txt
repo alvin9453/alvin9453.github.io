@@ -1,6 +1,0 @@
-2016/11/26 - Using iSpy to connect our IPCam
-=============================================
-
-1. Room 108 兩台IP Camera 皆能透過HTTP 與 RTSP 的方式拿到Streaming ( http://admin:409409@10.21.6.40/GetStream.cgi?Video=0 and rtsp://10.21.6.41 ) , 但是必須使用FFMPEG(H264)的格式，MJPEG無法得到Streaming ( 雖然設備的官方網站有說可以支援MJPEG ...)。
-
-2. Lab 409 的 IP Camera 可以透過 HTTP 的方式拿到Streaming ( http://10.21.20.178/video.cgi , username = admin, 沒有password )，但是必須使用MJPEG的格式才可以。然後這台似乎不支援RTSP的方式。

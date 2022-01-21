@@ -1,4 +1,2 @@
-source/Notes/DLink_DCS910_IP_Cam_HTTP_Request.rst
-source/Notes/Using_iSpy_to_connect_our_IPCam.rst
-source/Notes/How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.rst
-takeAlook.sh
+build/*
+.vscode
