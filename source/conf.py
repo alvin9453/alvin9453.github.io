@@ -47,9 +47,9 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = u'Weekly Report'
-copyright = u'2016, Jiawei'
-author = u'Jiawei'
+project = u'Alvin\'s Document'
+copyright = u'2016, Alvin'
+author = u'Alvin'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -203,7 +203,7 @@ html_show_sourcelink = False
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'jiaweidoc'
+htmlhelp_basename = 'alvindoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -255,7 +255,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'jiawei', u'jiawei Documentation',
+    (master_doc, 'alvin', u'Alvin Document',
      [author], 1)
 ]
 
@@ -269,8 +269,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'jiawei', u'jiawei Documentation',
-     author, 'jiawei', 'One line description of project.',
+    (master_doc, 'alvin', u'Alvin Document',
+     author, 'alvin', 'One line description of project.',
      'Miscellaneous'),
 ]
 
