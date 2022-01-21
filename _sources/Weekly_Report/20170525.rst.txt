@@ -1,0 +1,38 @@
+2017/05/25 - GitHub pages
+=============================
+
+Introduction
+--------------
+
+GitHub Pages provides every github user hosts directly from his GitHub repository. Just edit, push, and the changes are live.
+
+Tutorial
+-----------
+
+Step 1. Create a repository
+``````````````````````````````
+
+Head over to GitHub and create a new repository named *username*.github.io, where username is your username (or organization name) on GitHub.
+
+Note : If the first part of the repository doesn’t exactly match your username, it won’t work, so make sure to get it right.
+
+Step 2. Clone the repository
+``````````````````````````````
+
+Go to the folder where you want to store your project, and clone the new repository:
+
+  $ git clone https://github.com/*username*/*username*.github.io
+
+Step 3. Create an index.html and push it
+``````````````````````````````````````````
+
+Enter the project folder and add an index.html file. Then add, commit, and push your changes:
+
+  $ git add --all
+  $ git commit -m "Hello world"
+  $ git push -u origin master
+
+Reference
+-----------
+
+`GitHub Pages <https://pages.github.com/>`_

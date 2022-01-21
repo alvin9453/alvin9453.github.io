@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChronoChat connects to NFD &mdash; Weekly Report 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="NDN-Tools Usages" href="ndn-tools_usage.html" />
+    <link rel="prev" title="SEO - Search Engine Optimization" href="SEO-Search_Engine_Optimization.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Weekly Report
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../weekly_report.html">Weekly Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../business_weekly.html">Business Weekly</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../notes.html">Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="20180106-Discussion_Record.html">2018/01/01 - Patent Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SEO-Search_Engine_Optimization.html">SEO - Search Engine Optimization</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ChronoChat connects to NFD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ndn-tools_usage.html">NDN-Tools Usages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SSH_Login_Without_Password.html">SSH Login Without Passwrod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Preview_reStructureText_on_Atom.html">Preview reStructureText on Atom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="How_to_compile_iSpy_source_code_via_VS2015_on_my_PC.html">2016/12/24 - How to compile iSpy source code via VS2015 on my PC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iSpy_installation_guide.html">2016/12/04 - iSpy installation guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeup.html">Write up</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Weekly Report</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../notes.html">Notes</a> &raquo;</li>
+      <li>ChronoChat connects to NFD</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="chronochat-connects-to-nfd">
+<h1>ChronoChat connects to NFD<a class="headerlink" href="#chronochat-connects-to-nfd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When I download <a class="reference external" href="https://github.com/named-data/ChronoChat-js">Web ChronoChat</a> , I notice that there is a wshub option. User could chat with each other via connect to ucla NFD, but why not just use my own NFD?</p>
+</div>
+<div class="section" id="configure-nfd-conf-file">
+<h2>Configure nfd.conf file<a class="headerlink" href="#configure-nfd-conf-file" title="Permalink to this headline">¶</a></h2>
+<p>ChronoChat needs to connect with NFD to receive interests. For testing with my own NFD, I have to update <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/ndn/nfd.conf</span></code> to accept remote connections.(Even though I am connecting to my localhost, a WebSocket connection is always considered remote.).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">;</span> <span class="n">The</span> <span class="n">following</span> <span class="n">localhop_security</span> <span class="n">should</span> <span class="n">be</span> <span class="n">enabled</span> <span class="n">when</span> <span class="n">NFD</span> <span class="n">runs</span> <span class="n">on</span> <span class="n">a</span> <span class="n">hub</span><span class="p">,</span>
+<span class="p">;</span> <span class="n">which</span> <span class="n">accepts</span> <span class="nb">all</span> <span class="n">remote</span> <span class="n">registrations</span> <span class="ow">and</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">short</span><span class="o">-</span><span class="n">term</span> <span class="n">solution</span><span class="o">.</span>
+<span class="n">localhop_security</span>
+<span class="p">{</span>
+    <span class="n">trust</span><span class="o">-</span><span class="n">anchor</span>
+    <span class="p">{</span>
+        <span class="nb">type</span> <span class="nb">any</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Replace wshub with my NFD IP address or domain name, and users could chat based on my NFD now!</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SEO-Search_Engine_Optimization.html" class="btn btn-neutral float-left" title="SEO - Search Engine Optimization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ndn-tools_usage.html" class="btn btn-neutral float-right" title="NDN-Tools Usages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Jiawei.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

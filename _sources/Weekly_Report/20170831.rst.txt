@@ -1,0 +1,90 @@
+2017/08/31 - NDN-JS Usages
+=============================
+
+Introduction
+--------------
+
+NDN-JS [#]_ is the first native version of the NDN protocol written in JavaScript. It implements the NDN-TLV wire format.
+
+The primary goal of NDN-JS is to provide a pure Javascript implementation of the NDN API that enables developers to create browser-based or Node.js-based applications using Named Data Networking. 
+
+In this document, I will show how to use **NDN-JS JavaScript API** to ping my ``ndnpingserver``.
+
+
+Preparation
+--------------
+
+Clone the NDN-JS from github :
+
+::
+
+    git clone https://github.com/named-data/ndn-js.git
+
+And I just use JavaScript API, so I can include the library from websites and **do not have to install anything**.
+
+    - https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.js
+    - https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.min.js
+
+NDNPING by JavaScript API
+--------------------------
+
+Now, change directory to the ndnping example that just cloned from githug :
+
+::
+
+    cd ndn-js/examples/ndnping
+
+Then edit ``ndn-ping.js``.
+
+Replace
+
+::
+
+    var hostip = "spurs.cs.ucla.edu";
+
+with
+
+::
+
+    var hostip = "<your_pingserver_ip_address>";
+
+And find the ``dopings()`` funtion, write the pingserver name here.
+::
+
+    function dopings() {
+        ping("/ndn/tw/edu/ncnu/csie/jarvis");
+    }
+
+
+Then edit ``ndn-ping.html``.
+
+Replace
+
+::
+
+    <script type="text/javascript" src="../../build/ndn.js"></script>
+
+with
+
+::
+
+    <script type="text/javascript" src="https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.js"></script>
+
+Now, open the ``ndn-ping.html`` in browser. The ping message would show like this :
+
+.. image:: Images/20170831_001.png
+
+My demo website here : http://ms14.voip.edu.tw/~wei0923/NDN/ndnping/
+
+Summary
+--------
+
+NDN-JS provides JavaScript API to implement the NDN-TLV wire format. This means I can use JavaScipt to develop web application over NDN.
+
+There are many examples in NDN-JS that I clone from github, and ``ndnping`` is just one of them. I am trying the examples of producer and consumer. So that I can use web to register my name, publish the content and send interest to get the content on web!
+
+
+Reference
+----------
+
+.. [#] NDN-JS github : https://github.com/named-data/ndn-js

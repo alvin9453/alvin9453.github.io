@@ -1,0 +1,56 @@
+`2016/12/29 - (Patent) Systems and methods for collaborative note-taking <https://www.google.ch/patents/US20090204620>`_
+========================================================================================================================================
+
+
+**Reading range : from [0001] to [0045]**
+
+Background of the invention
+----------------------------
+
+This invention relates to :
+
+1. Collaborative note-talking
+2. collaborative feedback
+3. dynamic learning
+4. dynamic adaptation based on collaborative feedback
+
+Participants in classes and seminars frequently switch the focus of their attention between note taking tasks and the task of assimilating the material presnted.
+
+Two exemplary note-taking styles :
+
+1. Taking detailed note but less assimilation.
+2. Less detailed note-taking but assimilating more material in presentation.
+
+Some meeting capture ststem using automatic speech recognition.But :
+
+- Do not integrate the presentation material
+- Low accuracy makes a lot of recognition errors
+  - Misdirect the user's focus of attention
+
+Summary of the invention
+-------------------------
+
+Dynamically determine language models based on domain indicactors in speech would therefore be useful.
+
+Detailed description of exemplary embodiments
+---------------------------------------------------
+Fig.1
+
+[0026]The speaker based language model is used to compensate for idiosyncratic(有特性的) speech characterisitcs such as the accent of the speaker, prosody, intonnation and the like.
+
+
+[0029 - 0031] Domain based on language model -> Linguistic analysis using tools of *Xerox Linguistic Environment* (Parser)
+
+[0032] Correctness score based on users' feedback.
+
+[0037] Monitored action are used to determine a collaborative user feedback signal.
+
+Fig. 2
+
+[0040] Speaker identifier information like wireless microphone is optional.
+
+[0043]Sailent tokens are determined based on the imformativity of the words in the speech information. The classification of non-function words based on parts-of-speech such as adjectives , verbs , and nouns and/or references to presentation support information is used to determine the salient tokens.
+
+My summary in this session of reading
+--------------------------------------
+我之前用過的共同筆記是像 `Hackpad <https://hackpad.com/>`_ 這樣的方式，是大家有一個共同的空間，可以即時看到是誰在做筆記、看到誰正在做筆記，這篇專利看到目前為止再討論的部份似乎著重在選擇Language與Parsing 的階段，還沒有看到如何做到向Hackpad這樣即時多人共同做筆記的部份。

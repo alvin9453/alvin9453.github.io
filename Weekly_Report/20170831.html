@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2017/08/31 - NDN-JS Usages &mdash; Weekly Report 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking" href="20170824.html" />
+    <link rel="prev" title="2017/09/11 - MicroForwarder.js: an NDN Forwarder Extension for Web Browsers" href="20170911.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Weekly Report
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../weekly_report.html">Weekly Report</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="20180510.html">2018/05/10 - C++ Bus error v.s Segmentation fault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180404.html">2018/04/04 - Javascript ES6 Promise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180403.html">2018/04/03 - Javascript ES6 Arrow function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180129.html">2018/01/29 - Single Sign-on</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180101.html">2018/01/01 - Patent Discussion 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171127.html">2017/11/27 - Firepad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171120.html">2017/11/20 - (Paper) Sharing mHealth Data via Named Data Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171113.html">2017/11/13 - Named Data Networking (NDN) installation guide - part 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170918.html">2017/09/18 - (Paper) The Story of ChronoShare, or How NDN Brought Distrubuted Secure File Sharing Back</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170911.html">2017/09/11 - MicroForwarder.js: an NDN Forwarder Extension for Web Browsers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2017/08/31 - NDN-JS Usages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170824.html">2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170817.html">2017/08/17 - NDN Packet Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170803.html">2017/08/03 - Named Data Networking (NDN) installation guide - part 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170727.html">2017/07/27 - (Paper) Video Streaming over Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170720.html">2017/07/20 - (Paper) Implementing Instant Messaging Using Named Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170713.html">2017/07/13 - Advanced Information Security Summer School Pre-Exam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170622.html">2017/06/22 - Chronos:Serverless Multi-User Chat Over NDN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170601.html">2017/06/01 - Design a LINE Bot : Weather Bot!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170525.html">2017/05/25 - GitHub pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170503.html">2017/05/04 - (Paper) Let’s ChronoSync: Decentralized Dataset State Synchronization in Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170413.html">2017/04/13 - Web Application Messaging Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170406.html">2017/04/06 - Git tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170330.html">2017/03/30 - (Paper) Adaptive Video Multicast over the Internet - Part 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170323.html">2017/03/23 - Authenticating Node.js Applications With Passport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170316.html">2017/03/16 - WebRTC API Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170309.html">2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170302.html">2017/03/02 -  Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170216.html">2017/02/16 - (Paper) Internet Multicast Video Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170112.html">2017/01/12 - WebSocket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170105.html">2017/01/05 - (Patent) Systems and methods for collaborative note-taking - part 2 </a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161229.html">2016/12/29 - (Patent) Systems and methods for collaborative note-taking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161222.html">2016/12/22 - TDOH conference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161215.html">2016/12/15 - Dynamic Link Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161208.html">2016/12/08 - Research of Web Real-Time Communication Based on Web Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161201.html">2016/12/01 - Server-Sent Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161124.html">2016/11/24 - C++ Overloading, Abstract Class and Polymorphism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161112.html">2016/11/12 - Report of using Zoneminder to connect IP Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161105.html">2016/11/05 - SSDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161029.html">2016/10/29 - Sphinx</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../business_weekly.html">Business Weekly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes.html">Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writeup.html">Write up</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Weekly Report</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../weekly_report.html">Weekly Report</a> &raquo;</li>
+      <li>2017/08/31 - NDN-JS Usages</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="ndn-js-usages">
+<h1>2017/08/31 - NDN-JS Usages<a class="headerlink" href="#ndn-js-usages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>NDN-JS <a class="footnote-reference brackets" href="#id2" id="id1">1</a> is the first native version of the NDN protocol written in JavaScript. It implements the NDN-TLV wire format.</p>
+<p>The primary goal of NDN-JS is to provide a pure Javascript implementation of the NDN API that enables developers to create browser-based or Node.js-based applications using Named Data Networking.</p>
+<p>In this document, I will show how to use <strong>NDN-JS JavaScript API</strong> to ping my <code class="docutils literal notranslate"><span class="pre">ndnpingserver</span></code>.</p>
+</div>
+<div class="section" id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p>Clone the NDN-JS from github :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">named</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">ndn</span><span class="o">-</span><span class="n">js</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>And I just use JavaScript API, so I can include the library from websites and <strong>do not have to install anything</strong>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.js">https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.js</a></p></li>
+<li><p><a class="reference external" href="https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.min.js">https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.min.js</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="ndnping-by-javascript-api">
+<h2>NDNPING by JavaScript API<a class="headerlink" href="#ndnping-by-javascript-api" title="Permalink to this headline">¶</a></h2>
+<p>Now, change directory to the ndnping example that just cloned from githug :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ndn</span><span class="o">-</span><span class="n">js</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">ndnping</span>
+</pre></div>
+</div>
+<p>Then edit <code class="docutils literal notranslate"><span class="pre">ndn-ping.js</span></code>.</p>
+<p>Replace</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">hostip</span> <span class="o">=</span> <span class="s2">&quot;spurs.cs.ucla.edu&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">hostip</span> <span class="o">=</span> <span class="s2">&quot;&lt;your_pingserver_ip_address&gt;&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And find the <code class="docutils literal notranslate"><span class="pre">dopings()</span></code> funtion, write the pingserver name here.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">dopings</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ping</span><span class="p">(</span><span class="s2">&quot;/ndn/tw/edu/ncnu/csie/jarvis&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then edit <code class="docutils literal notranslate"><span class="pre">ndn-ping.html</span></code>.</p>
+<p>Replace</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;../../build/ndn.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;https://cdn.rawgit.com/named-data/ndn-js/master/build/ndn.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now, open the <code class="docutils literal notranslate"><span class="pre">ndn-ping.html</span></code> in browser. The ping message would show like this :</p>
+<img alt="../_images/20170831_001.png" src="../_images/20170831_001.png" />
+<p>My demo website here : <a class="reference external" href="http://ms14.voip.edu.tw/~wei0923/NDN/ndnping/">http://ms14.voip.edu.tw/~wei0923/NDN/ndnping/</a></p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>NDN-JS provides JavaScript API to implement the NDN-TLV wire format. This means I can use JavaScipt to develop web application over NDN.</p>
+<p>There are many examples in NDN-JS that I clone from github, and <code class="docutils literal notranslate"><span class="pre">ndnping</span></code> is just one of them. I am trying the examples of producer and consumer. So that I can use web to register my name, publish the content and send interest to get the content on web!</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>NDN-JS github : <a class="reference external" href="https://github.com/named-data/ndn-js">https://github.com/named-data/ndn-js</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="20170911.html" class="btn btn-neutral float-left" title="2017/09/11 - MicroForwarder.js: an NDN Forwarder Extension for Web Browsers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="20170824.html" class="btn btn-neutral float-right" title="2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Jiawei.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

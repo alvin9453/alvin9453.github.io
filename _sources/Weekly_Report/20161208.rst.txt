@@ -1,0 +1,48 @@
+2016/12/08 - Research of Web Real-Time Communication Based on Web Socket
+=========================================================================
+
+Abstract [#]_
+--------------
+Regarding the limitations of traditional web real-time communication solutions such as *polling*, *long-polling*, flash plug-in, propose that using new coming Web Socket technology in the web real-time communication field, introduce the features of Web Socket technology, analysis the difference between Web Socket protocol and HTTP protocol, offer an approach to implement the Web Socket both in client and server side, prove Web Socket can **decrease network traffic and latency** greatly by an experiment, made the prospect of future application of Web Socket in web real-time communication.
+
+
+Traditional Web Real-Time Communication Solutions [#]_
+-------------------------------------------------------
+Polling, long polling and HTTP streaming were the primary solutions used by Web developers to accomplish the real-time communication between browser and server in the past.
+
+Polling
+  Polling an approach manually refreshing page is replaced by auto running program is the earliest solution for real-time communication applied in browser. Easy implementation and no additional requirement for client and server are the big advantage of this solution. However, there are some obvious shortcomings in this solution, it is very hard to figure out the frequency of data updating, so browser can’t get the latest data in time. Additionally, in the case of no data updating occurring during a period of time, browser’s frequent request will generate unnecessary network traffic and cause unnecessary burden for server.
+
+Long-polling
+  For making server communicate with browser at any time, Web developers design a new visit mechanism called *long-polling* or *Comet*, through which server will save the new request from browser for a period instead of sending respond right away. If data updating occurs in this period, server will response to browser with the new coming data, and browser will make another request when receives the response. By this mechanism, browser can get the latest data of server side in time. However, if a large number of concurrency happens, server memory and computing capacity will be consumed greatly by maintaining those live HTTP connections.
+
+Streaming
+  Its main difference is server will never close a connection sponsored by browser, sever will used this connection for sending message at any time. In this case, since server won’t signal the completion of the connection, response from server will be probably buffered by *firewalls* and *proxy* servers in the network, cause some errors happened during browser receiving data.
+
+The Introduction of Web Socket
+---------------------------------
+
+Web Socket, as a new feature of HTML5, is defined as a technology that enables web pages to use the Web Socket protocol for *full-duplex* communication with a remote host. It introduces the Web Socket interface and defines a full-duplex communication channel that operates through a single socket over the Web. HTML5 Web Socket efficiently provides a socket connection to internet with **minimal overhead**.It delivers an enormous reduction in network traffic and latency compared to Ajax polling and Comet solutions that are often used to transmit real-time date to simulate full-duplex communication by maintaining two HTTP connections. Therefore, it is the ideal technology for building scalable, real-time web communication system.
+
+To use HTML5 Web Socket to connect one web client with another remote end-point, a new Web Socket instance should be initialized with a valid URL that represents the remote end-point to be connected. Web Socket defines *ws://* and *wss://* [#]_ scheme as Web Socket and secure Web Socket connection separately. A Web Socket connection is established when updating a HTTP protocol to Web Socket protocol during the initial handshake between client and server.
+
+Web Socket connections use standard HTTP ports (80 and 443), therefore, it is called “proxy server and firewall-friendly protocol” . So, HTML5 Web Socket does not require any new hardware to be installed. Without any intermediate server (proxy or reverse proxy server, firewall, load-balance router and so on), a new Web Socket connection can be established successfully, as long as both client and server support Web Socket protocol.
+
+The Analysis of Web Socket Performance
+---------------------------------------
+
+Socket connections are ten times efficient than HTTP connections. On the other hand, refer to Peter Lubbers and Frank Greco’s test about the efficiency comparison between Ajax polling and Web Socket, it can be concluded that Web Socket’s performance is much better than HTTP in terms of network traffic and delay, especially in large number concurrency case.
+
+.. image:: http://file.scirp.org/Html/1-23101/9a9c69a5-42cd-4eda-b9b6-05472f5fa08f.jpg
+
+
+Reference
+----------
+
+.. [#] http://file.scirp.org/Html/1-23101_25428.htm
+.. [#] WebSocket 通訊協定簡介：比較 Polling、Long-Polling 與 Streaming 的運作原理
+ https://blog.gtwang.org/web-development/websocket-protocol/
+
+.. [#] websocket.org http://websocket.org/echo.html
+.. [#] RFC6466 The Websocket Protocol https://tools.ietf.org/html/rfc6455
+.. [#] Getting Started with WebRTC https://www.html5rocks.com/en/tutorials/webrtc/basics/

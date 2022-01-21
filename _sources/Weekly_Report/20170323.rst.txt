@@ -1,0 +1,42 @@
+2017/03/23 - Authenticating Node.js Applications With Passport
+===============================================================
+
+Introduction [#]_
+------------------
+
+Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any **Express-based** web application.
+
+
+Authentication Strategies
+--------------------------
+Passport provides us with 140+ authentication mechanisms to choose from. You can authenticate against a **local/remote database** instance or use the single sign-on using OAuth providers for **Facebook, Twitter, Google**, etc.
+
+**All these strategies are independent** of each other and packaged as separate node modules which are not included by default when you install Passport's middleware
+
+::
+
+  npm install passport
+
+For using the Local Authentication Strategy, we need to install the passport-local module
+
+::
+
+  npm install passport-local
+
+Tutorial [#]_
+-------------------
+
+`Here is the link of how to use Passport  to implement an express-based web application. <https://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619>`_
+
+In this tutorial, it use **express-generator** to build a project and use **mongodb** to be its database.
+
+Summary
+---------
+
+I think **Passport** is a very powerful module in authenticatation,so I'm trying to use it in my note-taking system. Now I have a good begin that I finish the method of login and register. Next step is combining it in my system.
+
+Reference
+----------
+
+.. [#] : http://passportjs.org/
+.. [#] : https://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619

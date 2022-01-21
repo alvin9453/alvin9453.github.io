@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2017/07/27 - (Paper) Video Streaming over Named Data Networking &mdash; Weekly Report 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/07/20 - (Paper) Implementing Instant Messaging Using Named Data" href="20170720.html" />
+    <link rel="prev" title="2017/08/03 - Named Data Networking (NDN) installation guide - part 1" href="20170803.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Weekly Report
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../weekly_report.html">Weekly Report</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="20180510.html">2018/05/10 - C++ Bus error v.s Segmentation fault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180404.html">2018/04/04 - Javascript ES6 Promise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180403.html">2018/04/03 - Javascript ES6 Arrow function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180129.html">2018/01/29 - Single Sign-on</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180101.html">2018/01/01 - Patent Discussion 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171127.html">2017/11/27 - Firepad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171120.html">2017/11/20 - (Paper) Sharing mHealth Data via Named Data Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171113.html">2017/11/13 - Named Data Networking (NDN) installation guide - part 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170918.html">2017/09/18 - (Paper) The Story of ChronoShare, or How NDN Brought Distrubuted Secure File Sharing Back</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170911.html">2017/09/11 - MicroForwarder.js: an NDN Forwarder Extension for Web Browsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170831.html">2017/08/31 - NDN-JS Usages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170824.html">2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170817.html">2017/08/17 - NDN Packet Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170803.html">2017/08/03 - Named Data Networking (NDN) installation guide - part 1</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2017/07/27 - (Paper) Video Streaming over Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170720.html">2017/07/20 - (Paper) Implementing Instant Messaging Using Named Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170713.html">2017/07/13 - Advanced Information Security Summer School Pre-Exam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170622.html">2017/06/22 - Chronos:Serverless Multi-User Chat Over NDN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170601.html">2017/06/01 - Design a LINE Bot : Weather Bot!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170525.html">2017/05/25 - GitHub pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170503.html">2017/05/04 - (Paper) Let’s ChronoSync: Decentralized Dataset State Synchronization in Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170413.html">2017/04/13 - Web Application Messaging Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170406.html">2017/04/06 - Git tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170330.html">2017/03/30 - (Paper) Adaptive Video Multicast over the Internet - Part 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170323.html">2017/03/23 - Authenticating Node.js Applications With Passport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170316.html">2017/03/16 - WebRTC API Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170309.html">2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170302.html">2017/03/02 -  Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170216.html">2017/02/16 - (Paper) Internet Multicast Video Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170112.html">2017/01/12 - WebSocket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170105.html">2017/01/05 - (Patent) Systems and methods for collaborative note-taking - part 2 </a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161229.html">2016/12/29 - (Patent) Systems and methods for collaborative note-taking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161222.html">2016/12/22 - TDOH conference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161215.html">2016/12/15 - Dynamic Link Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161208.html">2016/12/08 - Research of Web Real-Time Communication Based on Web Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161201.html">2016/12/01 - Server-Sent Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161124.html">2016/11/24 - C++ Overloading, Abstract Class and Polymorphism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161112.html">2016/11/12 - Report of using Zoneminder to connect IP Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161105.html">2016/11/05 - SSDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161029.html">2016/10/29 - Sphinx</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../business_weekly.html">Business Weekly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes.html">Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writeup.html">Write up</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Weekly Report</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../weekly_report.html">Weekly Report</a> &raquo;</li>
+      <li>2017/07/27 - (Paper) Video Streaming over Named Data Networking</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="paper-video-streaming-over-named-data-networking">
+<h1>2017/07/27 - (Paper) Video Streaming over Named Data Networking<a class="headerlink" href="#paper-video-streaming-over-named-data-networking" title="Permalink to this headline">¶</a></h1>
+<p>IEEE COMSOC MMTC E-Letter</p>
+<p>Derek Kulinski, UCLA Computer Science, <a class="reference external" href="mailto:kulinski&#37;&#52;&#48;cs&#46;ucla&#46;edu">kulinski<span>&#64;</span>cs<span>&#46;</span>ucla<span>&#46;</span>edu</a>
+Jeff Burke, UCLA REMAP, <a class="reference external" href="mailto:jburke&#37;&#52;&#48;remap&#46;ucla&#46;edu">jburke<span>&#64;</span>remap<span>&#46;</span>ucla<span>&#46;</span>edu</a>
+Lixia Zhang, UCLA Computer Science, <a class="reference external" href="mailto:lixia&#37;&#52;&#48;cs&#46;ucla&#46;edu">lixia<span>&#64;</span>cs<span>&#46;</span>ucla<span>&#46;</span>edu</a></p>
+<p>Full Content : <a class="reference external" href="https://named-data.net/wp-content/uploads/2013/07/E-Letter-July13_page6.pdf">Link</a> , page 6 to 9.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Benefits of video streaming over NDN :</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Reducing bandwidth</p></li>
+<li><p>Improving performance</p></li>
+<li><p>Video consumers can simply request specific video content by names to seek.</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="design-goals">
+<h2>Design Goals<a class="headerlink" href="#design-goals" title="Permalink to this headline">¶</a></h2>
+<p>Design goals in this paper :</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Quality consistent with current Internet video expectations</p></li>
+<li><p>Simple , low-latency random access into streams, based on actual location in the video stream , using a timecode-based namespace (i.e., the hour, minute, second, and frame of the stream).</p></li>
+<li><p>Consumer-side synchronization of streams using the timecode-based namespace, and scalability without impact on the original source of video.</p></li>
+<li><p>On-the-fly archival of live streams, making them indistinguishable from pre-recorded streams for the purposes of most playback applications.</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>The NDNVideo protocol has two types of participants : publisher and consumer.</p>
+<p>The publisher simply prepares data packets, signs them , and stores them in a repository (persistent store) for retrieval by consumers.Consumer no longer need to establish a session with the publisher , nor inform the publisher about their Quality of Servis(QoS). Consumers are in full control of how much data they receive, and at what rate.</p>
+<p>During packet preparation, the video producer segments the stream using semantically meaningful names, e.g. frames for video and samples for audio, . <em>Namespace</em> shows in Figure 1.</p>
+<img alt="../_images/NDNVideo_namespace.png" src="../_images/NDNVideo_namespace.png" />
+<div class="section" id="encoding">
+<h3>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h3>
+<p>NDNVideo supports all of teh many encoding formats supported by GStreamer <a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+</div>
+<div class="section" id="packet-format">
+<h3>Packet format<a class="headerlink" href="#packet-format" title="Permalink to this headline">¶</a></h3>
+<p>NDNVideo handles large(video) and small(audio) samples by packing data in two layer.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Inner layer : All information necessary for the playback of a data buffer, such as timestamp, duration, and length in bytes. The timestamp tells the player at what point in time the buffer is supposed to be played.</p></li>
+<li><p>Outer layer : Offset and count. The count indicates how many buffer begin in a given packet, and the offset is used to tell where the first buffer starts.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="random-access">
+<h3>Random access<a class="headerlink" href="#random-access" title="Permalink to this headline">¶</a></h3>
+<p>NDN’s Interest selector fields enable a consumer to express requests that are more sophisicated than just name prefixes.</p>
+<p>The <em>Exclusion Filter</em> is used to tell the network to return the latest index entry.</p>
+</div>
+<div class="section" id="live-streaming">
+<h3>Live Streaming<a class="headerlink" href="#live-streaming" title="Permalink to this headline">¶</a></h3>
+<p>Video publisher simply puts frames in a network-addressable content repository immediately after capture.</p>
+<p>Because different nodes can have different data in their Content Store, the same request might result in different responses from different nodes.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The consumer first issues Interests periodically during its video playback to determine the ever-increasing duration of the stream, by checking for the latest entry in the index namespace. It set the exclusion filter in the Interest packet to only request Data packets with index name components greater than the last index it has seen.</p></li>
+<li><p>To enable the consumer to determine the rate at which it should issue Interests, in addition to the timestamp of the buffer, each individual packet also contains a local time at whitch the packet was generated.</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="handling-packet-loss">
+<h3>Handling Packet Loss<a class="headerlink" href="#handling-packet-loss" title="Permalink to this headline">¶</a></h3>
+<p>Each data packet is named with the segment name plus segment numbers to make the data names predictable and enable the consumer to pipline requests for the data.</p>
+<p>In order to provide seamless playback, it is important for the consumer to know how long to wait assuming that an Interest or the corresponding data packet is lost.</p>
+</div>
+</div>
+<div class="section" id="current-issue-and-future-work">
+<h2>Current Issue and future work<a class="headerlink" href="#current-issue-and-future-work" title="Permalink to this headline">¶</a></h2>
+<p>The CCNx repository dose not yet support deletion of specific data object, which can be problematic for long-running live streams.</p>
+</div>
+<div class="section" id="my-summary">
+<h2>My Summary<a class="headerlink" href="#my-summary" title="Permalink to this headline">¶</a></h2>
+<p>As we know, video streaming in NDN is a huge problem because every node (or router) may store the data in local content store, and this is not a good solution when many users are watching many videos at the same time. And in this paper , it did not mention how to solve this problem.</p>
+<p>The focus of this paper is all about naming the data segments uniquely, so that consumers can send Interest precisely to pull what data they desire , and consumers can control everything without any other Protocols support.</p>
+<p>After reading this paper, I think there is still many problem in the issue of video streaming over NDN, they just find a feasible way to get the streaming. Benefits, such as improving performance and reducing bandwidth, this paper just show them in session 1 and not proving how to do it.</p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>GStreamer : <a class="reference external" href="https://gstreamer.freedesktop.org/">https://gstreamer.freedesktop.org/</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="20170803.html" class="btn btn-neutral float-left" title="2017/08/03 - Named Data Networking (NDN) installation guide - part 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="20170720.html" class="btn btn-neutral float-right" title="2017/07/20 - (Paper) Implementing Instant Messaging Using Named Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Jiawei.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

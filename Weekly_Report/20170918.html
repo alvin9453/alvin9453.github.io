@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2017/09/18 - (Paper) The Story of ChronoShare, or How NDN Brought Distrubuted Secure File Sharing Back &mdash; Weekly Report 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017/09/11 - MicroForwarder.js: an NDN Forwarder Extension for Web Browsers" href="20170911.html" />
+    <link rel="prev" title="2017/11/13 - Named Data Networking (NDN) installation guide - part 2" href="20171113.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Weekly Report
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../weekly_report.html">Weekly Report</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="20180510.html">2018/05/10 - C++ Bus error v.s Segmentation fault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180404.html">2018/04/04 - Javascript ES6 Promise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180403.html">2018/04/03 - Javascript ES6 Arrow function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180129.html">2018/01/29 - Single Sign-on</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20180101.html">2018/01/01 - Patent Discussion 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171127.html">2017/11/27 - Firepad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171120.html">2017/11/20 - (Paper) Sharing mHealth Data via Named Data Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20171113.html">2017/11/13 - Named Data Networking (NDN) installation guide - part 2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2017/09/18 - (Paper) The Story of ChronoShare, or How NDN Brought Distrubuted Secure File Sharing Back</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170911.html">2017/09/11 - MicroForwarder.js: an NDN Forwarder Extension for Web Browsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170831.html">2017/08/31 - NDN-JS Usages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170824.html">2017/08/24 - (Paper) NDN.JS: A JavaScript Client Library for Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170817.html">2017/08/17 - NDN Packet Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170803.html">2017/08/03 - Named Data Networking (NDN) installation guide - part 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170727.html">2017/07/27 - (Paper) Video Streaming over Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170720.html">2017/07/20 - (Paper) Implementing Instant Messaging Using Named Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170713.html">2017/07/13 - Advanced Information Security Summer School Pre-Exam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170622.html">2017/06/22 - Chronos:Serverless Multi-User Chat Over NDN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170601.html">2017/06/01 - Design a LINE Bot : Weather Bot!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170525.html">2017/05/25 - GitHub pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170503.html">2017/05/04 - (Paper) Let’s ChronoSync: Decentralized Dataset State Synchronization in Named Data Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170413.html">2017/04/13 - Web Application Messaging Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170406.html">2017/04/06 - Git tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170330.html">2017/03/30 - (Paper) Adaptive Video Multicast over the Internet - Part 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170323.html">2017/03/23 - Authenticating Node.js Applications With Passport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170316.html">2017/03/16 - WebRTC API Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170309.html">2017/03/09 - (Paper) Adaptive Video Multicast over the Internet - Part 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170302.html">2017/03/02 -  Nodejs -&gt; Express-generator, Express , MogoDB , Session , and Jade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170216.html">2017/02/16 - (Paper) Internet Multicast Video Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170112.html">2017/01/12 - WebSocket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20170105.html">2017/01/05 - (Patent) Systems and methods for collaborative note-taking - part 2 </a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161229.html">2016/12/29 - (Patent) Systems and methods for collaborative note-taking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161222.html">2016/12/22 - TDOH conference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161215.html">2016/12/15 - Dynamic Link Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161208.html">2016/12/08 - Research of Web Real-Time Communication Based on Web Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161201.html">2016/12/01 - Server-Sent Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161124.html">2016/11/24 - C++ Overloading, Abstract Class and Polymorphism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161112.html">2016/11/12 - Report of using Zoneminder to connect IP Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161105.html">2016/11/05 - SSDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20161029.html">2016/10/29 - Sphinx</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../business_weekly.html">Business Weekly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes.html">Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writeup.html">Write up</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Weekly Report</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../weekly_report.html">Weekly Report</a> &raquo;</li>
+      <li>2017/09/18 - (Paper) The Story of ChronoShare, or How NDN Brought Distrubuted Secure File Sharing Back</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="paper-the-story-of-chronoshare-or-how-ndn-brought-distrubuted-secure-file-sharing-back">
+<h1>2017/09/18 - (Paper) The Story of ChronoShare, or How NDN Brought Distrubuted Secure File Sharing Back<a class="headerlink" href="#paper-the-story-of-chronoshare-or-how-ndn-brought-distrubuted-secure-file-sharing-back" title="Permalink to this headline">¶</a></h1>
+<p>Alex Afanasyev, Zhenkai Zhu, Yingdi Yu, Lijing Wang, and Lixia Zhang</p>
+<p>In IEEE MASS 2015 Workshop on Content-Centric Networks (accepted), October 2015.</p>
+<p>Full Content : <a class="reference external" href="https://named-data.net/wp-content/uploads/2015/08/story_of_chronoshare.pdf">Link</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>ChronoShare is a completely distrubuted file sharing application based on ChronoSync.</p>
+</div>
+<div class="section" id="a-few-words-about-chronosync">
+<h2>A Few words about ChronoSync<a class="headerlink" href="#a-few-words-about-chronosync" title="Permalink to this headline">¶</a></h2>
+<p>ChronoSync enables dataset synchronization among a group of participants in a distributed way.</p>
+<p>ChronoSync encodes the knowledge about the whole dataset into a compact crypto digest form(e.g. using SHA256). which we call the <em>state digest</em>. This digest is carried in a special “sync” Interest which reaches all participants in a group. Eventually, sync Interest from all participants will carry an indentical state digest, indicating the knowledge about the dataset has been synchronized, and there will be a pending sync Interest at each participant, awaiting for the new data to be generated.</p>
+</div>
+<div class="section" id="chronoshare-design">
+<h2>ChronoShare Design<a class="headerlink" href="#chronoshare-design" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-design-decisions">
+<h3>A. Design Decisions<a class="headerlink" href="#a-design-decisions" title="Permalink to this headline">¶</a></h3>
+<p>Synchronize the file set of the shared folder.</p>
+<p>ChronoShare treats individual user operations on files as streams of “actions”, where each action specifies which file has been modified and what changes has been made (new file, updated content, changed file system permissions, or removing a file).</p>
+</div>
+<div class="section" id="b-system-entities-roles-and-assumptions">
+<h3>B. System Entities, Roles, and Assumptions<a class="headerlink" href="#b-system-entities-roles-and-assumptions" title="Permalink to this headline">¶</a></h3>
+<p>ChronoShare is a general-purpose file sharing application, where <em>users</em> create or join shared folder on one or more of their <em>devices</em>.</p>
+<p>Each <em>shared folder</em> is composed of a set of files, which were either locally created, or discovered (and subsequently fetched) via user <em>action</em>.</p>
+<img alt="../_images/20170918_001.bmp" src="../_images/20170918_001.bmp" />
+</div>
+<div class="section" id="c-data-naming">
+<h3>C. Data Naming<a class="headerlink" href="#c-data-naming" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>1). Files :</p>
+<blockquote>
+<div><img alt="../_images/20170918_002.png" src="../_images/20170918_002.png" />
+<p>Files in ChronoShare’s shared folder are split into segments, each segment forming an NDN data packet that is named.</p>
+</div></blockquote>
+<p>2). Actions :</p>
+<blockquote>
+<div><img alt="../_images/20170918_003.png" src="../_images/20170918_003.png" />
+<p>Each user publishes a “stream” of actions under user’s namespace, which identifies the corresponding ChronoShare application and specific shared folder instance.</p>
+<p>The content of the action does not need to include the full NDN name of the file in the shared folder, only the relative name of the file in the shared folder and additional meta information about the revision of this file.</p>
+</div></blockquote>
+<p>3). Knowledge about actions (ChronoSync) :</p>
+<blockquote>
+<div><img alt="../_images/20170918_004.png" src="../_images/20170918_004.png" />
+<p>ChronoShare defines a four component structure for sync Interests: multicast prefix, application and folder name, and dataset digest. The first component is to ensure that every participant receives the sync Interest; the middle two ensure that the right instances of ChronoShare will get the Interest; and the last component is computed over all user names plus their sequence numbers.</p>
+<p>Similar to actions, the content of sync Data does not need to specify the full names of actions. Instead, sync Data specifies only action creator’s prefix and action sequence number.</p>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="d-folder-and-file-operations">
+<h3>D. Folder and File Operations<a class="headerlink" href="#d-folder-and-file-operations" title="Permalink to this headline">¶</a></h3>
+<p>ChronoShare assumes that each device runs a local file manager, which detects file system changes and notifies ChronoShare to create new actions and distribute them to remote folders via ChronoSync.</p>
+</div>
+<div class="section" id="f-action-and-file-retrieval-strategy">
+<h3>F. Action and File Retrieval Strategy<a class="headerlink" href="#f-action-and-file-retrieval-strategy" title="Permalink to this headline">¶</a></h3>
+<p>In this prototype, ChronoShare fetch new actions for each participant in the order from the largest sequence number to the smallest. This way, multiple changes of the file by the same participant will be quickly reflected in the shared folder.</p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>ChronoShare is based on ChronoSync, just like ChronoChat.</p>
+<p>This idea is similar to version control system, but the difference is ChronoShare will forward action to tell everyone in group automaticly via ChronoShare.</p>
+<p>In a small area, I think ChronoShare is a good solution to synchronize files because the delivery cost is lower than shared folder such as Dropbox or Google Drives.</p>
+<p>But if in a big area, such as United State, the packets for synchronization may round-trip for a long way, and this special case would be inefficient.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="20171113.html" class="btn btn-neutral float-left" title="2017/11/13 - Named Data Networking (NDN) installation guide - part 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="20170911.html" class="btn btn-neutral float-right" title="2017/09/11 - MicroForwarder.js: an NDN Forwarder Extension for Web Browsers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Jiawei.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
