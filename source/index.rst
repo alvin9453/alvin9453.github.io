@@ -4,7 +4,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Alvin's Notes & Document
+Alvin's Notes
 ============================
 
 This is the note and document to record everything I learned.
