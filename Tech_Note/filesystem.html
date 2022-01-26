@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filesystem Management - Abstractions &mdash; Alvin&#39;s Document 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="My Lab Weekly Report" href="../weekly_report.html" />
+    <link rel="prev" title="Tech Notes" href="../tech_note.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Alvin's Document
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../tech_note.html">Tech Notes</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Filesystem Management -  Abstractions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../weekly_report.html">My Lab Weekly Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../business_weekly.html">Business Weekly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc.html">Misc Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writeup.html">Write up</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Alvin's Document</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../tech_note.html">Tech Notes</a> &raquo;</li>
+      <li>Filesystem Management -  Abstractions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="filesystem-management-abstractions">
+<h1>Filesystem Management -  Abstractions<a class="headerlink" href="#filesystem-management-abstractions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="filesystem-abstractions">
+<h2>Filesystem Abstractions<a class="headerlink" href="#filesystem-abstractions" title="Permalink to this headline">¶</a></h2>
+<p>A fileystem is a way to organize files and directories on storage devices such as hard disks, SSDs or flash memory. There are many types
+of filesystems (e.g. FAT, ext4, btrfs, ntfs) and on one running system we can have multiple instances of the same filesystem type in use.</p>
+<p>While filesystems use different data structures to organizing the files, directories, user data and meta (internal) data on storage devices there are a few common abstractions that are used in almost all filesystems:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><strong>superblock</strong></dt><dd><p>The <em>superblock</em> abstraction contains information about the filesystem instance such as the block size, the root inode, filesystem size. It is present both on storage and in memory (for caching purposes).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>file</strong></dt><dd><p>The <em>file</em> abstraction contains information about an opened file such as the current file pointer. It only exists in memory. (Note : The file name is not a property of the file.)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>inode</strong></dt><dd><p>The <em>inode</em> is identifying a file on disk. It exists both on storage and in memory (for caching purposes). An inode identifies a file in a unique way and has various properties such as the file size, access rights, file type, etc.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>dentry</strong></dt><dd><p>The <em>dentry</em> associates a name with an inode. It exists both on storage and in memory (for caching purposes).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="filesystem-abstractions-relationship">
+<h3>Filesystem Abstractions Relationship<a class="headerlink" href="#filesystem-abstractions-relationship" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="in-memory">
+<h4>In Memory<a class="headerlink" href="#in-memory" title="Permalink to this headline">¶</a></h4>
+<p>The following diagram shows the relationship between the various filesystem abstractions as they used in <strong>memory</strong>:</p>
+<img alt="../_images/filesystem_abstraction_relationships.png" src="../_images/filesystem_abstraction_relationships.png" />
+<p>Multiple file descriptors can point to the same file because we can use the dup() system call to duplicate a file descriptor.</p>
+<p>Multiple file abstractions can point to the same dentry if we the same path multiple times.</p>
+<p>Multiple dentries can point to the same inode when hard links are used.</p>
+</div>
+<div class="section" id="in-storage">
+<h4>In Storage<a class="headerlink" href="#in-storage" title="Permalink to this headline">¶</a></h4>
+<p>The following diagram shows the relationship of the filesystem abstraction on storage:</p>
+<img alt="../_images/filesystem_abstraction_relationship_storage.png" src="../_images/filesystem_abstraction_relationship_storage.png" />
+<p>The diagram shows that the superblock is typically stored at the beginning of the fileystem and that various blocks are used with different purposes: some to store dentries, some to store inodes and some to store user data blocks. There are also blocks used to manage the available free blocks (e.g. bitmaps for the simple filesystems).</p>
+</div>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Linux Kernel Teaching : <a class="reference external" href="https://linux-kernel-labs.github.io/refs/heads/master/lectures/fs.html#filesystem-abstractions">https://linux-kernel-labs.github.io/refs/heads/master/lectures/fs.html#filesystem-abstractions</a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tech_note.html" class="btn btn-neutral float-left" title="Tech Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../weekly_report.html" class="btn btn-neutral float-right" title="My Lab Weekly Report" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Alvin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

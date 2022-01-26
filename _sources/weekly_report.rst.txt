@@ -1,7 +1,7 @@
-My Lab's Weekly Report
+My Lab Weekly Report
 ===========================
 
-This is my personal weekly report. Just record what I learn and what I read every week!
+This is my personal weekly report which is for NCNU CSIE PERAL Lab. Just record what I learn and what I read every week!
 
 .. toctree::
    :titlesonly:
