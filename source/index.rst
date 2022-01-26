@@ -14,6 +14,7 @@ Hope I can be more professional !
 .. toctree::
    :titlesonly:
 
+   tech_note
    weekly_report
    business_weekly
    misc
