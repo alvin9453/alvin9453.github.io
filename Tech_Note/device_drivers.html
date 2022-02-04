@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device drivers &mdash; Alvin&#39;s Document 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Filesystem Management - Abstractions" href="filesystem.html" />
+    <link rel="prev" title="Certificate Chain" href="cert_chain.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Alvin's Document
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../tech_note.html">Tech Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cert_chain.html">Certificate Chain</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Device drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">Filesystem Management -  Abstractions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../weekly_report.html">My Lab Weekly Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../business_weekly.html">Business Weekly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc.html">Misc Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writeup.html">Write up</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Alvin's Document</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../tech_note.html">Tech Notes</a> &raquo;</li>
+      <li>Device drivers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="device-drivers">
+<h1>Device drivers<a class="headerlink" href="#device-drivers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In UNIX, hardware devices are accessed by the user through special device files. These files are grouped into the /dev directory, and system calls <code class="docutils literal notranslate"><span class="pre">open</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">close</span></code>, <code class="docutils literal notranslate"><span class="pre">lseek</span></code>, <code class="docutils literal notranslate"><span class="pre">mmap</span></code> etc. are redirected by the operating system to the device driver associated with the physical device. The device driver is a kernel component (usually a module) that interacts with a hardware device.</p>
+<p>In the UNIX world there are two categories of device files and thus device drivers: <strong>character</strong> and <strong>block</strong>. This division is done by the speed, volume and way of organizing the data to be transferred from the device to the system and vice versa. For the two types of device drivers, the Linux kernel offers different APIs.</p>
+<div class="section" id="character-device-drivers">
+<h3>Character device drivers<a class="headerlink" href="#character-device-drivers" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Slow devices</p></li>
+<li><p>Manage a small amount of data</p></li>
+<li><p>Access to data does not require frequent seek queries</p></li>
+<li><p>Operations (read, write) are performed sequentially byte by byte.</p></li>
+<li><p>Such as keyboard, mouse, serial ports, sound card, joystick.</p></li>
+<li><p><strong>[Linux kernel APIs]</strong> System calls go directly to device drivers.</p></li>
+</ul>
+</div>
+<div class="section" id="block-device-drivers">
+<h3>Block device drivers<a class="headerlink" href="#block-device-drivers" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fast devices</p></li>
+<li><p>Data volume is large</p></li>
+<li><p>Search data is common.</p></li>
+<li><p>Data is organized on blocks</p></li>
+<li><p>Such as hard drives, cdroms, ram disks, magnetic tape drives.</p></li>
+<li><p><strong>[Linux kernel APIs]</strong> The drivers do not work directly with system calls. Communication between the user-space and the block device driver is mediated by the file management subsystem and the block device subsystem.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Linux Kernel Teaching : <a class="reference external" href="https://linux-kernel-labs.github.io/refs/heads/master/labs/device_drivers.html">https://linux-kernel-labs.github.io/refs/heads/master/labs/device_drivers.html</a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cert_chain.html" class="btn btn-neutral float-left" title="Certificate Chain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="filesystem.html" class="btn btn-neutral float-right" title="Filesystem Management - Abstractions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Alvin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
