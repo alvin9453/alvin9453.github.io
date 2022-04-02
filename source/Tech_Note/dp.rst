@@ -14,21 +14,21 @@ Dynamic Programming = Divide-and-Conquer Method + Memoization
 
 1. 把原問題遞迴分割成許多更小的問題。（recurrence）
 
-   (1-1). 子問題與原問題的求解方式皆類似。（optimal sub-structure）
-   (1-2). 子問題會一而再、再而三的出現。（overlapping sub-problems）
+   a. 子問題與原問題的求解方式皆類似。（optimal sub-structure）
+   b. 子問題會一而再、再而三的出現。（overlapping sub-problems）
 
 2. 設計計算過程：
 
-   (2-1). 確認每個問題需要哪些子問題來計算答案。（recurrence）
-   (2-2). 確認總共有哪些問題。（state space）
-   (2-3). 把問題一一對應到表格。（lookup table）
-   (2-4). 決定問題的計算順序。（computational sequence）
-   (2-5). 確認初始值、計算範圍。（initial states / boundary）
+   a. 確認每個問題需要哪些子問題來計算答案。（recurrence）
+   b. 確認總共有哪些問題。（state space）
+   c. 把問題一一對應到表格。（lookup table）
+   d. 決定問題的計算順序。（computational sequence）
+   e. 確認初始值、計算範圍。（initial states / boundary）
 
 3. 實作，主要有兩種方式：
    
-   (3-1). Top-down
-   (3-2). Bottom-up
+   a. Top-down
+   b. Bottom-up
 
 Example : Factorial 
 +++++++++++++++++++++
