@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Device drivers &mdash; Alvin&#39;s Document 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Dynamic Programming &mdash; Alvin&#39;s Document 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,8 +15,8 @@
         <script src="../_static/language_data.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Filesystem Management - Abstractions" href="filesystem.html" />
-    <link rel="prev" title="Certificate Chain" href="cert_chain.html" /> 
+    <link rel="next" title="Certificate Chain" href="cert_chain.html" />
+    <link rel="prev" title="Tech Notes" href="../tech_note.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,9 +39,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../tech_note.html">Tech Notes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="dp.html">Dynamic Programming</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dynamic Programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cert_chain.html">Certificate Chain</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Device drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_drivers.html">Device drivers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filesystem.html">Filesystem Management -  Abstractions</a></li>
 </ul>
 </li>
@@ -66,7 +66,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../tech_note.html">Tech Notes</a> &raquo;</li>
-      <li>Device drivers</li>
+      <li>Dynamic Programming</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -75,40 +75,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="device-drivers">
-<h1>Device drivers<a class="headerlink" href="#device-drivers" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>In UNIX, hardware devices are accessed by the user through special device files. These files are grouped into the /dev directory, and system calls <code class="docutils literal notranslate"><span class="pre">open</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">close</span></code>, <code class="docutils literal notranslate"><span class="pre">lseek</span></code>, <code class="docutils literal notranslate"><span class="pre">mmap</span></code> etc. are redirected by the operating system to the device driver associated with the physical device. The device driver is a kernel component (usually a module) that interacts with a hardware device.</p>
-<p>In the UNIX world there are two categories of device files and thus device drivers: <strong>character</strong> and <strong>block</strong>. This division is done by the speed, volume and way of organizing the data to be transferred from the device to the system and vice versa. For the two types of device drivers, the Linux kernel offers different APIs.</p>
-<div class="section" id="character-device-drivers">
-<h3>Character device drivers<a class="headerlink" href="#character-device-drivers" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Slow devices</p></li>
-<li><p>Manage a small amount of data</p></li>
-<li><p>Access to data does not require frequent seek queries</p></li>
-<li><p>Operations (read, write) are performed sequentially byte by byte.</p></li>
-<li><p>Such as keyboard, mouse, serial ports, sound card, joystick.</p></li>
-<li><p><strong>[Linux kernel APIs]</strong> System calls go directly to device drivers.</p></li>
-</ul>
-</div>
-<div class="section" id="block-device-drivers">
-<h3>Block device drivers<a class="headerlink" href="#block-device-drivers" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Fast devices</p></li>
-<li><p>Data volume is large</p></li>
-<li><p>Search data is common.</p></li>
-<li><p>Data is organized on blocks</p></li>
-<li><p>Such as hard drives, cdroms, ram disks, magnetic tape drives.</p></li>
-<li><p><strong>[Linux kernel APIs]</strong> The drivers do not work directly with system calls. Communication between the user-space and the block device driver is mediated by the file management subsystem and the block device subsystem.</p></li>
-</ul>
+  <div class="section" id="dynamic-programming">
+<h1>Dynamic Programming<a class="headerlink" href="#dynamic-programming" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-dynamic-programming">
+<h2>What is Dynamic Programming?<a class="headerlink" href="#what-is-dynamic-programming" title="Permalink to this headline">¶</a></h2>
+<p>Dynamic Programming (DP)，是一個在解題很常用的一種解題方式，原理是透過把原問題分解為相對簡單的子問題的方式，來求解複雜問題的方法。</p>
+<p>DP 在尋找有很多**重疊子問題**的情況的最佳解時有效，當遇到複雜的計算且有規律的問題時，我們可以使用動態規劃來將問題分解成數個小問題，找到其中的規律，每次將小問題的答案**記錄**下來，當下一回來用到前一回合答案時就直接查表，也可以說是一種**用空間換取時間**的解題方式。</p>
+<p>Dynamic Programming = Divide-and-Conquer Method + Memoization</p>
+<img alt="../_images/dp_recurrence.png" src="../_images/dp_recurrence.png" />
+<ol class="arabic simple">
+<li><p>把原問題遞迴分割成許多更小的問題。（recurrence）
+1-1. 子問題與原問題的求解方式皆類似。（optimal sub-structure）
+1-2. 子問題會一而再、再而三的出現。（overlapping sub-problems）</p></li>
+<li><p>設計計算過程：
+2-1. 確認每個問題需要哪些子問題來計算答案。（recurrence）
+2-2. 確認總共有哪些問題。（state space）
+2-3. 把問題一一對應到表格。（lookup table）
+2-4. 決定問題的計算順序。（computational sequence）
+2-5. 確認初始值、計算範圍。（initial states / boundary）</p></li>
+<li><p>實作，主要有兩種方式：
+3-1. Top-down
+3-2. Bottom-up</p></li>
+</ol>
+<div class="section" id="example-factorial">
+<h3>Example : Factorial<a class="headerlink" href="#example-factorial" title="Permalink to this headline">¶</a></h3>
+<p>1 × 2 × 3 × ⋯ × N 。整數 1 到 N 的連乘積，稱為 N 階乘，數學表示方式為 <code class="docutils literal notranslate"><span class="pre">N!</span></code></p>
+<p>陣列的每一格對應每一個問題。設定第一格的答案，再以迴圈依序計算其餘答案。</p>
+<img alt="../_images/dp_factorial.png" src="../_images/dp_factorial.png" />
 </div>
 </div>
 <div class="section" id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Linux Kernel Teaching : <a class="reference external" href="https://linux-kernel-labs.github.io/refs/heads/master/labs/device_drivers.html">https://linux-kernel-labs.github.io/refs/heads/master/labs/device_drivers.html</a></p></li>
-</ul>
+<p><a class="reference external" href="https://web.ntnu.edu.tw/~algo/DynamicProgramming.html">https://web.ntnu.edu.tw/~algo/DynamicProgramming.html</a></p>
+<p><a class="reference external" href="https://medium.com/%E6%8A%80%E8%A1%93%E7%AD%86%E8%A8%98/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98%E7%B3%BB%E5%88%97-dynamic-programming-%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83-de980ca4a2d3">https://medium.com/%E6%8A%80%E8%A1%93%E7%AD%86%E8%A8%98/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98%E7%B3%BB%E5%88%97-dynamic-programming-%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83-de980ca4a2d3</a></p>
 </div>
 </div>
 
@@ -116,8 +115,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cert_chain.html" class="btn btn-neutral float-left" title="Certificate Chain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="filesystem.html" class="btn btn-neutral float-right" title="Filesystem Management - Abstractions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../tech_note.html" class="btn btn-neutral float-left" title="Tech Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cert_chain.html" class="btn btn-neutral float-right" title="Certificate Chain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
