@@ -6,6 +6,7 @@ Technical notes.
 .. toctree::
     :titlesonly:
 
+    ./Tech_Note/c_uthash
     ./Tech_Note/dp
     ./Tech_Note/cert_chain
     ./Tech_Note/device_drivers
