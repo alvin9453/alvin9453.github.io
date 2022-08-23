@@ -11,3 +11,4 @@ Technical notes.
     ./Tech_Note/cert_chain
     ./Tech_Note/device_drivers
     ./Tech_Note/filesystem
+    ./Tech_Note/i2c
