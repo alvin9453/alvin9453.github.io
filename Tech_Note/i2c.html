@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>I2C &mdash; Alvin&#39;s Document 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>I2C Introduction &mdash; Alvin&#39;s Document 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,8 +15,8 @@
         <script src="../_static/language_data.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="My Lab Weekly Report" href="../weekly_report.html" />
-    <link rel="prev" title="Filesystem Management - Abstractions" href="filesystem.html" /> 
+    <link rel="next" title="uthash.h - A hash table for C structure" href="c_uthash.html" />
+    <link rel="prev" title="Tech Notes" href="../tech_note.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,12 +39,12 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../tech_note.html">Tech Notes</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">I2C Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="c_uthash.html">uthash.h - A hash table for C structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dp.html">Dynamic Programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cert_chain.html">Certificate Chain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_drivers.html">Device drivers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filesystem.html">Filesystem Management -  Abstractions</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">I2C</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../weekly_report.html">My Lab Weekly Report</a></li>
@@ -68,7 +68,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../tech_note.html">Tech Notes</a> &raquo;</li>
-      <li>I2C</li>
+      <li>I2C Introduction</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -77,14 +77,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="i2c">
-<h1>I2C<a class="headerlink" href="#i2c" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="i2c-introduction">
+<h1>I2C Introduction<a class="headerlink" href="#i2c-introduction" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><strong>I2C（Inter-Integrated Circuit）</strong>，唸做 I-square-C，它是 NXP（前身為飛利浦）開發的通訊協定，主要用來作為 IC 之間的通訊。它的速度一般是 100 Kbit/s，也有些是 400 Kbit/s，現在更有到 1 Mbit/s 與 3.4 Mbit/s 的，但仍然無法像 Ethernet 那麼快，所以不適合用來傳送大量資料，不過非常適合拿來設定 IC 初始值，或是 IC 之間的控制訊號傳輸。</p></li>
 <li><p>由於 I2C 只用兩條線通訊 SDA（data）/ SCL（clock），因此空間超級省。</p></li>
-<li><p>I2C 是 <strong>master/slave</strong> 架構，代表一個系統內通常**只能有一個 master**，其他裝置只能當 slave（這邊說「通常」是因為 spec 裡面有寫它可以 multi-master )</p></li>
+<li><p>I2C 是 <strong>master/slave</strong> 架構，代表一個系統內通常 <strong>只能有一個 master</strong>，其他裝置只能當 slave（這邊說「通常」是因為 spec 裡面有寫它可以 multi-master )</p></li>
 <li><p>I2C 是序列式的傳輸，只有兩條線，一條叫做 <strong>SDA</strong>， 專門用來送資料，另一條叫做 <strong>SCL</strong>，是用來傳 clock。依序是由 start condition 開始、傳資料，最後 stop condition 結束（所謂 start condition 就是這兩條線某種狀態的組合可以拿來認定為傳輸的開始）</p></li>
 </ul>
 </div>
@@ -93,7 +93,7 @@
 <img alt="../_images/i2c_sda_scl.png" src="../_images/i2c_sda_scl.png" />
 <ul class="simple">
 <li><p>最左邊是 Start condition：SCL=high + SDA falling，最右邊是 Stop condition：SCL=high + SDA raising，至於中間的資料，它是以 8+1 bit 為一組來傳送的，意思是說 8 bit data 外加 1 bit 的 Acknowledge。ACK 是 slave 用來回應 master 用的，表示已經收到資料了，其中 clock 的 positive pulse 必須完整包含在 bit data 之內。</p></li>
-<li><p>Idle 狀態下，CLK 和 DAT 皆為 high，而**資料的傳輸只有在 CLK 為 high 時可以進行**，並且只能在 CLK 拉為 low 後才可以變更要傳輸的資料。如果在 CLK 為 high 時將 DAT signal 從 high 變成 low，則意味著傳遞出 START message，表示某個 master 裝置想佔據 bus 進行傳輸。如果在 CLK 為 high 時將 DAT signal 從 low 變成 high，</p></li>
+<li><p>Idle 狀態下，CLK 和 DAT 皆為 high，而 <strong>資料的傳輸只有在 CLK 為 high 時可以進行</strong>，並且只能在 CLK 拉為 low 後才可以變更要傳輸的資料。如果在 CLK 為 high 時將 DAT signal 從 high 變成 low，則意味著傳遞出 START message，表示某個 master 裝置想佔據 bus 進行傳輸。如果在 CLK 為 high 時將 DAT signal 從 low 變成 high，</p></li>
 </ul>
 <img alt="../_images/i2c_data_validity.png" src="../_images/i2c_data_validity.png" />
 </div>
@@ -110,8 +110,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="filesystem.html" class="btn btn-neutral float-left" title="Filesystem Management - Abstractions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../weekly_report.html" class="btn btn-neutral float-right" title="My Lab Weekly Report" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../tech_note.html" class="btn btn-neutral float-left" title="Tech Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="c_uthash.html" class="btn btn-neutral float-right" title="uthash.h - A hash table for C structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
